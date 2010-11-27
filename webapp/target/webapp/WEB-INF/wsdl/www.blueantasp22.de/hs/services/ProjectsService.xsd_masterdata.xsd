@@ -1,0 +1,950 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:base="http://base.blueant.axis.proventis.net/" xmlns:masterdata="http://masterdata.blueant.axis.proventis.net/" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://masterdata.blueant.axis.proventis.net/">
+   <xsd:import namespace="http://base.blueant.axis.proventis.net/" schemaLocation="ProjectsService?xsd=base.xsd"/>
+   <xsd:element name="Activity" type="masterdata:T_Activity"/>
+   <xsd:complexType name="T_Activity">
+      <xsd:sequence>
+         <xsd:element name="activityID" type="base:id"/>
+         <xsd:element name="name" type="xsd:string"/>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Diese Tätigkeit kann nur für Änderungen und nicht für Neuerfassungen von AZ genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ActivityList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:Activity"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="Progress" type="masterdata:T_Progress"/>
+   <xsd:complexType name="T_Progress">
+      <xsd:sequence>
+         <xsd:element name="progressID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="value" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Fertigstellung in Prozent</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProgressList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:Progress"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ProjectPriority" type="masterdata:T_ProjectPriority"/>
+   <xsd:complexType name="T_ProjectPriority">
+      <xsd:sequence>
+         <xsd:element name="priorityID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="priority" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der ProjektPriorität</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Diese Priorität kann nur für Auswertungen und nicht für Neuerfassungen genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProjectPriorityList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:ProjectPriority"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ProjectType" type="masterdata:T_ProjectType"/>
+   <xsd:complexType name="T_ProjectType">
+      <xsd:sequence>
+         <xsd:element name="projecttypeID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Projektart</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="description" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Beschreibung der Projektart</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="billable" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>fakturierbar ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="internal" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Internes Projekt ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="resourceRequested" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Ressourcen müssen für dieses Projekt beantragt (TRUE) werden oder nicht (FALSE).</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Diese Projektart kann nur für Auswertungen und nicht für Neuerfassungen genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProjectTypeList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:ProjectType"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ProjectState" type="masterdata:T_ProjectState"/>
+   <xsd:complexType name="T_ProjectState">
+      <xsd:sequence>
+         <xsd:element name="projectstateID" type="base:id"/>
+         <xsd:element name="state" type="xsd:string"/>
+         <xsd:element name="visible" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Projekt für AZ-Erfassung und Fortschrittserfassung zulässig(TRUE) oder nicht (FALSE)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="reduceParticipation" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Vorgabeprojektbeteiligungen werden ab dem Tag des Statuswechsel auf NULL % reduziert (TRUE) oder bleiben bestehen (FALSE).</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Dieser Projektstatus kann nur für Auswertungen und nicht für Neuerfassungen genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProjectStateList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:ProjectState"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="Currency" type="masterdata:T_Currency"/>
+   <xsd:complexType name="T_Currency">
+      <xsd:sequence>
+         <xsd:element name="currencyID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="currency" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Währung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="abbreviation" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Kürzel der Währung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="exchange" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Umrechnungskrus in Euro.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Diese Währung kann nur für Auswertungen und nicht für Neuerfassungen genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="CurrencyList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="masterdata:Currency"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="InternalDepartment" type="masterdata:T_InternalDepartment"/>
+   <xsd:complexType name="T_InternalDepartment">
+      <xsd:sequence>
+         <xsd:element name="departmentID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Primary Key</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Name des Unternehmensbereiches</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="managerID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Leiter des Unternehmensbereiches</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="substituteID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Stellvertretender Leiter des Unternehmensbereiches</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="costCenterNumber" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Kostenstellen-Nummer</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Dieser Unternehmensbereich kann nur für Auswertungen und nicht für Neuerfassungen genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="children" nillable="true" type="masterdata:T_InternalDepartmentList">
+            <xsd:annotation>
+               <xsd:documentation>Liste der Unter-Unternehmensbereiche</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="InternalDepartmentList" type="masterdata:T_InternalDepartmentList"/>
+   <xsd:complexType name="T_InternalDepartmentList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="masterdata:InternalDepartment"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getInternalDepartmentsRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string">
+               <xsd:annotation>
+                  <xsd:documentation>Session-ID</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="departmentID" nillable="true" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>Wurzel des Unternehmensbereichs-Teilbaumes</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="Department" type="masterdata:T_Department"/>
+   <xsd:complexType name="T_Department">
+      <xsd:sequence>
+         <xsd:element name="departmentID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Primary Key</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="intern" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Dieser ist ein Unternehmensbereich im eigenen Unternehmen / externes Unternehmen</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Dieser Unternehmensbereich kann nur für Auswertungen und nicht für Neuerfassungen genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Name des Unternehmensbereiches</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="additionalName" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Namenszusatz</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="zipCode" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Postleitzahl</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="place" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Ort</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="countryID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Land in der dieser Unternehmensbereiches angesiedelt ist - Wird zur Zeit nicht unterstützt.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="street" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Straße und Hausnummer</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="sector" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Branche des Unternehmens</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="phone" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Telefonnummer</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="fax" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Faxnummer</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="email" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Email des Unternehmens</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="homepage" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Homepage des Unternehmens</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="costCenterNumber" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Kostenstellen-Nummer</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="managerID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Leiter des Unternehmensbereiches - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="substituteID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Stellvertretender Leiter des Unternehmensbereiches - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="ownProjectReleaseType" nillable="true" type="masterdata:T_ProjectReleaseType">
+            <xsd:annotation>
+               <xsd:documentation>Wie soll bei der Reservierung von Ressourcen aus dem eigenen Unternehmensbereich vorgegangen werden ? - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="ownProjectReservation" nillable="true" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Der Grenzwert ab den Ressourcenanforderungen aus dem eigenen Unternehmensbereich genehmigungspflichtig sind - nur wenn ownProjectReservation = approval_from - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="ownProjectReservationUnit" nillable="true" type="masterdata:T_ProjectReservationUnit">
+            <xsd:annotation>
+               <xsd:documentation>Die Einheit in der der Wert ownProjectReservation angegeben ist - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="otherProjectReleaseType" nillable="true" type="masterdata:T_ProjectReleaseType">
+            <xsd:annotation>
+               <xsd:documentation>Wie soll bei der Reservierung von Ressourcen aus fremden Unternehmensbereichen vorgegangen werden ? - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="otherProjectReservation" nillable="true" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Der Grenzwert ab den Ressourcenanforderungen aus fremden Unternehmensbereichen genehmigungspflichtig sind - nur wenn otherProjectReservation = approval_from - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="otherProjectReservationUnit" nillable="true" type="masterdata:T_ProjectReservationUnit">
+            <xsd:annotation>
+               <xsd:documentation>Die Einheit in der der Wert otherProjectReservation angegeben ist - nur eigenes Unternehmen (intern=true)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="children" nillable="true" type="masterdata:T_DepartmentList">
+            <xsd:annotation>
+               <xsd:documentation>Liste der Unter-Unternehmensbereiche</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="T_ProjectReleaseType">
+      <xsd:annotation>
+         <xsd:documentation>Beschreibt wie bei der Reservierung von Ressourcen vorgegangen werden soll</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="released">
+            <xsd:annotation>
+               <xsd:documentation>nicht genehmigungspflichtig</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="is_to_be_apply">
+            <xsd:annotation>
+               <xsd:documentation>genehmigungspflichtig</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="rule">
+            <xsd:annotation>
+               <xsd:documentation>genehmigungspflichtig ab vorgegebenem Schwellenwert</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="inherited">
+            <xsd:annotation>
+               <xsd:documentation>Vom übergeordenten Unternehmensbereich geerbt</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="T_ProjectReservationUnit">
+      <xsd:annotation>
+         <xsd:documentation>In welcher Einheit ist der Grenzwert zur Reservierung von Ressourcen angegeben ?</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="h">
+            <xsd:annotation>
+               <xsd:documentation>Stunden</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="pt">
+            <xsd:annotation>
+               <xsd:documentation>Personentage</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="DepartmentList" type="masterdata:T_DepartmentList"/>
+   <xsd:complexType name="T_DepartmentList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="masterdata:Department"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getDepartmentsRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string">
+               <xsd:annotation>
+                  <xsd:documentation>Session-ID</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="intern" type="xsd:boolean">
+               <xsd:annotation>
+                  <xsd:documentation>Interne Unternehmensbereiche liefern</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="extern" type="xsd:boolean">
+               <xsd:annotation>
+                  <xsd:documentation>Externe Unternehmensbereiche liefern</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="departmentID" nillable="true" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>Wurzel des Unternehmensbereichs-Teilbaumes</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="IndirectCostCentre" type="masterdata:T_IndirectCostCentre"/>
+   <xsd:complexType name="T_IndirectCostCentre">
+      <xsd:sequence>
+         <xsd:element name="iccID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Primary Key</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="departmentID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>Zuordnung zum Unternehmensbereich</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="iccName" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Hilfskostenstelle</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="iccNumber" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Hilfskostenstellen-Nummer</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Diese Hilfskostenstelle kann nur für Auswertungen und nicht für Neuerfassungen genutzt werden.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="IndirectCostCentreList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="masterdata:IndirectCostCentre"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getIndirectCostCentresRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string">
+               <xsd:annotation>
+                  <xsd:documentation>Session-ID</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="departmentID" nillable="true" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>Unternehmensbereich für den die Hilfskostenstellen geholte werden sollen.</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetDefaultRolesRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="DefaultRole" type="masterdata:T_DefaultRole"/>
+   <xsd:complexType name="T_DefaultRole">
+      <xsd:sequence>
+         <xsd:element name="defaultRoleID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung des Kostensatzes</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="internal" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Interner Kostensatz</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="external" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Externer Kostensatz</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="travel" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Kostensatz für Reisetätigkeiten</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf diese Rolle bei Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="DefaultRoleList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:DefaultRole"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetProgressListRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetProjectPrioritiesRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetProjectTypesRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetProjectStatesRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetCurrenciesRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetActivitiesRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetRiskEffectRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="RiskEffect" type="masterdata:T_RiskEffect"/>
+   <xsd:complexType name="T_RiskEffect">
+      <xsd:sequence>
+         <xsd:element name="riskEffectID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Risiko-Auswirkung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="RiskEffectList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:RiskEffect"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetRiskProbabilityRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="RiskProbability" type="masterdata:T_RiskProbability"/>
+   <xsd:complexType name="T_RiskProbability">
+      <xsd:sequence>
+         <xsd:element name="riskProbabilityID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Risiko-Wahrscheinlichkeit</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="RiskProbabilityList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:RiskProbability"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetRiskStateRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="RiskState" type="masterdata:T_RiskState"/>
+   <xsd:complexType name="T_RiskState">
+      <xsd:sequence>
+         <xsd:element name="riskStateID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung des Risiko-Status</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="RiskStateList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:RiskState"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetTicketTopicRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TicketTopic" type="masterdata:T_TicketTopic"/>
+   <xsd:complexType name="T_TicketTopic">
+      <xsd:sequence>
+         <xsd:element name="ticketTopicID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung des Ticketthemas</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="responsibleID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PK des verantwortlichen Mitarbeiters</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="substituteID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PK des Stellvertreters</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="default" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Ist der Datensatz der Default-Wert ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TicketTopicList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:TicketTopic"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetTicketStateRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:simpleType name="T_TicketStateInternal">
+      <xsd:annotation>
+         <xsd:documentation>Enumeration über moegliche interne Ticketstati</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="new">
+            <xsd:annotation>
+               <xsd:documentation>neu</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="in_process">
+            <xsd:annotation>
+               <xsd:documentation>in Bearbeitung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="finished">
+            <xsd:annotation>
+               <xsd:documentation>beendet</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="invoice">
+            <xsd:annotation>
+               <xsd:documentation>fakturiert</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="TicketState" type="masterdata:T_TicketState"/>
+   <xsd:complexType name="T_TicketState">
+      <xsd:sequence>
+         <xsd:element name="ticketStateID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="ticketState" type="masterdata:T_TicketStateInternal">
+            <xsd:annotation>
+               <xsd:documentation>Ticketstatus</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung des Ticketstatus</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="visibleInInvoice" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Im Leistungsnachweis anzeigen ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="workTimeEnabled" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Für Arbeitszeiten nutzbar ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="default" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Ist der Datensatz der Default-Wert ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TicketStateList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:TicketState"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetTicketTypeRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TicketType" type="masterdata:T_TicketType"/>
+   <xsd:complexType name="T_TicketType">
+      <xsd:sequence>
+         <xsd:element name="ticketTypeID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung des Tickettyps</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="default" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Ist der Datensatz der Default-Wert ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TicketTypeList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:TicketType"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetTicketPriorityRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TicketPriority" type="masterdata:T_TicketPriority"/>
+   <xsd:complexType name="T_TicketPriority">
+      <xsd:sequence>
+         <xsd:element name="ticketPriorityID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Ticketprioritaet</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="default" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Ist der Datensatz der Default-Wert ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TicketPriorityList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:TicketPriority"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetTicketSLARequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" nillable="true" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>Optionaler Filter nach Projekt-SLAs</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TicketSLA" type="masterdata:T_TicketSLA"/>
+   <xsd:complexType name="T_TicketSLA">
+      <xsd:sequence>
+         <xsd:element name="ticketSLAID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Ticket-SLA</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="responsibleID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PK des verantwortlichen Mitarbeiters</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="active" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Darf der Datensatz für Neuanlagen genutzt werden ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="default" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Ist der Datensatz der Default-Wert ?</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TicketSLAList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="masterdata:TicketSLA"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

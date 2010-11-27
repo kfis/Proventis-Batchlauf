@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?wsdl" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.wsdl"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=exception.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_exception.xsd"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=base.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_base.xsd"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=masterdata.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_masterdata.xsd"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=human.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_human.xsd"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=cost.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_cost.xsd"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=project.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_project.xsd"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=absence.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_absence.xsd"/>
+    <system systemId="http://www.blueantasp22.de/hs/services/ProjectsService?xsd=ticket.xsd" uri="wsdl/www.blueantasp22.de/hs/services/ProjectsService.xsd_ticket.xsd"/>
+</catalog>

@@ -1,0 +1,2108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BlueAnt" targetNamespace="http://blueant.axis.proventis.net/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:project="http://project.blueant.axis.proventis.net/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://blueant.axis.proventis.net/" xmlns:exception="http://exception.blueant.axis.proventis.net/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:base="http://base.blueant.axis.proventis.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:masterdata="http://masterdata.blueant.axis.proventis.net/" xmlns:cost="http://cost.blueant.axis.proventis.net/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:human="http://human.blueant.axis.proventis.net/">
+<wsdl:documentation>Version 8.0.1 vom 26.04.2010 10:30 - WSI - Verified</wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema>
+			<xsd:import namespace="http://exception.blueant.axis.proventis.net/" schemaLocation="exception.xsd"/>
+		</xsd:schema>
+    <xsd:schema>
+			<xsd:import namespace="http://base.blueant.axis.proventis.net/" schemaLocation="base.xsd"/>
+		</xsd:schema>
+
+    <xsd:schema>
+			<xsd:import namespace="http://masterdata.blueant.axis.proventis.net/" schemaLocation="masterdata.xsd"/>
+		</xsd:schema>
+    <xsd:schema>
+			<xsd:import namespace="http://human.blueant.axis.proventis.net/" schemaLocation="human.xsd"/>
+		</xsd:schema>
+    <xsd:schema>
+			<xsd:import namespace="http://cost.blueant.axis.proventis.net/" schemaLocation="cost.xsd"/>
+		</xsd:schema>
+
+    <xsd:schema>
+			<xsd:import namespace="http://project.blueant.axis.proventis.net/" schemaLocation="project.xsd"/>
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="addProjectTaskResponse">
+    <wsdl:part name="param" element="project:addProjectTaskResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidConcurrentLicenseException">
+
+    <wsdl:part name="InvalidConcurrentLicenseException" element="exception:InvalidConcurrentLicenseException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeProjectTaskResponse">
+  </wsdl:message>
+  <wsdl:message name="deleteProjectParticipationResponse">
+  </wsdl:message>
+  <wsdl:message name="deleteTaskPredecessorResponse">
+  </wsdl:message>
+
+  <wsdl:message name="changeProjectResourceRequest">
+    <wsdl:part name="param" element="project:changeProjectResourceRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProjectRequest">
+    <wsdl:part name="param" element="project:addProjectRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectRolesResponse">
+
+    <wsdl:part name="projectRoleList" element="project:ProjectRoleList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteTaskResourceRequest">
+    <wsdl:part name="param" element="project:deleteTaskResourceRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeProjectParticipationRequest">
+    <wsdl:part name="param" element="project:changeProjectParticipationRequestParameter">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="releaseProjectParticipationRequest">
+    <wsdl:part name="param" element="project:releaseProjectParticipationRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWtCalendarsResponse">
+    <wsdl:part name="wtCalendarList" element="project:WtCalendarList">
+    </wsdl:part>
+
+  </wsdl:message>
+  <wsdl:message name="addTaskResourceRequest">
+    <wsdl:part name="param" element="project:addTaskResourceRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectPermissionsResponse">
+    <wsdl:part name="projectPermissionList" element="project:ProjectPermissionList">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="getReleasableProjectParticipationsResponse">
+    <wsdl:part name="projectParticipationList" element="project:ProjectParticipationList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeRiskRequest">
+    <wsdl:part name="param" element="project:ChangeRiskRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProjectResourceRequest">
+
+    <wsdl:part name="param" element="project:addProjectResourceRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteProjectResourceRequest">
+    <wsdl:part name="param" element="project:deleteProjectResourceRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectListResponse">
+    <wsdl:part name="projectlist" element="project:ProjectList">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addTaskPredecessorResponse">
+  </wsdl:message>
+  <wsdl:message name="getProjectTasksRequest">
+    <wsdl:part name="param" element="project:getProjectTasksRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeRiskResponse">
+
+  </wsdl:message>
+  <wsdl:message name="changeProjectRequest">
+    <wsdl:part name="param" element="project:changeProjectRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidUsernamePasswordCombinationException">
+    <wsdl:part name="InvalidUsernamePasswordCombinatioException" element="exception:InvalidUsernamePasswordCombinationException">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="getTaskResourcesRequest">
+    <wsdl:part name="param" element="project:getTaskResourcesRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeProjectTaskRequest">
+    <wsdl:part name="param" element="project:changeProjectTaskRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProjectParticipationRequest">
+
+    <wsdl:part name="param" element="project:addProjectParticipationRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidUsernameException">
+    <wsdl:part name="InvalidUsernameException" element="exception:InvalidUsernameException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getRisksRequest">
+    <wsdl:part name="param" element="project:GetRisksRequestParameter">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWtCalendarsRequest">
+    <wsdl:part name="param" element="project:GetWtCalendarsRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteProjectTaskResponse">
+  </wsdl:message>
+  <wsdl:message name="getProjectPermissionsRequest">
+
+    <wsdl:part name="param" element="project:GetProjectPermissionsRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeProjectResourceResponse">
+    <wsdl:part name="resourceID" element="base:mandatoryID">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addMultiTaskResourceRequest">
+    <wsdl:part name="param" element="project:addMultiTaskResourceRequestParameter">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeProjectParticipationResponse">
+    <wsdl:part name="projectParticipationList" element="project:ProjectParticipationList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addTaskResourceResponse">
+    <wsdl:part name="taskResourceID" element="base:mandatoryID">
+    </wsdl:part>
+
+  </wsdl:message>
+  <wsdl:message name="changeTaskResourceRequest">
+    <wsdl:part name="param" element="project:changeTaskResourceRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidParameterException">
+    <wsdl:part name="InvalidParameterException" element="exception:InvalidParameterException">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="getTaskResourcesResponse">
+    <wsdl:part name="taskResources" element="project:TaskResourceList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PermissionDeniedException">
+    <wsdl:part name="PermissionDeniedException" element="exception:PermissionDeniedException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getReleasableProjectParticipationsRequest">
+
+    <wsdl:part name="param" element="project:GetReleasableProjectParticipationsRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidClientException">
+    <wsdl:part name="InvalidClientException" element="exception:InvalidClientException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="requestParticipationResponse">
+  </wsdl:message>
+
+  <wsdl:message name="deleteProjectResourceResponse">
+  </wsdl:message>
+  <wsdl:message name="assignVirtualResourceResponse">
+  </wsdl:message>
+  <wsdl:message name="deleteProjectTaskRequest">
+    <wsdl:part name="param" element="project:deleteProjectTaskRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectResourcesResponse">
+
+    <wsdl:part name="projectResourceList" element="project:ProjectResourceList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidNamedLicenseException">
+    <wsdl:part name="InvalidNamedLicenseException" element="exception:InvalidNamedLicenseException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ServerMaintenanceException">
+    <wsdl:part name="ServerMaintenanceException" element="exception:ServerMaintenanceException">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidSessionException">
+    <wsdl:part name="InvalidSessionException" element="exception:InvalidSessionException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="refuseProjectParticipationResponse">
+  </wsdl:message>
+  <wsdl:message name="refuseProjectParticipationRequest">
+
+    <wsdl:part name="param" element="project:refuseProjectParticipationRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addMultiTaskResourceResponse">
+    <wsdl:part name="resultList" element="project:TaskResourceResultList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteTaskResourceResponse">
+  </wsdl:message>
+
+  <wsdl:message name="getProjectTasksResponse">
+    <wsdl:part name="projecttasklist" element="project:ProjectTaskList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getParticipationProjectsResponse">
+    <wsdl:part name="projectList" element="project:ParticipationProjectList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProjectResponse">
+
+    <wsdl:part name="projectID" element="base:mandatoryID">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectParticipationsRequest">
+    <wsdl:part name="param" element="project:getProjectParticipationsRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeTaskResourceResponse">
+  </wsdl:message>
+
+  <wsdl:message name="AssertionException">
+    <wsdl:part name="AssertionException" element="exception:AssertionException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProjectResourceResponse">
+    <wsdl:part name="resourceID" element="base:mandatoryID">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="releaseProjectParticipationResponse">
+
+  </wsdl:message>
+  <wsdl:message name="deleteProjectParticipationRequest">
+    <wsdl:part name="param" element="project:deleteProjectParticipationRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getParticipationProjectsRequest">
+    <wsdl:part name="param" element="project:GetParticipationProjectsRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="addRiskRequest">
+    <wsdl:part name="param" element="project:AddRiskRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectParticipationsResponse">
+    <wsdl:part name="projectParticipationList" element="project:ProjectParticipationList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRiskResponse">
+
+  </wsdl:message>
+  <wsdl:message name="addProjectTaskRequest">
+    <wsdl:part name="param" element="project:addProjectTaskRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getParticipationTasksRequest">
+    <wsdl:part name="param" element="project:getParticipationTasksRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="addTaskPredecessorRequest">
+    <wsdl:part name="param" element="project:addTaskPredecessorRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="assignVirtualResourceRequest">
+    <wsdl:part name="param" element="project:assignVirtualResourceRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addRiskResponse">
+
+    <wsdl:part name="riskID" element="base:mandatoryID">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getParticipationTasksResponse">
+    <wsdl:part name="taskList" element="project:ParticipationTaskList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidDatesException">
+    <wsdl:part name="InvalidDatesException" element="exception:InvalidDatesException">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectListRequest">
+    <wsdl:part name="param" element="project:getProjectListRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteTaskPredecessorRequest">
+    <wsdl:part name="param" element="project:deleteTaskPredecessorRequestParameter">
+    </wsdl:part>
+
+  </wsdl:message>
+  <wsdl:message name="getProjectRolesRequest">
+    <wsdl:part name="param" element="project:getProjectRolesRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="requestParticipationRequest">
+    <wsdl:part name="param" element="project:requestParticipationRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="getProjectResourcesRequest">
+    <wsdl:part name="param" element="project:getProjectResourcesRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addProjectParticipationResponse">
+    <wsdl:part name="projectParticipationList" element="project:ProjectParticipationList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteRiskRequest">
+
+    <wsdl:part name="param" element="project:DeleteRiskRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeProjectResponse">
+  </wsdl:message>
+  <wsdl:message name="getRisksResponse">
+    <wsdl:part name="risks" element="project:RiskList">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:portType name="Projects">
+<wsdl:documentation>Alle Services liefern aus Blue Ant Projekte, die: 1. nicht archiviert sind 2. einen Projektstatus haben, der Sichtbar für die AZ- und Fortschrittserfassung (Stammdaten/Projekte/Status) ist. Beim schreiben von Daten in Blue Ant werden diese Bedingungen ebenfalls überprüft und ggf. Fehlermeldungen zurückgegeben.</wsdl:documentation>
+    <wsdl:operation name="getParticipationProjects">
+<wsdl:documentation>Auflistung aller aktiven Projekte egal ob der der Mitarbeiter bereits Mitglied ist oder noch nicht.</wsdl:documentation>
+      <wsdl:input message="tns:getParticipationProjectsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getParticipationProjectsResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getParticipationTasks">
+<wsdl:documentation>Auflistung aller Aktivitäten aus den aktiven Projekten in denen
+a) der Mitarbeiter noch kein Mitglied ist und die Aktivitäten nicht zu 100% fertig sind (subj)
+b) der Mitarbeiter Mitglied ist, aber den Aktivitäten nicht zugewiesen ist und die Aktivitäten noch nicht zu 100% fertig sind (subj).</wsdl:documentation>
+      <wsdl:input message="tns:getParticipationTasksRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getParticipationTasksResponse">
+    </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="requestParticipation">
+<wsdl:documentation>Beantragen einer Projektmitgliedschaft. Grundlage bilden getParticipationProject/getParticipationTasks. Aus Blue Ant wird eine Mail an den Projektleiter gesandt.</wsdl:documentation>
+
+      <wsdl:input message="tns:requestParticipationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:requestParticipationResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter: - Nachticht zu lang</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectList">
+<wsdl:documentation>Dieser Service liefert aus Blue Ant eine Liste aller Projekte die nicht archiviert oder gelöscht sind. Projektvorlagen werden nicht mit zurückgegeben.</wsdl:documentation>
+      <wsdl:input message="tns:getProjectListRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getProjectListResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+
+<wsdl:documentation>Ungültiger Parameter: - Nachticht zu lang</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectResources">
+<wsdl:documentation>Dieser Service liefert eine Liste aller Ressourcen, die einem Projekt zugeordnet sind und dem definierten RessourcenTyp entsprechen.. Zu finden sind diese Werte in Blue Ant unter Projekte/Planung/Ressourcen. Nur Ressourcen, deren Beteiligung freigegeben ist, können für die Aktivitätenplanung eingesetzt werden.</wsdl:documentation>
+      <wsdl:input message="tns:getProjectResourcesRequest">
+
+    </wsdl:input>
+      <wsdl:output message="tns:getProjectResourcesResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="getProjectRoles">
+<wsdl:documentation>Dieser Service liefert eine Liste aller akt. Projektrollen und deren Kostensätze zu einem Projekt. Zu finden sind diese Werte in Blue Ant unter Projekte/Vorgabe/Rollen .</wsdl:documentation>
+      <wsdl:input message="tns:getProjectRolesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getProjectRolesResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectParticipations">
+<wsdl:documentation>Dieser Service liefert eine Liste aller Projektbeteiligungen zu einem Projekt aus Blue Ant. Zu finden sind diese Werte in Blue Ant unter Projekt/Planung/Ressourcen.</wsdl:documentation>
+      <wsdl:input message="tns:getProjectParticipationsRequest">
+    </wsdl:input>
+
+      <wsdl:output message="tns:getProjectParticipationsResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getReleasableProjectParticipations">
+<wsdl:documentation>Dieser Service liefert eine Liste Projektbeteiligungen die vom Anfragenden freigegeben werden können.</wsdl:documentation>
+      <wsdl:input message="tns:getReleasableProjectParticipationsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getReleasableProjectParticipationsResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addProjectResource">
+<wsdl:documentation>Dieser Service legt eine neue ProjektRessource an.</wsdl:documentation>
+      <wsdl:input message="tns:addProjectResourceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addProjectResourceResponse">
+
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeProjectResource">
+
+<wsdl:documentation>Dieser Service bearbeitet eine vorhandene ProjektRessource.</wsdl:documentation>
+      <wsdl:input message="tns:changeProjectResourceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:changeProjectResourceResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProjectResource">
+<wsdl:documentation>Dieser Service löscht eine vorhandene ProjektRessource.</wsdl:documentation>
+      <wsdl:input message="tns:deleteProjectResourceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteProjectResourceResponse">
+    </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="assignVirtualResource">
+<wsdl:documentation>Dieser Service weist einer virtuellen ProjektRessource eine reale Ressource zu.</wsdl:documentation>
+
+      <wsdl:input message="tns:assignVirtualResourceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:assignVirtualResourceResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addProjectParticipation">
+<wsdl:documentation>Dieser Service beantragt eine neue ProjektBeteiligung.</wsdl:documentation>
+      <wsdl:input message="tns:addProjectParticipationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addProjectParticipationResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeProjectParticipation">
+<wsdl:documentation>Dieser Service bearbeitet eine vorhandene ProjektBeteiligung.</wsdl:documentation>
+      <wsdl:input message="tns:changeProjectParticipationRequest">
+
+    </wsdl:input>
+      <wsdl:output message="tns:changeProjectParticipationResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="deleteProjectParticipation">
+<wsdl:documentation>Dieser Service löscht eine vorhandene ProjektBeteiligung.</wsdl:documentation>
+      <wsdl:input message="tns:deleteProjectParticipationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteProjectParticipationResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="releaseProjectParticipation">
+<wsdl:documentation>Mit diesem Service können angefragte Beteiligungen von Ressourcen freigegeben werden. Zu finden sind in Blue Ant diese Werte unter Ressourcenfreigabe</wsdl:documentation>
+      <wsdl:input message="tns:releaseProjectParticipationRequest">
+    </wsdl:input>
+
+      <wsdl:output message="tns:releaseProjectParticipationResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="refuseProjectParticipation">
+<wsdl:documentation>Mit diesem Service können angefragte Beteiligungen von Ressourcen abgelehnt werden. Zu finden sind in Blue Ant diese Werte unter Ressourcenfreigabe</wsdl:documentation>
+      <wsdl:input message="tns:refuseProjectParticipationRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:refuseProjectParticipationResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectTasks">
+<wsdl:documentation>Dieser Service liefert eine Liste aller Projektaktivitäten zu einem Projekt.</wsdl:documentation>
+      <wsdl:input message="tns:getProjectTasksRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getProjectTasksResponse">
+
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addProjectTask">
+
+<wsdl:documentation>Dieser Service fügt eine Aktivität zu einem Projekt hinzu</wsdl:documentation>
+      <wsdl:input message="tns:addProjectTaskRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addProjectTaskResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeProjectTask">
+<wsdl:documentation>Dieser Service ändert eine Aktivität</wsdl:documentation>
+      <wsdl:input message="tns:changeProjectTaskRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:changeProjectTaskResponse">
+    </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProjectTask">
+<wsdl:documentation>Dieser Service löscht eine Aktivität</wsdl:documentation>
+
+      <wsdl:input message="tns:deleteProjectTaskRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteProjectTaskResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addTaskPredecessor">
+<wsdl:documentation>Dieser Service verknüpft eine Aktivität mit einer Vorgänger-Aktivität</wsdl:documentation>
+      <wsdl:input message="tns:addTaskPredecessorRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addTaskPredecessorResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteTaskPredecessor">
+<wsdl:documentation>Dieser Service löscht die Verknüpfung zwischen einer Aktivität und einer Vorgänger-Aktivität</wsdl:documentation>
+      <wsdl:input message="tns:deleteTaskPredecessorRequest">
+
+    </wsdl:input>
+      <wsdl:output message="tns:deleteTaskPredecessorResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="getTaskResources">
+<wsdl:documentation>Dieser Service liefert eine Liste von Aktivitätenbeteiligungen</wsdl:documentation>
+      <wsdl:input message="tns:getTaskResourcesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getTaskResourcesResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addTaskResource">
+<wsdl:documentation>Dieser Service legt eine Aktivitätenbeteiligung an</wsdl:documentation>
+      <wsdl:input message="tns:addTaskResourceRequest">
+    </wsdl:input>
+
+      <wsdl:output message="tns:addTaskResourceResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="addMultiTaskResource">
+<wsdl:documentation>Dieser Service legt mehrere Aktivitätenbeteiligungen an</wsdl:documentation>
+      <wsdl:input message="tns:addMultiTaskResourceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addMultiTaskResourceResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeTaskResource">
+<wsdl:documentation>Dieser Service ändert eine Aktivitätenbeteiligung</wsdl:documentation>
+      <wsdl:input message="tns:changeTaskResourceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:changeTaskResourceResponse">
+
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteTaskResource">
+
+<wsdl:documentation>Dieser Service löscht eine Aktivitätenbeteiligung</wsdl:documentation>
+      <wsdl:input message="tns:deleteTaskResourceRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteTaskResourceResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addProject">
+<wsdl:documentation>Dieser Service legt ein Projekt an</wsdl:documentation>
+      <wsdl:input message="tns:addProjectRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:addProjectResponse">
+    </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeProject">
+<wsdl:documentation>Dieser Service ändert die Basisdaten eines Projektes</wsdl:documentation>
+
+      <wsdl:input message="tns:changeProjectRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:changeProjectResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getRisks">
+<wsdl:documentation>Dieser Service liefert die Risiken eines Projektes</wsdl:documentation>
+      <wsdl:input message="tns:getRisksRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getRisksResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addRisk">
+<wsdl:documentation>Dieser Service fügt einem Projekte ein Risiko hinzu</wsdl:documentation>
+      <wsdl:input message="tns:addRiskRequest">
+
+    </wsdl:input>
+      <wsdl:output message="tns:addRiskResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="changeRisk">
+<wsdl:documentation>Dieser Service ändert ein Risiko eines Projektes</wsdl:documentation>
+      <wsdl:input message="tns:changeRiskRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:changeRiskResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteRisk">
+<wsdl:documentation>Dieser Service löscht ein Risiko aus einem Projekt</wsdl:documentation>
+      <wsdl:input message="tns:deleteRiskRequest">
+    </wsdl:input>
+
+      <wsdl:output message="tns:deleteRiskResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+
+  </wsdl:portType>
+  <wsdl:binding name="ProjectsBinding" type="tns:Projects">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getParticipationProjects">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getParticipationProjects"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getParticipationTasks">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getParticipationTasks"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="requestParticipation">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/requestParticipation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getProjectList">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getProjectList"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectResources">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getProjectResources"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectRoles">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getProjectRoles"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getProjectParticipations">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getProjectParticipations"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getReleasableProjectParticipations">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getReleasableProjectParticipations"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addProjectResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addProjectResource"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="changeProjectResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/changeProjectResource"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProjectResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/deleteProjectResource"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="assignVirtualResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/assignVirtualResource"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="addProjectParticipation">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addProjectParticipation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeProjectParticipation">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/changeProjectParticipation"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProjectParticipation">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/deleteProjectParticipation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="releaseProjectParticipation">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/releaseProjectParticipation"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="refuseProjectParticipation">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/refuseProjectParticipation"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getProjectTasks">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getProjectTasks"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="addProjectTask">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addProjectTask"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeProjectTask">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/changeProjectTask"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteProjectTask">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/deleteProjectTask"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="addTaskPredecessor">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addTaskPredecessor"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteTaskPredecessor">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/deleteTaskPredecessor"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTaskResources">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getTaskResources"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="addTaskResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addTaskResource"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addMultiTaskResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addMultiTaskResource"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeTaskResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/changeTaskResource"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="deleteTaskResource">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/deleteTaskResource"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addProject">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addProject"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeProject">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/changeProject"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="getRisks">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getRisks"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addRisk">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/addRisk"/>
+      <wsdl:input>
+
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeRisk">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/changeRisk"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="deleteRisk">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/deleteRisk"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ProjectsService">
+    <wsdl:port name="ProjectsServicePort" binding="tns:ProjectsBinding">
+
+<wsdl:documentation>Alle Services liefern aus Blue Ant Projekte, die: 1. nicht archiviert sind 2. einen Projektstatus haben, der Sichtbar für die AZ- und Fortschrittserfassung (Stammdaten/Projekte/Status) ist. Beim Schreiben von Daten in Blue Ant werden diese Bedingungen ebenfalls überprüft und ggf. Fehlermeldungen zurückgegeben.</wsdl:documentation>
+      <soap:address location="http://78.46.94.155:8081/hs/services/ProjectsService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema
+	targetNamespace="http://absence.blueant.axis.proventis.net/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:base="http://base.blueant.axis.proventis.net/"
+	xmlns:absence="http://absence.blueant.axis.proventis.net/"
+	xmlns:xhtml="http://www.w3.org/1999/xhtml"
+	elementFormDefault="qualified">
+
+	<xsd:import schemaLocation="base.xsd" namespace="http://base.blueant.axis.proventis.net/"/>
+
+	<xsd:simpleType name="T_HalfDay">
+		<xsd:annotation><xsd:documentation>
+			Specifies the day half for the absence type leave. All absence types except leave use <xhtml:i><xhtml:b>not_specified</xhtml:b></xhtml:i>.
+		</xsd:documentation></xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="not_specified">
+
+				<xsd:annotation><xsd:documentation>All absence types except leave</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="first">
+				<xsd:annotation><xsd:documentation>First half of day</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="second">
+				<xsd:annotation><xsd:documentation>Second half of day</xsd:documentation></xsd:annotation>
+
+			</xsd:enumeration>
+			<xsd:enumeration value="none">
+				<xsd:annotation><xsd:documentation>Full-day</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="addAbsenceRequestParameter">
+		<xsd:complexType>
+
+			<xsd:sequence>
+				<xsd:element name="sessionID" type="xsd:string"/>
+				<xsd:element name="absence" type="absence:T_Absence"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="setAbsenceStateRequestParameter">
+		<xsd:complexType>
+			<xsd:sequence>
+
+				<xsd:element name="sessionID" type="xsd:string"/>
+				<xsd:element name="absenceID" type="base:id"/>
+				<xsd:element name="state" type="xsd:int">
+					<xsd:annotation><xsd:documentation>
+						The new state of an absence can be one of the following:<xhtml:br/>
+						<xhtml:table>
+							<xhtml:tr><xhtml:td>0</xhtml:td><xhtml:td>planned</xhtml:td></xhtml:tr>
+
+							<xhtml:tr><xhtml:td>1</xhtml:td><xhtml:td>confirmed</xhtml:td></xhtml:tr>
+							<xhtml:tr><xhtml:td>2</xhtml:td><xhtml:td>cancelled</xhtml:td></xhtml:tr>
+						</xhtml:table>
+					</xsd:documentation></xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+
+	</xsd:element>
+
+	<xsd:simpleType name="T_AbsenceApproval">
+		<xsd:annotation><xsd:documentation>Who has to approve the absence ?</xsd:documentation></xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="none">
+				<xsd:annotation><xsd:documentation>no approval necessary</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="pl">
+
+				<xsd:annotation><xsd:documentation>Project head</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="sr">
+				<xsd:annotation><xsd:documentation>Line manager</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="pl_sr">
+				<xsd:annotation><xsd:documentation>Project head and line manager</xsd:documentation></xsd:annotation>
+
+			</xsd:enumeration>
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:element name="AbsenceType" type="absence:T_AbsenceType" />
+
+	<xsd:complexType name="T_AbsenceType">
+		<xsd:sequence>
+			<xsd:element name="absenceTypeID" type="base:id">
+				<xsd:annotation><xsd:documentation>PrimaryKey</xsd:documentation></xsd:annotation>
+
+			</xsd:element>
+			<xsd:element name="name" type="xsd:string">
+				<xsd:annotation><xsd:documentation>Name of this absence type</xsd:documentation></xsd:annotation>
+			</xsd:element>
+			<xsd:element name="duration" type="xsd:int">
+				<xsd:annotation><xsd:documentation>
+					Unit for this absence type:<xhtml:br />
+					<xhtml:table>
+
+						<xhtml:tr><xhtml:td>0</xhtml:td><xhtml:td>day</xhtml:td></xhtml:tr>
+						<xhtml:tr><xhtml:td>1</xhtml:td><xhtml:td>minute</xhtml:td></xhtml:tr>
+					</xhtml:table>
+				</xsd:documentation></xsd:annotation>
+			</xsd:element>
+			<xsd:element name="type" type="xsd:int">
+				<xsd:annotation><xsd:documentation>
+
+					Type for this absence type:<xhtml:br />
+					<xhtml:table>
+						<xhtml:tr><xhtml:td>0</xhtml:td><xhtml:td>leave</xhtml:td></xhtml:tr>
+						<xhtml:tr><xhtml:td>1</xhtml:td><xhtml:td>ill - deprecated - mapped to other(2)</xhtml:td></xhtml:tr>
+						<xhtml:tr><xhtml:td>2</xhtml:td><xhtml:td>other</xhtml:td></xhtml:tr>
+
+						<xhtml:tr><xhtml:td>3</xhtml:td><xhtml:td>servicetime</xhtml:td></xhtml:tr>
+					</xhtml:table>
+				</xsd:documentation></xsd:annotation>
+			</xsd:element>
+			<xsd:element name="active" type="xsd:boolean">
+				<xsd:annotation><xsd:documentation>
+					Only active absence types can be used for creation.
+				</xsd:documentation></xsd:annotation>
+
+			</xsd:element>
+			<xsd:element name="approval" type="absence:T_AbsenceApproval">
+				<xsd:annotation><xsd:documentation>
+					Who has to approve this absence type ? <xhtml:br />
+					Creation by webserive is only permitted for approval type <xhtml:i><xhtml:b>none</xhtml:b></xhtml:i>.
+				</xsd:documentation></xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+
+	</xsd:complexType>
+
+	<xsd:element name="AbsenceTypeList">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="absence:AbsenceType"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="GetAbsenceTypeListRequestParameter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="sessionID" type="xsd:string"/>
+				<xsd:element name="all" type="xsd:boolean" nillable="true">
+					<xsd:annotation><xsd:documentation>
+						Return all types of abesence ?<xhtml:br />
+						If <xhtml:b>false</xhtml:b>, only absences with approval type <xhtml:i><xhtml:b>none</xhtml:b></xhtml:i> will be returned.
+					</xsd:documentation></xsd:annotation>
+
+				</xsd:element>
+				<xsd:element name="type" type="base:optionalInt" nillable="true">
+					<xsd:annotation><xsd:documentation>
+						Type for the absences requested:<xhtml:br />
+						<xhtml:table>
+							<xhtml:tr><xhtml:td>0</xhtml:td><xhtml:td>leave</xhtml:td></xhtml:tr>
+							<xhtml:tr><xhtml:td>2</xhtml:td><xhtml:td>other</xhtml:td></xhtml:tr>
+
+							<xhtml:tr><xhtml:td>3</xhtml:td><xhtml:td>servicetime</xhtml:td></xhtml:tr>
+						</xhtml:table>
+					</xsd:documentation></xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:simpleType name="T_AbsenceState">
+		<xsd:annotation><xsd:documentation>Processingstate of the absence</xsd:documentation></xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="planned">
+				<xsd:annotation><xsd:documentation>planned</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="requested">
+				<xsd:annotation><xsd:documentation>requested / in process</xsd:documentation></xsd:annotation>
+
+			</xsd:enumeration>
+			<xsd:enumeration value="released">
+				<xsd:annotation><xsd:documentation>confirmed</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+			<xsd:enumeration value="declined">
+				<xsd:annotation><xsd:documentation>cancelled</xsd:documentation></xsd:annotation>
+			</xsd:enumeration>
+		</xsd:restriction>
+
+	</xsd:simpleType>
+
+	<xsd:element name="Absence" type="absence:T_Absence"/>
+
+	<xsd:complexType name="T_Absence">
+		<xsd:sequence>
+			<xsd:element name="absenceID" type="base:id"
+				nillable="true">
+				<xsd:annotation>
+					<xsd:documentation>PrimaryKey</xsd:documentation>
+
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="personID" type="base:id">
+				<xsd:annotation>
+					<xsd:documentation>
+						Absences can only be created for employees
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="absenceTypeID" type="base:id">
+				<xsd:annotation>
+					<xsd:documentation>
+						Type of the absence <xhtml:i>see: getAbsenceTypeList</xhtml:i>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="from" type="xsd:dateTime">
+
+				<xsd:annotation>
+					<xsd:documentation>
+						Startdate and time for the absence.
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="to" type="xsd:dateTime">
+				<xsd:annotation>
+					<xsd:documentation>
+
+						Enddate and time for the absence
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="halfDay" type="absence:T_HalfDay" nillable="true">
+				<xsd:annotation><xsd:documentation>
+					Specifies the day half for the absence type leave. All absence types except leave use <xhtml:i><xhtml:b>not_specified</xhtml:b></xhtml:i>.
+					<xhtml:table>
+
+						<xhtml:tr><xhtml:th>not_specified</xhtml:th><xhtml:td>All absence types except leave</xhtml:td></xhtml:tr>
+						<xhtml:tr><xhtml:th>first</xhtml:th><xhtml:td>First half of day</xhtml:td></xhtml:tr>
+						<xhtml:tr><xhtml:th>second</xhtml:th><xhtml:td>Second half of day</xhtml:td></xhtml:tr>
+						<xhtml:tr><xhtml:th>none</xhtml:th><xhtml:td>Full-day</xhtml:td></xhtml:tr>
+					</xhtml:table>
+
+				</xsd:documentation></xsd:annotation>
+			</xsd:element>
+			<xsd:element name="comment" type="xsd:string" nillable="true">
+				<xsd:annotation>
+					<xsd:documentation>
+						Comment (max. 100 characters)
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
+			<xsd:element name="state" type="absence:T_AbsenceState">
+				<xsd:annotation>
+					<xsd:documentation>
+						State of the absence. Has to be one of:<xhtml:br />
+						<xhtml:table>
+							<xhtml:tr><xhtml:th>planned</xhtml:th><xhtml:td>This absence is to be planned (absence type leave only)</xhtml:td></xhtml:tr>
+							<xhtml:tr><xhtml:th>requested</xhtml:th><xhtml:td>This absence is to be requested (all absence types)</xhtml:td></xhtml:tr>
+
+						</xhtml:table>
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="title" type="xsd:string" nillable="true">
+				<xsd:annotation>
+					<xsd:documentation>
+						The short description for this absence
+					</xsd:documentation>
+
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="projectID" type="base:id" nillable="true">
+				<xsd:annotation>
+					<xsd:documentation>
+						Only valid if the absence type is a servicetime. <xhtml:br />
+						In this case the projectID is mandatory.<xhtml:br />
+					</xsd:documentation>
+
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="isCommentPrivate" type="xsd:boolean">
+				<xsd:annotation><xsd:documentation>
+					if true, the given comment may only be seen by the owner and the advicor of the absence
+				</xsd:documentation></xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="GetAbsenceRequestParameter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="sessionID" type="xsd:string"/>
+				<xsd:element name="absenceID" type="base:id" nillable="true">
+					<xsd:annotation><xsd:documentation>Only this single absence with will be returned</xsd:documentation></xsd:annotation>
+				</xsd:element>
+				<xsd:element name="absenceTypeID" type="base:id" nillable="true">
+
+					<xsd:annotation><xsd:documentation>Only absences of this type will be returned</xsd:documentation></xsd:annotation>
+				</xsd:element>
+				<xsd:element name="absenceState" type="absence:T_AbsenceState" nillable="true">
+					<xsd:annotation><xsd:documentation>Only absences of this state will be returned</xsd:documentation></xsd:annotation>
+				</xsd:element>
+				<xsd:element name="personID" type="base:id" nillable="true">
+					<xsd:annotation><xsd:documentation>Only absences for this person will be returned</xsd:documentation></xsd:annotation>
+
+				</xsd:element>
+				<xsd:element name="from" type="xsd:dateTime" nillable="true">
+					<xsd:annotation><xsd:documentation>Only absences past this date will be returned</xsd:documentation></xsd:annotation>
+				</xsd:element>
+				<xsd:element name="to" type="xsd:dateTime" nillable="true">
+					<xsd:annotation><xsd:documentation>Only absences before this date will be returned</xsd:documentation></xsd:annotation>
+				</xsd:element>
+			</xsd:sequence>
+
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="AbsenceList">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="absence:Absence"/>
+			</xsd:sequence>
+		</xsd:complexType>
+
+	</xsd:element>
+
+	<xsd:element name="DeleteAbsenceRequestParameter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="sessionID" type="xsd:string"/>
+				<xsd:element name="absenceID" type="base:id">
+					<xsd:annotation><xsd:documentation>PrimaryKey of the absence to delete</xsd:documentation></xsd:annotation>
+				</xsd:element>
+
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="UpdateAbsenceRequestParameter">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="sessionID" type="xsd:string"/>
+				<xsd:element name="absence" type="absence:T_Absence"/>
+
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:base="http://base.blueant.axis.proventis.net/" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://base.blueant.axis.proventis.net/">
+   <xsd:simpleType name="id">
+      <xsd:restriction base="xsd:long"/>
+   </xsd:simpleType>
+   <xsd:element name="mandatoryID" type="base:id"/>
+   <xsd:element name="optionalID" nillable="true" type="base:id"/>
+   <xsd:simpleType name="optionalInt">
+      <xsd:restriction base="xsd:int"/>
+   </xsd:simpleType>
+
+   <xsd:simpleType name="optionalBoolean">
+      <xsd:restriction base="xsd:boolean"/>
+   </xsd:simpleType>
+   <xsd:simpleType name="optionalDouble">
+      <xsd:restriction base="xsd:double"/>
+   </xsd:simpleType>
+   <xsd:element name="sessionID">
+      <xsd:complexType>
+         <xsd:sequence>
+
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="personID" type="xsd:long"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="mandatoryDouble" type="xsd:double"/>
+   <xsd:element name="mandatoryString" type="xsd:string"/>
+   <xsd:element name="optionalString" nillable="true" type="xsd:string"/>
+   <xsd:element name="mandatoryDateTime" type="xsd:dateTime"/>
+
+   <xsd:element name="mandatoryInt" type="xsd:int"/>
+   <xsd:element name="LoginRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="username" type="xsd:string"/>
+            <xsd:element name="password" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+
+   <xsd:element name="LoginNoAuthRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="username" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="LoginSAMLRequestParameter">
+      <xsd:complexType>
+
+         <xsd:sequence>
+            <xsd:element name="SAMLartifact" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="LogoutRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

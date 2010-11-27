@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:exception="http://exception.blueant.axis.proventis.net/" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://exception.blueant.axis.proventis.net/">
+   <xsd:complexType name="GeneralWebserviceException">
+      <xsd:sequence>
+         <xsd:element name="cause" nillable="true" type="xsd:anyType"/>
+         <xsd:element name="message" nillable="true" type="xsd:string"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="UserManagementException">
+      <xsd:complexContent>
+
+         <xsd:extension base="exception:GeneralWebserviceException"/>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="InvalidSessionException">
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:UserManagementException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+
+   </xsd:element>
+   <xsd:element name="InvalidClientException">
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:UserManagementException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="PermissionDeniedException">
+
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:UserManagementException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="InvalidUsernamePasswordCombinationException">
+      <xsd:complexType>
+         <xsd:complexContent>
+
+            <xsd:extension base="exception:UserManagementException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="InvalidUsernameException">
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:UserManagementException"/>
+         </xsd:complexContent>
+
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="InvalidDatesException">
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:UserManagementException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+
+   <xsd:element name="ServerMaintenanceException">
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:UserManagementException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="InvalidParameterException">
+      <xsd:complexType>
+
+         <xsd:complexContent>
+            <xsd:extension base="exception:GeneralWebserviceException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="AssertionException">
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:GeneralWebserviceException"/>
+
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:complexType name="InvalidLicenseException">
+      <xsd:complexContent>
+         <xsd:extension base="exception:UserManagementException"/>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="InvalidNamedLicenseException">
+
+      <xsd:complexType>
+         <xsd:complexContent>
+            <xsd:extension base="exception:InvalidLicenseException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="InvalidConcurrentLicenseException">
+      <xsd:complexType>
+         <xsd:complexContent>
+
+            <xsd:extension base="exception:InvalidLicenseException"/>
+         </xsd:complexContent>
+      </xsd:complexType>
+   </xsd:element>
+</xsd:schema>

@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BlueAnt" targetNamespace="http://blueant.axis.proventis.net/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://blueant.axis.proventis.net/" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:exception="http://exception.blueant.axis.proventis.net/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:base="http://base.blueant.axis.proventis.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+<wsdl:documentation>Version 8.0.1 vom 26.04.2010 10:30 - WSI - Verified</wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema>
+			<xsd:import namespace="http://exception.blueant.axis.proventis.net/" schemaLocation="exception.xsd"/>
+		</xsd:schema>
+    <xsd:schema>
+			<xsd:import namespace="http://base.blueant.axis.proventis.net/" schemaLocation="base.xsd"/>
+		</xsd:schema>
+
+  </wsdl:types>
+  <wsdl:message name="PermissionDeniedException">
+    <wsdl:part name="PermissionDeniedException" element="exception:PermissionDeniedException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidConcurrentLicenseException">
+    <wsdl:part name="InvalidConcurrentLicenseException" element="exception:InvalidConcurrentLicenseException">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="LoginResponse">
+    <wsdl:part name="sessionID" element="base:sessionID">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LogoutRequest">
+    <wsdl:part name="param" element="base:LogoutRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidClientException">
+
+    <wsdl:part name="InvalidClientException" element="exception:InvalidClientException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidUsernamePasswordCombinationException">
+    <wsdl:part name="InvalidUsernamePasswordCombinatioException" element="exception:InvalidUsernamePasswordCombinationException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoginNoAuthResponse">
+    <wsdl:part name="sessionID" element="base:sessionID">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidDatesException">
+    <wsdl:part name="InvalidDatesException" element="exception:InvalidDatesException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidNamedLicenseException">
+    <wsdl:part name="InvalidNamedLicenseException" element="exception:InvalidNamedLicenseException">
+    </wsdl:part>
+
+  </wsdl:message>
+  <wsdl:message name="InvalidUsernameException">
+    <wsdl:part name="InvalidUsernameException" element="exception:InvalidUsernameException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ServerMaintenanceException">
+    <wsdl:part name="ServerMaintenanceException" element="exception:ServerMaintenanceException">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="InvalidSessionException">
+    <wsdl:part name="InvalidSessionException" element="exception:InvalidSessionException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoginNoAuthRequest">
+    <wsdl:part name="param" element="base:LoginNoAuthRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoginSAMLRequest">
+
+    <wsdl:part name="param" element="base:LoginSAMLRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoginRequest">
+    <wsdl:part name="param" element="base:LoginRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LoginSAMLResponse">
+    <wsdl:part name="sessionID" element="base:sessionID">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AssertionException">
+    <wsdl:part name="AssertionException" element="exception:AssertionException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="LogoutResponse">
+  </wsdl:message>
+  <wsdl:message name="InvalidParameterException">
+
+    <wsdl:part name="InvalidParameterException" element="exception:InvalidParameterException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="Base">
+    <wsdl:operation name="Login">
+<wsdl:documentation>Dieser Service liefert aus Blue Ant eine gültige sessionID bei der Übergabe von Benutzername und Password</wsdl:documentation>
+      <wsdl:input message="tns:LoginRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LoginResponse">
+
+    </wsdl:output>
+      <wsdl:fault name="ServerMaintenanceException" message="tns:ServerMaintenanceException">
+<wsdl:documentation>Der Server ist im Wartungsmodus</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidDatesException" message="tns:InvalidDatesException">
+<wsdl:documentation>Eintritts- oder Austrittsdatum des Anwenders ist noch nicht erreicht oder ueberschritten</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidNamedLicenseException" message="tns:InvalidNamedLicenseException">
+<wsdl:documentation>Anzahl der Named Lizensen erschöft.</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidUsernamePasswordCombinationException" message="tns:InvalidUsernamePasswordCombinationException">
+<wsdl:documentation>Benutzername/ Password falsch</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidConcurrentLicenseException" message="tns:InvalidConcurrentLicenseException">
+<wsdl:documentation>Anzahl der Concurrent Lizensen erschöft.</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LoginNoAuth">
+
+<wsdl:documentation>Dieser Service liefert aus Blue Ant eine gültige sessionID bei der Übergabe von Benutzername oder einem Alias OHNE Password.</wsdl:documentation>
+      <wsdl:input message="tns:LoginNoAuthRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LoginNoAuthResponse">
+    </wsdl:output>
+      <wsdl:fault name="ServerMaintenanceException" message="tns:ServerMaintenanceException">
+<wsdl:documentation>Der Server ist im Wartungsmodus</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidDatesException" message="tns:InvalidDatesException">
+
+<wsdl:documentation>Eintritts- oder Austrittsdatum des Anwenders ist noch nicht erreicht oder ueberschritten</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidNamedLicenseException" message="tns:InvalidNamedLicenseException">
+<wsdl:documentation>Anzahl der Named Lizensen erschöft.</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidUsernameException" message="tns:InvalidUsernameException">
+<wsdl:documentation>Benutzername falsch</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidConcurrentLicenseException" message="tns:InvalidConcurrentLicenseException">
+
+<wsdl:documentation>Anzahl der Concurrent Lizensen erschöft.</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LoginSAML">
+<wsdl:documentation>Dieser Service liefert aus Blue Ant eine gueltige sessionID bei der Übergabe von einem SAML artifact via SSO</wsdl:documentation>
+      <wsdl:input message="tns:LoginSAMLRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LoginSAMLResponse">
+    </wsdl:output>
+
+      <wsdl:fault name="ServerMaintenanceException" message="tns:ServerMaintenanceException">
+<wsdl:documentation>Der Server ist im Wartungsmodus</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidDatesException" message="tns:InvalidDatesException">
+<wsdl:documentation>Eintritts- oder Austrittsdatum des Anwenders ist noch nicht erreicht oder ueberschritten</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidNamedLicenseException" message="tns:InvalidNamedLicenseException">
+<wsdl:documentation>Anzahl der Named Lizensen erschöft.</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidUsernamePasswordCombinationException" message="tns:InvalidUsernamePasswordCombinationException">
+<wsdl:documentation>Benutzername / Password falsch</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidConcurrentLicenseException" message="tns:InvalidConcurrentLicenseException">
+<wsdl:documentation>Anzahl der Concurrent Lizensen erschöft.</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+<wsdl:documentation>Dieser Service meldet eine gültige sessionID bei Blue Ant ab.</wsdl:documentation>
+
+      <wsdl:input message="tns:LogoutRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:LogoutResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BaseBinding" type="tns:Base">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Login">
+
+      <soap:operation soapAction="http://blueant.axis.proventis.net/Login"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServerMaintenanceException">
+        <soap:fault name="ServerMaintenanceException"/>
+
+      </wsdl:fault>
+      <wsdl:fault name="InvalidDatesException">
+        <soap:fault name="InvalidDatesException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidNamedLicenseException">
+        <soap:fault name="InvalidNamedLicenseException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidUsernamePasswordCombinationException">
+        <soap:fault name="InvalidUsernamePasswordCombinationException"/>
+
+      </wsdl:fault>
+      <wsdl:fault name="InvalidConcurrentLicenseException">
+        <soap:fault name="InvalidConcurrentLicenseException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LoginNoAuth">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/LoginNoAuth"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="ServerMaintenanceException">
+        <soap:fault name="ServerMaintenanceException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidDatesException">
+        <soap:fault name="InvalidDatesException"/>
+
+      </wsdl:fault>
+      <wsdl:fault name="InvalidNamedLicenseException">
+        <soap:fault name="InvalidNamedLicenseException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidUsernameException">
+        <soap:fault name="InvalidUsernameException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidConcurrentLicenseException">
+        <soap:fault name="InvalidConcurrentLicenseException"/>
+
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="LoginSAML">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/LoginSAML"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+
+      </wsdl:output>
+      <wsdl:fault name="ServerMaintenanceException">
+        <soap:fault name="ServerMaintenanceException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidDatesException">
+        <soap:fault name="InvalidDatesException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidNamedLicenseException">
+        <soap:fault name="InvalidNamedLicenseException"/>
+
+      </wsdl:fault>
+      <wsdl:fault name="InvalidUsernamePasswordCombinationException">
+        <soap:fault name="InvalidUsernamePasswordCombinationException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidConcurrentLicenseException">
+        <soap:fault name="InvalidConcurrentLicenseException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+
+      <soap:operation soapAction="http://blueant.axis.proventis.net/Logout"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+
+  <wsdl:service name="BaseService">
+    <wsdl:port name="BaseServicePort" binding="tns:BaseBinding">
+<wsdl:documentation>This service supports login and logout to the BlueAnt system</wsdl:documentation>
+      <soap:address location="http://78.46.94.155:8081/hs/services/BaseService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
