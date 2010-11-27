@@ -969,16 +969,6 @@
 
               
                   if (
-                  "http://project.blueant.axis.proventis.net/".equals(namespaceURI) &&
-                  "predecessors_type0".equals(typeName)){
-                   
-                            return  net.proventis.axis.blueant.project.Predecessors_type0.Factory.parse(reader);
-                        
-
-                  }
-
-              
-                  if (
                   "http://base.blueant.axis.proventis.net/".equals(namespaceURI) &&
                   "optionalDouble".equals(typeName)){
                    
@@ -1023,6 +1013,16 @@
                   "T_TicketStateInternal".equals(typeName)){
                    
                             return  net.proventis.axis.blueant.masterdata.T_TicketStateInternal.Factory.parse(reader);
+                        
+
+                  }
+
+              
+                  if (
+                  "http://project.blueant.axis.proventis.net/".equals(namespaceURI) &&
+                  "T_TaskPredecessorList".equals(typeName)){
+                   
+                            return  net.proventis.axis.blueant.project.T_TaskPredecessorList.Factory.parse(reader);
                         
 
                   }

@@ -306,14 +306,14 @@
                         */
 
                         
-                                    protected net.proventis.axis.blueant.project.Predecessors_type0 localPredecessors ;
+                                    protected net.proventis.axis.blueant.project.T_TaskPredecessorList localPredecessors ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return net.proventis.axis.blueant.project.Predecessors_type0
+                           * @return net.proventis.axis.blueant.project.T_TaskPredecessorList
                            */
-                           public  net.proventis.axis.blueant.project.Predecessors_type0 getPredecessors(){
+                           public  net.proventis.axis.blueant.project.T_TaskPredecessorList getPredecessors(){
                                return localPredecessors;
                            }
 
@@ -323,7 +323,7 @@
                                * Auto generated setter method
                                * @param param Predecessors
                                */
-                               public void setPredecessors(net.proventis.axis.blueant.project.Predecessors_type0 param){
+                               public void setPredecessors(net.proventis.axis.blueant.project.T_TaskPredecessorList param){
                             
                                             this.localPredecessors=param;
                                     
@@ -1417,7 +1417,7 @@
                                           
                                       }else{
                                     
-                                                object.setPredecessors(net.proventis.axis.blueant.project.Predecessors_type0.Factory.parse(reader));
+                                                object.setPredecessors(net.proventis.axis.blueant.project.T_TaskPredecessorList.Factory.parse(reader));
                                               
                                         reader.next();
                                     }

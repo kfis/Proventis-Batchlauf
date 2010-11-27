@@ -1,1525 +1,1748 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
-<xsd:schema
-	targetNamespace="http://project.blueant.axis.proventis.net/"
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-	xmlns:base="http://base.blueant.axis.proventis.net/"
-	xmlns:masterdata="http://masterdata.blueant.axis.proventis.net/"
-	xmlns:human="http://human.blueant.axis.proventis.net/"
-	xmlns:cost="http://cost.blueant.axis.proventis.net/"
-	xmlns:project="http://project.blueant.axis.proventis.net/"
-	elementFormDefault="qualified">
+<?xml version="1.0" encoding="ISO-8859-1"?><xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:project="http://project.blueant.axis.proventis.net/" xmlns:base="http://base.blueant.axis.proventis.net/" xmlns:masterdata="http://masterdata.blueant.axis.proventis.net/" xmlns:cost="http://cost.blueant.axis.proventis.net/" xmlns:human="http://human.blueant.axis.proventis.net/" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://project.blueant.axis.proventis.net/">
+   <xsd:import namespace="http://base.blueant.axis.proventis.net/" schemaLocation="base.xsd"/>
+   <xsd:import namespace="http://masterdata.blueant.axis.proventis.net/" schemaLocation="masterdata.xsd"/>
+   <xsd:import namespace="http://human.blueant.axis.proventis.net/" schemaLocation="human.xsd"/>
+   <xsd:import namespace="http://cost.blueant.axis.proventis.net/" schemaLocation="cost.xsd"/>
+   <xsd:import namespace="http://absence.blueant.axis.proventis.net/" schemaLocation="absence.xsd"/>
+   <xsd:import namespace="http://ticket.blueant.axis.proventis.net/" schemaLocation="ticket.xsd"/>
+   <xsd:element name="ParticipationProject" type="project:T_ParticipationProject"/>
+   <xsd:complexType name="T_ParticipationProject">
 
-	<xsd:import schemaLocation="base.xsd" namespace="http://base.blueant.axis.proventis.net/"/>
-	<xsd:import schemaLocation="masterdata.xsd" namespace="http://masterdata.blueant.axis.proventis.net/"/>
-	<xsd:import schemaLocation="human.xsd" namespace="http://human.blueant.axis.proventis.net/"/>
-	<xsd:import schemaLocation="cost.xsd" namespace="http://cost.blueant.axis.proventis.net/"/>
-	<!--
-		Auch wenn die beiden folgenden Schemata nicht in project verwendet werden, müssen wir sie hier importieren,
-		damit bei der WSDL2Java-Generierung der ExtensionMapper vollständig alle Schemata enthält (Generierung überschreibt den ExtensionMapper)
-		siehe http://bug/show_bug.cgi?id=11360
-		23.09.2008 dparnitzke
-	 -->
-	<xsd:import schemaLocation="absence.xsd" namespace="http://absence.blueant.axis.proventis.net/"/>
-	<xsd:import schemaLocation="ticket.xsd" namespace="http://ticket.blueant.axis.proventis.net/"/>
+      <xsd:complexContent>
+         <xsd:extension base="cost:T_SimpleProject"/>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="ParticipationProjectList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:ParticipationProject"/>
+         </xsd:sequence>
 
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getParticipationTasksRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
 
-	<xsd:element name="ParticipationProject" type="project:T_ParticipationProject"/>
+   </xsd:element>
+   <xsd:element name="ParticipationTask" type="project:T_ParticipationTask"/>
+   <xsd:complexType name="T_ParticipationTask">
+      <xsd:complexContent>
+         <xsd:extension base="cost:T_SimpleTask">
+            <xsd:sequence>
+               <xsd:element name="enabled" type="xsd:boolean"/>
+               <xsd:element name="children" type="project:T_ParticipationTaskList"/>
+            </xsd:sequence>
 
-	<xsd:complexType name="T_ParticipationProject">
-		<xsd:complexContent>
-			<xsd:extension base="cost:T_SimpleProject"/>
-		</xsd:complexContent>
-	</xsd:complexType>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="ParticipationTaskList" type="project:T_ParticipationTaskList"/>
+   <xsd:complexType name="T_ParticipationTaskList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:ParticipationTask"/>
+      </xsd:sequence>
+   </xsd:complexType>
 
-	<xsd:element name="ParticipationProjectList">
-		<xsd:complexType>
-			<xsd:sequence>
+   <xsd:element name="requestParticipationRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>FÃ¼r welches Projekt wird die Mitgliedschaft beantragt ?</xsd:documentation>
+               </xsd:annotation>
 
-				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:ParticipationProject"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+            </xsd:element>
+            <xsd:element name="taskID" nillable="true" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>FÃ¼r welche AktivitÃ¤t wird die Mitgliedschaft beantragt ?</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="message" nillable="true" type="xsd:string">
+               <xsd:annotation>
 
-	<xsd:element name="getParticipationTasksRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id"/>
+                  <xsd:documentation>Nachricht an den Projektleiter, die der Mitarbeitererfassen kann.</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getProjectListRequestParameter">
+      <xsd:complexType>
 
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="ParticipationTask" type="project:T_ParticipationTask"/>
-
-	<xsd:complexType name="T_ParticipationTask">
-		<xsd:complexContent>
-			<xsd:extension base="cost:T_SimpleTask">
-				<xsd:sequence>
-					<xsd:element name="enabled" type="xsd:boolean"/>
-
-					<xsd:element name="children" type="project:T_ParticipationTaskList"/>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:element name="ParticipationTaskList" type="project:T_ParticipationTaskList"/>
-
-	<xsd:complexType name="T_ParticipationTaskList">
-		<xsd:sequence>
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:ParticipationTask"/>
-
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:element name="requestParticipationRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id">
-					<xsd:annotation><xsd:documentation>Für welches Projekt wird die Mitgliedschaft beantragt ?</xsd:documentation></xsd:annotation>
-
-				</xsd:element>
-				<xsd:element name="taskID" type="base:id" nillable="true">
-					<xsd:annotation><xsd:documentation>Für welche Aktivität wird die Mitgliedschaft beantragt ?</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="message" type="xsd:string" nillable="true">
-					<xsd:annotation><xsd:documentation>Nachricht an den Projektleiter, die der Mitarbeitererfassen kann.</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="getProjectListRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string" />
-				<xsd:element name="projectName" type="xsd:string"
-					nillable="true">
-					<xsd:annotation>
-						<xsd:documentation>
-
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectName" nillable="true" type="xsd:string">
+               <xsd:annotation>
+                  <xsd:documentation>
 							Nur Projekte mit diesem Projektnamen holen
 							(Like-Suche)
 						</xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="projectNumber" type="xsd:string"
-					nillable="true">
-					<xsd:annotation>
-						<xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+
+            <xsd:element name="projectNumber" nillable="true" type="xsd:string">
+               <xsd:annotation>
+                  <xsd:documentation>
 							Nur Projekte mit dieser ProjektNummer holen
 							(Like-Suche)
 						</xsd:documentation>
-					</xsd:annotation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="projectID" nillable="true" type="base:id">
+               <xsd:annotation>
 
-				</xsd:element>
-				<xsd:element name="projectID" type="base:id"
-					nillable="true">
-					<xsd:annotation>
-						<xsd:documentation>
+                  <xsd:documentation>
 							Nur Projekte holen, die zu dieser ProjektID
 							holen
 						</xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="fromDate" type="xsd:date"
-					nillable="true">
-
-					<xsd:annotation>
-						<xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="fromDate" nillable="true" type="xsd:date">
+               <xsd:annotation>
+                  <xsd:documentation>
 							Nur Projekte holen, die nach fromDate liegen
 						</xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="toDate" type="xsd:date"
-					nillable="true">
-					<xsd:annotation>
-						<xsd:documentation>
 
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="toDate" nillable="true" type="xsd:date">
+               <xsd:annotation>
+                  <xsd:documentation>
 							Nur Projekte holen, die vor toDate liegen
 						</xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="ownProjectsOnly"
-					type="base:optionalBoolean" nillable="true">
-					<xsd:annotation>
-						<xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+
+            <xsd:element name="ownProjectsOnly" nillable="true" type="base:optionalBoolean">
+               <xsd:annotation>
+                  <xsd:documentation>
 							Nur eigene Projekte holen
 						</xsd:documentation>
-					</xsd:annotation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="offerNumber" nillable="true" type="xsd:string">
+               <xsd:annotation>
 
-				</xsd:element>
-				<xsd:element name="offerNumber" type="xsd:string"
-					nillable="true">
-					<xsd:annotation>
-						<xsd:documentation>
+                  <xsd:documentation>
 							Nur Projekte holen, zu denen diese
-							Angebotsnummer gehört (Like-Suche)
+							Angebotsnummer gehÃ¶rt (Like-Suche)
 						</xsd:documentation>
-					</xsd:annotation>
-				</xsd:element>
-				<xsd:element name="ticketsOnly" type="base:optionalBoolean" nillable="true">
-
-					<xsd:annotation>
-						<xsd:documentation>Nur Projekte holen, bei denen Tickets aktiviert sind.</xsd:documentation>
-					</xsd:annotation></xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="Project" type="project:T_Project"/>
-
-	<xsd:complexType name="T_Project">
-
-		<xsd:complexContent>
-			<xsd:extension base="cost:T_SimpleProject">
-				<xsd:sequence>
-					<xsd:element name="isVirtuell" type="xsd:boolean">
-						<xsd:annotation><xsd:documentation>Projektvorlage (virtuell = true) / Projekt</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="projectNumber" type="xsd:string">
-						<xsd:annotation><xsd:documentation>ProjektNummer</xsd:documentation></xsd:annotation>
-
-					</xsd:element>
-					<xsd:element name="projectTypeID" type="base:id">
-						<xsd:annotation><xsd:documentation>PrimaryKey des ProjektTypes (siehe Stammdaten)</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="creatorID" type="base:id" nillable="true">
-						<xsd:annotation><xsd:documentation>Referenz auf den Ersteller des Projektes (siehe Personenliste) - nur lesend</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="priorityID" type="base:id">
-
-						<xsd:annotation><xsd:documentation>Referenz auf die Priorität des Projektes (siehe Stammdaten)</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="currencyID" type="base:id">
-						<xsd:annotation><xsd:documentation>Referenz auf die Währung des Projektes (siehe Stammdaten)</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="stateID" type="base:id">
-						<xsd:annotation><xsd:documentation>Referenz auf den Status des Projektes (siehe Stammdaten)</xsd:documentation></xsd:annotation>
-
-					</xsd:element>
-					<xsd:element name="stateDate" type="xsd:date" nillable="true">
-						<xsd:annotation><xsd:documentation>Wann wurde der Status gesetzt ? - nur lesend</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="costUnitNo" type="xsd:string" nillable="true">
-						<xsd:annotation><xsd:documentation>Kostenstelle</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="projectLeaderID" type="base:id">
-
-						<xsd:annotation><xsd:documentation>Referenz auf den Projektleiter (siehe Personenliste)</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="worktimeTaskRequired" type="xsd:boolean" nillable="true">
-						<xsd:annotation><xsd:documentation>Aktivität als Pflichtfeld für die Arbeitszeiterfassung - nur lesend</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="startdateForTask" type="xsd:int" nillable="true">
-						<xsd:annotation><xsd:documentation>Startdatum neuer Aktivitäten (0=Projektstart, 1=Aktuelles Datum) - nur lesend - wird bei Anlage/Änderung ignoriert</xsd:documentation></xsd:annotation>
-
-					</xsd:element>
-					<xsd:element name="departmentID" type="base:id">
-						<xsd:annotation><xsd:documentation>Referenz auf den Unternehmensbereich dem das Projekt zugeordnet ist</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="projectLeaderRoleID" type="base:id" nillable="true">
-						<xsd:annotation><xsd:documentation>Referenz auf die Rolle des Projektleiter - nur Anlage</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="projectLeaderParticipation" type="base:optionalDouble" nillable="true">
-
-						<xsd:annotation><xsd:documentation>Beteiligung des Projektleiters in % - nur Anlage - wird bei Änderung ignoriert</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="isObligatory" type="xsd:boolean">
-						<xsd:annotation><xsd:documentation>Aktivierungspflichtig</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="costObjectNumber" type="xsd:string" nillable="true">
-						<xsd:annotation><xsd:documentation>Kostenträger</xsd:documentation></xsd:annotation>
-
-					</xsd:element>
-					<xsd:element name="customers" type="project:T_CustomerList">
-						<xsd:annotation><xsd:documentation>Liste der Auftraggeber</xsd:documentation></xsd:annotation>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:element name="ProjectList">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:Project"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="Customer" type="project:T_Customer"/>
-
-
-	<xsd:complexType name="T_Customer">
-		<xsd:sequence>
-			<xsd:element name="customerID" type="base:id" nillable="true">
-				<xsd:annotation><xsd:documentation>Referenz auf den Auftraggber - von masterdata:getDepartments</xsd:documentation></xsd:annotation>
-			</xsd:element>
-				<xsd:element name="share" type="xsd:double">
-					<xsd:annotation><xsd:documentation>Verrechnungssatz in %</xsd:documentation></xsd:annotation>
-				</xsd:element>
-
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="T_CustomerList">
-		<xsd:sequence>
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:Customer" />
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<!-- 5.1 Basistypen der Ressourcenplanung -->
-	<xsd:complexType name="T_AbstractResourceHead" abstract="true">
-
-		<xsd:sequence>
-			<xsd:element name="resourceID" type="base:id" nillable="true">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Ressource.</xsd:documentation></xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="AbstractResource" abstract="true">
-		<xsd:complexContent>
-
-			<xsd:extension base="project:T_AbstractResourceHead">
-				<xsd:sequence>
-					<xsd:element name="roleID" type="base:id">
-						<xsd:annotation><xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation><xsd:documentation></xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="hasIndividualCosts" type="xsd:boolean">
-						<xsd:annotation><xsd:documentation>Ressource hat individuelle Kostensätze</xsd:documentation></xsd:annotation>
-					</xsd:element>
-
-					<xsd:element name="internalCost" type="base:optionalDouble" nillable="true">
-						<xsd:annotation><xsd:documentation>Interner Kostensatz</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="externalCost" type="base:optionalDouble" nillable="true">
-						<xsd:annotation><xsd:documentation>Externer Kostensatz</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="travelCost" type="base:optionalDouble" nillable="true">
-						<xsd:annotation><xsd:documentation>Reise-Kostensatz</xsd:documentation></xsd:annotation>
-
-					</xsd:element>
-					<xsd:element name="participations" type="project:T_ProjectParticipationList" nillable="true">
-						<xsd:annotation><xsd:documentation>Liste der Projektbeteiligungen</xsd:documentation></xsd:annotation>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-
-	<xsd:complexType name="ContactResource">
-		<xsd:complexContent>
-			<xsd:extension base="project:T_AbstractResourceHead">
-				<xsd:sequence>
-					<xsd:element name="personID" type="base:id">
-						<xsd:annotation><xsd:documentation>PrimaryKey des Mitarbeiters</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="permissionID" type="base:id">
-
-						<xsd:annotation><xsd:documentation>PrimaryKey des Rechtes</xsd:documentation></xsd:annotation>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:complexType name="StaffResource">
-		<xsd:complexContent>
-
-			<xsd:extension base="project:AbstractResource">
-				<xsd:sequence>
-					<xsd:element name="personID" type="base:id">
-						<xsd:annotation><xsd:documentation>PrimaryKey des Mitarbeiters</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="permissionID" type="base:id">
-						<xsd:annotation><xsd:documentation>PrimaryKey des Rechtes</xsd:documentation></xsd:annotation>
-					</xsd:element>
-
-					<xsd:element name="isActive" type="xsd:boolean">
-						<xsd:annotation><xsd:documentation>Aktive Mitarbeit im Projekt</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="isIntern" type="xsd:boolean" nillable="true">
-						<xsd:annotation><xsd:documentation>Interner Mitarbeiter</xsd:documentation></xsd:annotation>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<xsd:complexType name="VirtualResource">
-		<xsd:complexContent>
-			<xsd:extension base="project:AbstractResource">
-				<xsd:sequence>
-					<xsd:element name="name" type="xsd:string">
-						<xsd:annotation><xsd:documentation>Name der virtuellen Ressource</xsd:documentation></xsd:annotation>
-
-					</xsd:element>
-					<xsd:element name="wtCalendarID" type="base:id">
-						<xsd:annotation><xsd:documentation>PrimaryKey des Arbeitszeit-Kalenders</xsd:documentation></xsd:annotation>
-					</xsd:element>
-					<xsd:element name="isIntern" type="xsd:boolean" nillable="true">
-						<xsd:annotation><xsd:documentation>Interner Mitarbeiter</xsd:documentation></xsd:annotation>
-					</xsd:element>
-				</xsd:sequence>
-
-			</xsd:extension>
-		</xsd:complexContent>
-	</xsd:complexType>
-
-	<!-- 5.1.1 getResources -->
-	<xsd:element name="ProjectResource" type="project:T_ProjectResource"/>
-
-	<xsd:complexType name="T_ProjectResource">
-		<xsd:sequence>
-			<xsd:element name="resource" type="project:T_AbstractResourceHead">
-				<xsd:annotation><xsd:documentation>Kopfdaten der Ressource.</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="projectPartipations" type="project:T_ProjectParticipationList" nillable="true">
-				<xsd:annotation><xsd:documentation>Liste der Projektbeteiligungen</xsd:documentation></xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:element name="ProjectResourceList" type="project:T_ProjectResourceList"/>
-
-	<xsd:complexType name="T_ProjectResourceList">
-
-		<xsd:sequence>
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:ProjectResource"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:simpleType name="ProjectResourceReleaseType">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="released">
-				<xsd:annotation><xsd:documentation>Alle Ressourcen, bei denen wenigstens eine Projektbeteiligung freigegeben ist.</xsd:documentation></xsd:annotation>
-
-			</xsd:enumeration>
-			<xsd:enumeration value="all">
-				<xsd:annotation><xsd:documentation>Alle Ressourcen, unabhängig von der Projektbeteiligung</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:element name="getProjectResourcesRequestParameter">
-		<xsd:complexType>
-
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id">
-					<xsd:annotation><xsd:documentation>Das gewünschte Projekt</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="releaseType" type="project:ProjectResourceReleaseType">
-					<xsd:annotation><xsd:documentation>Nur Ressourcen mit diesem FreigabeStatus liefern</xsd:documentation></xsd:annotation>
-				</xsd:element>
-
-				<xsd:element name="personID" type="base:id" nillable="true">
-					<xsd:annotation><xsd:documentation>Nur Informationen über diesen Mitarbeiter liefern</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- 5.1.1.1 getProjectRoles -->
-	<xsd:element name="getProjectRolesRequestParameter">
-
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="ProjectRole" type="project:T_ProjectRole"/>
-
-	<xsd:complexType name="T_ProjectRole">
-
-		<xsd:sequence>
-			<xsd:element name="projectRoleID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="name" type="xsd:string">
-				<xsd:annotation><xsd:documentation>Bezeichnung der Projektrolle</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="internal" type="xsd:double">
-
-				<xsd:annotation><xsd:documentation>Interner Kostensatz</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="external" type="xsd:double">
-				<xsd:annotation><xsd:documentation>Externer Kostensatz</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="travel" type="xsd:double">
-				<xsd:annotation><xsd:documentation>Kostensatz für Reisetätigkeiten</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:element name="ProjectRoleList">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element maxOccurs="unbounded" ref="project:ProjectRole"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<!-- 5.1.1.2 getProjectPermissions -->
-	<xsd:simpleType name="ProjectPermissionType">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="leader">
-				<xsd:annotation><xsd:documentation>Projektleiter</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="substitute">
-
-				<xsd:annotation><xsd:documentation>Stellvertreter</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="member">
-				<xsd:annotation><xsd:documentation>Mitarbeiter</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="extern">
-				<xsd:annotation><xsd:documentation>externer Mitarbeiter</xsd:documentation></xsd:annotation>
-
-			</xsd:enumeration>
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:element name="ProjectPermission" type="project:T_ProjectPermission"/>
-
-	<xsd:complexType name="T_ProjectPermission">
-		<xsd:sequence>
-			<xsd:element name="projectPermissionID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="name" type="xsd:string">
-				<xsd:annotation><xsd:documentation>Bezeichnung der Projektrolle</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="typ" type="project:ProjectPermissionType">
-				<xsd:annotation><xsd:documentation>Art der Projektrolle (Projektleiter, Stellvertreter, Mitarbeiter, Externer Mitarbeiter)</xsd:documentation></xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-
-	</xsd:complexType>
-
-	<xsd:element name="ProjectPermissionList">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element maxOccurs="unbounded" ref="project:ProjectPermission"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- 5.1.1.3 getProjectParticipations -->
-
-	<xsd:simpleType name="WorkUnitType">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="work_in_pt">
-				<xsd:annotation><xsd:documentation>Arbeit in Personentagen</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="work_in_h">
-				<xsd:annotation><xsd:documentation>Arbeit in Stunden</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:simpleType name="ProjectParticipationState">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="requested">
-				<xsd:annotation><xsd:documentation>Die Projektbeteiligung ist angefragt.</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="released">
-
-				<xsd:annotation><xsd:documentation>Die Projektbeteiligung wurde genehmigt.</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="refused">
-				<xsd:annotation><xsd:documentation>Die Projektbeteiligung wurde abgelehnt.</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:simpleType name="ProjectParticipationType">
-
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="percent">
-				<xsd:annotation><xsd:documentation>Erfassung erfolgte in Prozent.</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="work">
-				<xsd:annotation><xsd:documentation>Erfassung erfolgte als Arbeit.</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="hours_weekly">
-
-				<xsd:annotation><xsd:documentation>Erfassung erfolgte in Wochenarbeitzeit.</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:element name="ProjectParticipation" type="project:T_ProjectParticipation"/>
-
-	<xsd:complexType name="T_ProjectParticipation">
-		<xsd:sequence>
-			<xsd:element name="projectParticipationID" type="base:id" nillable="true">
-
-				<xsd:annotation><xsd:documentation>PrimaryKey der Projektbeteiligung - NULL bei Neuanlage</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="resourceID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Ressource</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="from" type="xsd:date">
-				<xsd:annotation><xsd:documentation>Beginn des Beteiligungszeitraumes</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="to" type="xsd:date">
-				<xsd:annotation><xsd:documentation>Ende des Beteiligungszeitraumes</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="participation_in_percent" type="xsd:double" nillable="true">
-				<xsd:annotation><xsd:documentation>%-Beteiligung der Ressource am Projekt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_in_h_or_pt" type="xsd:double" nillable="true">
-
-				<xsd:annotation><xsd:documentation>Arbeit der Ressource am Projekt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_unit" type="project:WorkUnitType" nillable="true">
-				<xsd:annotation><xsd:documentation>Die Einheit für das Feld Arbeit der Ressource am Projekt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="participation_in_h_per_week" type="xsd:double" nillable="true">
-				<xsd:annotation><xsd:documentation>Wöchentliche Arbeit der Ressource am Projekt in Stunden</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="state" type="project:ProjectParticipationState" nillable="true">
-				<xsd:annotation><xsd:documentation>Status der Projektbeteiligung</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="type" type="project:ProjectParticipationType">
-				<xsd:annotation><xsd:documentation>Gibt an, welcher Wert gesetzt wurde / wird.</xsd:documentation></xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-
-	</xsd:complexType>
-
-	<xsd:element name="ProjectParticipationList" type="project:T_ProjectParticipationList" />
-
-	<xsd:complexType name="T_ProjectParticipationList">
-		<xsd:sequence>
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:ProjectParticipation" />
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<!-- 5.1.1.3 getProjectParticipations -->
-	<xsd:element name="getProjectParticipationsRequestParameter">
-
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id"/>
-				<xsd:element name="resourceID" type="base:id" nillable="true"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- 5.1.2 addProjectResource -->
-
-	<xsd:element name="addProjectResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id"/>
-				<xsd:element name="resource" type="project:T_AbstractResourceHead"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-
-	<!-- 5.1.2 changeProjectResource -->
-	<xsd:element name="changeProjectResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="resource" type="project:T_AbstractResourceHead"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-
-	<!-- 5.1.2 deleteProjectResource -->
-	<xsd:element name="deleteProjectResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="resourceID" type="base:id"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-
-	<!-- 5.1.3 AZ-Kalender -->
-	<xsd:element name="WtCalendar" type="project:T_WtCalendar"/>
-	<xsd:complexType name="T_WtCalendar">
-		<xsd:sequence>
-			<xsd:element name="wtCalendarID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="name" type="xsd:string">
-
-				<xsd:annotation><xsd:documentation>Bezeichnung des Arbeitszeit-Kalenders</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="duration" type="xsd:long">
-				<xsd:annotation><xsd:documentation>Arbeitszeit pro Woche in ms</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="default" type="xsd:boolean">
-				<xsd:annotation><xsd:documentation>Dieser Kalender ist der Standard-Kalender</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:element name="WtCalendarList">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element maxOccurs="unbounded" ref="project:WtCalendar"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<!-- 5.1.4 addProjectParticipation -->
-	<xsd:element name="addProjectParticipationRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectParticipation" type="project:T_ProjectParticipation"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<!-- 5.1.4 changeProjectParticipation -->
-	<xsd:element name="changeProjectParticipationRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectParticipation" type="project:T_ProjectParticipation"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<!-- 5.1.4 deleteProjectParticipation -->
-	<xsd:element name="deleteProjectParticipationRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectParticipationID" type="base:id"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<!-- 5.1.5 releaseProjectParticipation -->
-	<xsd:element name="releaseProjectParticipationRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectParticipationRelease" type="project:T_ProjectParticipationRelease"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<xsd:simpleType name="ProjectParticipationReleaseState">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="released">
-				<xsd:annotation><xsd:documentation>Die Projektbeteiligung wurde genehmigt.</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="refused">
-				<xsd:annotation><xsd:documentation>Die Projektbeteiligung wurde abgelehnt.</xsd:documentation></xsd:annotation>
-
-			</xsd:enumeration>
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:element name="ProjectParticipationRelease" type="project:T_ProjectParticipationRelease"/>
-
-	<xsd:complexType name="T_ProjectParticipationRelease">
-		<xsd:sequence>
-			<xsd:element name="projectParticipationID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Projektbeteiligung</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="participation_in_percent" type="xsd:double" nillable="true">
-				<xsd:annotation><xsd:documentation>%-Beteiligung der Ressource am Projekt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_in_h_or_pt" type="xsd:double" nillable="true">
-				<xsd:annotation><xsd:documentation>Arbeit der Ressource am Projekt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_unit" type="project:WorkUnitType" nillable="true">
-
-				<xsd:annotation><xsd:documentation>Die Einheit für das Feld Arbeit der Ressource am Projekt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="participation_in_h_per_week" type="xsd:double" nillable="true">
-				<xsd:annotation><xsd:documentation>Wöchentliche Arbeit der Ressource am Projekt in Stunden</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="type" type="project:ProjectParticipationType">
-				<xsd:annotation><xsd:documentation>Gibt an, welcher Wert gesetzt wurde / wird.</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<!-- 5.1.6 assignVirtualResource -->
-	<xsd:element name="assignVirtualResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="virtualResourceID" type="base:id">
-
-					<xsd:annotation><xsd:documentation>PrimaryKey der zu ersetzenden virtuelle Ressource</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="realResourceID" type="base:id">
-					<xsd:annotation><xsd:documentation>PrimaryKey der ersetzenden echten Ressource</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-
-	<xsd:simpleType name="PlanUnit">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="work">
-				<xsd:annotation><xsd:documentation>Plan-Aufwand ist Arbeit</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="duration">
-				<xsd:annotation><xsd:documentation>Plan-Aufwand ist Dauer</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<!-- 5.1.7 refuseProjectParticipation -->
-	<xsd:element name="refuseProjectParticipationRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectParticipationID" type="base:id">
-					<xsd:annotation><xsd:documentation>PrimaryKey der Projektbeteiligung</xsd:documentation></xsd:annotation>
-
-				</xsd:element>
-				<xsd:element name="note" type="xsd:string" nillable="false">
-					<xsd:annotation><xsd:documentation>Ablehnungsgrund</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- 5.2.1 getProjectTasks -->
-
-	<xsd:simpleType name="T_TaskStateValue">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="open">
-				<xsd:annotation><xsd:documentation>Offene Aktivitäten</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="closed">
-				<xsd:annotation><xsd:documentation>Abgeschlossene Aktivitäten</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-
-			<xsd:enumeration value="all">
-				<xsd:annotation><xsd:documentation>Alle AKtivitäten (default)</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:element name="getProjectTasksRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id">
-					<xsd:annotation><xsd:documentation>Für welches Projekt sollen die Aktivitäten geliefert werden ?</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="taskID" type="base:id" nillable="true">
-					<xsd:annotation><xsd:documentation>Welches Aktivität soll geliefert werden ?</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="taskState" type="project:T_TaskStateValue" nillable="true">
-
-					<xsd:annotation><xsd:documentation>Welche Art von Aktivitäten soll geliefert werden ? (offen, abgeschlossen, alle)</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="ProjectTask" type="project:T_ProjectTask"/>
-
-	<xsd:complexType name="T_ProjectTask">
-		<xsd:complexContent>
-
-			<xsd:extension base="cost:T_SimpleTask">
-				<xsd:sequence>
-					<xsd:element name="number" type="xsd:string">
-						<xsd:annotation>
-							<xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="ticketsOnly" nillable="true" type="base:optionalBoolean">
+               <xsd:annotation>
+                  <xsd:documentation>Nur Projekte holen, bei denen Tickets aktiviert sind.</xsd:documentation>
+               </xsd:annotation>
+
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="Project" type="project:T_Project"/>
+   <xsd:complexType name="T_Project">
+      <xsd:complexContent>
+         <xsd:extension base="cost:T_SimpleProject">
+            <xsd:sequence>
+
+               <xsd:element name="isVirtuell" type="xsd:boolean">
+                  <xsd:annotation>
+                     <xsd:documentation>Projektvorlage (virtuell = true) / Projekt</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="projectNumber" type="xsd:string">
+                  <xsd:annotation>
+                     <xsd:documentation>ProjektNummer</xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="projectTypeID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>PrimaryKey des ProjektTypes (siehe Stammdaten)</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="creatorID" nillable="true" type="base:id">
+
+                  <xsd:annotation>
+                     <xsd:documentation>Referenz auf den Ersteller des Projektes (siehe Personenliste) - nur lesend</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="priorityID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>Referenz auf die PrioritÃ¤t des Projektes (siehe Stammdaten)</xsd:documentation>
+                  </xsd:annotation>
+
+               </xsd:element>
+               <xsd:element name="currencyID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>Referenz auf die WÃ¤hrung des Projektes (siehe Stammdaten)</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="stateID" type="base:id">
+                  <xsd:annotation>
+
+                     <xsd:documentation>Referenz auf den Status des Projektes (siehe Stammdaten)</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="stateDate" nillable="true" type="xsd:date">
+                  <xsd:annotation>
+                     <xsd:documentation>Wann wurde der Status gesetzt ? - nur lesend</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+
+               <xsd:element name="costUnitNo" nillable="true" type="xsd:string">
+                  <xsd:annotation>
+                     <xsd:documentation>Kostenstelle</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="projectLeaderID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>Referenz auf den Projektleiter (siehe Personenliste)</xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="worktimeTaskRequired" nillable="true" type="xsd:boolean">
+                  <xsd:annotation>
+                     <xsd:documentation>AktivitÃ¤t als Pflichtfeld fÃ¼r die Arbeitszeiterfassung - nur lesend</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="startdateForTask" nillable="true" type="xsd:int">
+
+                  <xsd:annotation>
+                     <xsd:documentation>Startdatum neuer AktivitÃ¤ten (0=Projektstart, 1=Aktuelles Datum) - nur lesend - wird bei Anlage/Ã?nderung ignoriert</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="departmentID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>Referenz auf den Unternehmensbereich dem das Projekt zugeordnet ist</xsd:documentation>
+                  </xsd:annotation>
+
+               </xsd:element>
+               <xsd:element name="projectLeaderRoleID" nillable="true" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>Referenz auf die Rolle des Projektleiter - nur Anlage</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="projectLeaderParticipation" nillable="true" type="base:optionalDouble">
+                  <xsd:annotation>
+
+                     <xsd:documentation>Beteiligung des Projektleiters in % - nur Anlage - wird bei Ã?nderung ignoriert</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="isObligatory" type="xsd:boolean">
+                  <xsd:annotation>
+                     <xsd:documentation>Aktivierungspflichtig</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+
+               <xsd:element name="costObjectNumber" nillable="true" type="xsd:string">
+                  <xsd:annotation>
+                     <xsd:documentation>KostentrÃ¤ger</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="customers" type="project:T_CustomerList">
+                  <xsd:annotation>
+                     <xsd:documentation>Liste der Auftraggeber</xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:element name="ProjectList">
+      <xsd:complexType>
+         <xsd:sequence>
+
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:Project"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="Customer" type="project:T_Customer"/>
+   <xsd:complexType name="T_Customer">
+      <xsd:sequence>
+         <xsd:element name="customerID" nillable="true" type="base:id">
+            <xsd:annotation>
+
+               <xsd:documentation>Referenz auf den Auftraggber - von masterdata:getDepartments</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="share" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Verrechnungssatz in %</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="T_CustomerList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:Customer"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType abstract="true" name="T_AbstractResourceHead">
+      <xsd:sequence>
+
+         <xsd:element name="resourceID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Ressource.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType abstract="true" name="AbstractResource">
+
+      <xsd:complexContent>
+         <xsd:extension base="project:T_AbstractResourceHead">
+            <xsd:sequence>
+               <xsd:element name="roleID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+
+               <xsd:element name="hasIndividualCosts" type="xsd:boolean">
+                  <xsd:annotation>
+                     <xsd:documentation>Ressource hat individuelle KostensÃ¤tze</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="internalCost" nillable="true" type="base:optionalDouble">
+                  <xsd:annotation>
+                     <xsd:documentation>Interner Kostensatz</xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="externalCost" nillable="true" type="base:optionalDouble">
+                  <xsd:annotation>
+                     <xsd:documentation>Externer Kostensatz</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="travelCost" nillable="true" type="base:optionalDouble">
+
+                  <xsd:annotation>
+                     <xsd:documentation>Reise-Kostensatz</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="participations" nillable="true" type="project:T_ProjectParticipationList">
+                  <xsd:annotation>
+                     <xsd:documentation>Liste der Projektbeteiligungen</xsd:documentation>
+                  </xsd:annotation>
+
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="ContactResource">
+      <xsd:complexContent>
+         <xsd:extension base="project:T_AbstractResourceHead">
+            <xsd:sequence>
+
+               <xsd:element name="personID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>PrimaryKey des Mitarbeiters</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="permissionID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>PrimaryKey des Rechtes</xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+   <xsd:complexType name="StaffResource">
+      <xsd:complexContent>
+         <xsd:extension base="project:AbstractResource">
+
+            <xsd:sequence>
+               <xsd:element name="personID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>PrimaryKey des Mitarbeiters</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="permissionID" type="base:id">
+                  <xsd:annotation>
+
+                     <xsd:documentation>PrimaryKey des Rechtes</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="isActive" type="xsd:boolean">
+                  <xsd:annotation>
+                     <xsd:documentation>Aktive Mitarbeit im Projekt</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+
+               <xsd:element name="isIntern" nillable="true" type="xsd:boolean">
+                  <xsd:annotation>
+                     <xsd:documentation>Interner Mitarbeiter</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+
+   </xsd:complexType>
+   <xsd:complexType name="VirtualResource">
+      <xsd:complexContent>
+         <xsd:extension base="project:AbstractResource">
+            <xsd:sequence>
+               <xsd:element name="name" type="xsd:string">
+                  <xsd:annotation>
+                     <xsd:documentation>Name der virtuellen Ressource</xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="wtCalendarID" type="base:id">
+                  <xsd:annotation>
+                     <xsd:documentation>PrimaryKey des Arbeitszeit-Kalenders</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="isIntern" nillable="true" type="xsd:boolean">
+
+                  <xsd:annotation>
+                     <xsd:documentation>Interner Mitarbeiter</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
+   </xsd:complexType>
+
+   <xsd:element name="ProjectResource" type="project:T_ProjectResource"/>
+   <xsd:complexType name="T_ProjectResource">
+      <xsd:sequence>
+         <xsd:element name="resource" type="project:T_AbstractResourceHead">
+            <xsd:annotation>
+               <xsd:documentation>Kopfdaten der Ressource.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="projectPartipations" nillable="true" type="project:T_ProjectParticipationList">
+            <xsd:annotation>
+               <xsd:documentation>Liste der Projektbeteiligungen</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProjectResourceList" type="project:T_ProjectResourceList"/>
+
+   <xsd:complexType name="T_ProjectResourceList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:ProjectResource"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="ProjectResourceReleaseType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="released">
+            <xsd:annotation>
+
+               <xsd:documentation>Alle Ressourcen, bei denen wenigstens eine Projektbeteiligung freigegeben ist.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="all">
+            <xsd:annotation>
+               <xsd:documentation>Alle Ressourcen, unabhÃ¤ngig von der Projektbeteiligung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="getProjectResourcesRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>Das gewÃ¼nschte Projekt</xsd:documentation>
+
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="releaseType" type="project:ProjectResourceReleaseType">
+               <xsd:annotation>
+                  <xsd:documentation>Nur Ressourcen mit diesem FreigabeStatus liefern</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="personID" nillable="true" type="base:id">
+
+               <xsd:annotation>
+                  <xsd:documentation>Nur Informationen Ã¼ber diesen Mitarbeiter liefern</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getProjectRolesRequestParameter">
+
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ProjectRole" type="project:T_ProjectRole"/>
+   <xsd:complexType name="T_ProjectRole">
+
+      <xsd:sequence>
+         <xsd:element name="projectRoleID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+
+               <xsd:documentation>Bezeichnung der Projektrolle</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="internal" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Interner Kostensatz</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="external" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Externer Kostensatz</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="travel" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Kostensatz fÃ¼r ReisetÃ¤tigkeiten</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProjectRoleList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="project:ProjectRole"/>
+         </xsd:sequence>
+
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:simpleType name="ProjectPermissionType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="leader">
+            <xsd:annotation>
+               <xsd:documentation>Projektleiter</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:enumeration>
+         <xsd:enumeration value="substitute">
+            <xsd:annotation>
+               <xsd:documentation>Stellvertreter</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="member">
+            <xsd:annotation>
+
+               <xsd:documentation>Mitarbeiter</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="extern">
+            <xsd:annotation>
+               <xsd:documentation>externer Mitarbeiter</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="ProjectPermission" type="project:T_ProjectPermission"/>
+   <xsd:complexType name="T_ProjectPermission">
+      <xsd:sequence>
+         <xsd:element name="projectPermissionID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der Projektrolle</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="typ" type="project:ProjectPermissionType">
+
+            <xsd:annotation>
+               <xsd:documentation>Art der Projektrolle (Projektleiter, Stellvertreter, Mitarbeiter, Externer Mitarbeiter)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProjectPermissionList">
+      <xsd:complexType>
+
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="project:ProjectPermission"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:simpleType name="WorkUnitType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="work_in_pt">
+            <xsd:annotation>
+
+               <xsd:documentation>Arbeit in Personentagen</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="work_in_h">
+            <xsd:annotation>
+               <xsd:documentation>Arbeit in Stunden</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ProjectParticipationState">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="requested">
+            <xsd:annotation>
+               <xsd:documentation>Die Projektbeteiligung ist angefragt.</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:enumeration>
+         <xsd:enumeration value="released">
+            <xsd:annotation>
+               <xsd:documentation>Die Projektbeteiligung wurde genehmigt.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="refused">
+            <xsd:annotation>
+
+               <xsd:documentation>Die Projektbeteiligung wurde abgelehnt.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:simpleType name="ProjectParticipationType">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="percent">
+
+            <xsd:annotation>
+               <xsd:documentation>Erfassung erfolgte in Prozent.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="work">
+            <xsd:annotation>
+               <xsd:documentation>Erfassung erfolgte als Arbeit.</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:enumeration>
+         <xsd:enumeration value="hours_weekly">
+            <xsd:annotation>
+               <xsd:documentation>Erfassung erfolgte in Wochenarbeitzeit.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+
+   <xsd:element name="ProjectParticipation" type="project:T_ProjectParticipation"/>
+   <xsd:complexType name="T_ProjectParticipation">
+      <xsd:sequence>
+         <xsd:element name="projectParticipationID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Projektbeteiligung - NULL bei Neuanlage</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="resourceID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Ressource</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="from" type="xsd:date">
+            <xsd:annotation>
+               <xsd:documentation>Beginn des Beteiligungszeitraumes</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="to" type="xsd:date">
+            <xsd:annotation>
+               <xsd:documentation>Ende des Beteiligungszeitraumes</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="participation_in_percent" nillable="true" type="xsd:double">
+
+            <xsd:annotation>
+               <xsd:documentation>%-Beteiligung der Ressource am Projekt</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_in_h_or_pt" nillable="true" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Arbeit der Ressource am Projekt</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+         <xsd:element name="work_unit" nillable="true" type="project:WorkUnitType">
+            <xsd:annotation>
+               <xsd:documentation>Die Einheit fÃ¼r das Feld Arbeit der Ressource am Projekt</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="participation_in_h_per_week" nillable="true" type="xsd:double">
+            <xsd:annotation>
+
+               <xsd:documentation>WÃ¶chentliche Arbeit der Ressource am Projekt in Stunden</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="state" nillable="true" type="project:ProjectParticipationState">
+            <xsd:annotation>
+               <xsd:documentation>Status der Projektbeteiligung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="type" type="project:ProjectParticipationType">
+            <xsd:annotation>
+               <xsd:documentation>Gibt an, welcher Wert gesetzt wurde / wird.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="ProjectParticipationList" type="project:T_ProjectParticipationList"/>
+
+   <xsd:complexType name="T_ProjectParticipationList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:ProjectParticipation"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="getProjectParticipationsRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+
+            <xsd:element name="projectID" type="base:id"/>
+            <xsd:element name="resourceID" nillable="true" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="addProjectResourceRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+
+            <xsd:element name="projectID" type="base:id"/>
+            <xsd:element name="resource" type="project:T_AbstractResourceHead"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="changeProjectResourceRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+
+            <xsd:element name="resource" type="project:T_AbstractResourceHead"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="deleteProjectResourceRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="resourceID" type="base:id"/>
+
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="WtCalendar" type="project:T_WtCalendar"/>
+   <xsd:complexType name="T_WtCalendar">
+      <xsd:sequence>
+         <xsd:element name="wtCalendarID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="name" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung des Arbeitszeit-Kalenders</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="duration" type="xsd:long">
+
+            <xsd:annotation>
+               <xsd:documentation>Arbeitszeit pro Woche in ms</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="default" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>Dieser Kalender ist der Standard-Kalender</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="WtCalendarList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" ref="project:WtCalendar"/>
+         </xsd:sequence>
+      </xsd:complexType>
+
+   </xsd:element>
+   <xsd:element name="addProjectParticipationRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectParticipation" type="project:T_ProjectParticipation"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+
+   <xsd:element name="changeProjectParticipationRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectParticipation" type="project:T_ProjectParticipation"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="deleteProjectParticipationRequestParameter">
+
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectParticipationID" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="releaseProjectParticipationRequestParameter">
+      <xsd:complexType>
+
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectParticipationRelease" type="project:T_ProjectParticipationRelease"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:simpleType name="ProjectParticipationReleaseState">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="released">
+
+            <xsd:annotation>
+               <xsd:documentation>Die Projektbeteiligung wurde genehmigt.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="refused">
+            <xsd:annotation>
+               <xsd:documentation>Die Projektbeteiligung wurde abgelehnt.</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="ProjectParticipationRelease" type="project:T_ProjectParticipationRelease"/>
+   <xsd:complexType name="T_ProjectParticipationRelease">
+      <xsd:sequence>
+         <xsd:element name="projectParticipationID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Projektbeteiligung</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="participation_in_percent" nillable="true" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>%-Beteiligung der Ressource am Projekt</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_in_h_or_pt" nillable="true" type="xsd:double">
+
+            <xsd:annotation>
+               <xsd:documentation>Arbeit der Ressource am Projekt</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_unit" nillable="true" type="project:WorkUnitType">
+            <xsd:annotation>
+               <xsd:documentation>Die Einheit fÃ¼r das Feld Arbeit der Ressource am Projekt</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+         <xsd:element name="participation_in_h_per_week" nillable="true" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>WÃ¶chentliche Arbeit der Ressource am Projekt in Stunden</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="type" type="project:ProjectParticipationType">
+            <xsd:annotation>
+
+               <xsd:documentation>Gibt an, welcher Wert gesetzt wurde / wird.</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="assignVirtualResourceRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="virtualResourceID" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>PrimaryKey der zu ersetzenden virtuelle Ressource</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="realResourceID" type="base:id">
+               <xsd:annotation>
+
+                  <xsd:documentation>PrimaryKey der ersetzenden echten Ressource</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:simpleType name="PlanUnit">
+      <xsd:restriction base="xsd:string">
+
+         <xsd:enumeration value="work">
+            <xsd:annotation>
+               <xsd:documentation>Plan-Aufwand ist Arbeit</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="duration">
+            <xsd:annotation>
+               <xsd:documentation>Plan-Aufwand ist Dauer</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="refuseProjectParticipationRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectParticipationID" type="base:id">
+
+               <xsd:annotation>
+                  <xsd:documentation>PrimaryKey der Projektbeteiligung</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="note" type="xsd:string">
+               <xsd:annotation>
+                  <xsd:documentation>Ablehnungsgrund</xsd:documentation>
+               </xsd:annotation>
+
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:simpleType name="T_TaskStateValue">
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="open">
+            <xsd:annotation>
+               <xsd:documentation>Offene AktivitÃ¤ten</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="closed">
+            <xsd:annotation>
+               <xsd:documentation>Abgeschlossene AktivitÃ¤ten</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="all">
+
+            <xsd:annotation>
+               <xsd:documentation>Alle AKtivitÃ¤ten (default)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="getProjectTasksRequestParameter">
+      <xsd:complexType>
+
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>FÃ¼r welches Projekt sollen die AktivitÃ¤ten geliefert werden ?</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="taskID" nillable="true" type="base:id">
+
+               <xsd:annotation>
+                  <xsd:documentation>Welches AktivitÃ¤t soll geliefert werden ?</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="taskState" nillable="true" type="project:T_TaskStateValue">
+               <xsd:annotation>
+                  <xsd:documentation>Welche Art von AktivitÃ¤ten soll geliefert werden ? (offen, abgeschlossen, alle)</xsd:documentation>
+               </xsd:annotation>
+
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ProjectTask" type="project:T_ProjectTask"/>
+   <xsd:complexType name="T_ProjectTask">
+      <xsd:complexContent>
+         <xsd:extension base="cost:T_SimpleTask">
+            <xsd:sequence>
+
+               <xsd:element name="number" type="xsd:string">
+                  <xsd:annotation>
+                     <xsd:documentation>
 								Die laufende Nummer eines Task in
-								Abhängigkeit der Projekt-Einstellung
+								AbhÃ¤ngigkeit der Projekt-Einstellung
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="plan" type="xsd:double">
+                  <xsd:annotation>
 
-					<xsd:element name="plan" type="xsd:double">
-						<xsd:annotation>
-							<xsd:documentation>
+                     <xsd:documentation>
 								Geplante Arbeit
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="actual" type="xsd:double">
-						<xsd:annotation>
-
-							<xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="actual" type="xsd:double">
+                  <xsd:annotation>
+                     <xsd:documentation>
 								Geleistete Arbeit
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="planUnit"
-						type="project:PlanUnit">
-						<xsd:annotation>
-							<xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="planUnit" type="project:PlanUnit">
+                  <xsd:annotation>
+                     <xsd:documentation>
 								Plan-Einheit (Stunden/Tage)
 							</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
 
-						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="limitation"
-						type="project:TaskLimitation">
-						<xsd:annotation>
-							<xsd:documentation>
-								Einschränkungsart der Aktivität
+               <xsd:element name="limitation" type="project:TaskLimitation">
+                  <xsd:annotation>
+                     <xsd:documentation>
+								EinschrÃ¤nkungsart der AktivitÃ¤t
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="milestone" type="xsd:boolean">
+                  <xsd:annotation>
 
-					<xsd:element name="milestone" type="xsd:boolean">
-						<xsd:annotation>
-							<xsd:documentation>
+                     <xsd:documentation>
 								Ist dies ein Meilenstein ?
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="priority" type="xsd:int">
-						<xsd:annotation>
-
-							<xsd:documentation>
-								Priorität der Aktivität
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="priority" type="xsd:int">
+                  <xsd:annotation>
+                     <xsd:documentation>
+								PrioritÃ¤t der AktivitÃ¤t
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="comment" type="xsd:string"
-						nillable="true">
-						<xsd:annotation>
-							<xsd:documentation>
+
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="comment" nillable="true" type="xsd:string">
+                  <xsd:annotation>
+                     <xsd:documentation>
 								Bemerkung
 							</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
 
-						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="resources"
-						type="project:T_TaskResourceList">
-						<xsd:annotation>
-							<xsd:documentation>
+               <xsd:element name="resources" type="project:T_TaskResourceList">
+                  <xsd:annotation>
+                     <xsd:documentation>
 								Liste der zugeordneten Ressourcen
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="predecessors" nillable="true" type="project:T_TaskPredecessorList"/>
+               <xsd:element name="children" type="project:T_ProjectTaskList">
 
-					<xsd:element name="predecessors" nillable="true">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="predecessor"
-									type="base:id" maxOccurs="unbounded" minOccurs="0">
-								</xsd:element>
-							</xsd:sequence>
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="children"
-						type="project:T_ProjectTaskList">
-
-						<xsd:annotation>
-							<xsd:documentation>
-								Liste der Unteraktivitäten
+                  <xsd:annotation>
+                     <xsd:documentation>
+								Liste der UnteraktivitÃ¤ten
 							</xsd:documentation>
-						</xsd:annotation>
-					</xsd:element>
-				</xsd:sequence>
-			</xsd:extension>
-		</xsd:complexContent>
+                  </xsd:annotation>
+               </xsd:element>
+            </xsd:sequence>
+         </xsd:extension>
+      </xsd:complexContent>
 
-	</xsd:complexType>
+   </xsd:complexType>
+   <xsd:element name="ProjectTaskList" type="project:T_ProjectTaskList"/>
+   <xsd:complexType name="T_ProjectTaskList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:ProjectTask"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:simpleType name="TaskLimitation">
+      <xsd:annotation>
 
-	<xsd:element name="ProjectTaskList" type="project:T_ProjectTaskList"/>
+         <xsd:documentation>EinschrÃ¤nkung einer AktivitÃ¤t</xsd:documentation>
+      </xsd:annotation>
+      <xsd:restriction base="xsd:string">
+         <xsd:enumeration value="none">
+            <xsd:annotation>
+               <xsd:documentation>Keine EinschrÃ¤nkung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
 
-	<xsd:complexType name="T_ProjectTaskList">
-		<xsd:sequence>
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:ProjectTask"/>
-		</xsd:sequence>
-	</xsd:complexType>
+         <xsd:enumeration value="mso">
+            <xsd:annotation>
+               <xsd:documentation>Beginnt am</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="mfo">
+            <xsd:annotation>
+               <xsd:documentation>Endet am</xsd:documentation>
 
-	<xsd:simpleType name="TaskLimitation">
-		<xsd:annotation><xsd:documentation>Einschränkung einer Aktivität</xsd:documentation></xsd:annotation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="snet">
+            <xsd:annotation>
+               <xsd:documentation>Beginnt frÃ¼hestens am</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="fnet">
 
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="none">
-				<xsd:annotation><xsd:documentation>Keine Einschränkung</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="mso">
-				<xsd:annotation><xsd:documentation>Beginnt am</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="mfo">
+            <xsd:annotation>
+               <xsd:documentation>Endet frÃ¼hestens am</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="snlt">
+            <xsd:annotation>
+               <xsd:documentation>Beginnt spÃ¤testens am</xsd:documentation>
+            </xsd:annotation>
 
-				<xsd:annotation><xsd:documentation>Endet am</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="snet">
-				<xsd:annotation><xsd:documentation>Beginnt frühestens am</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="fnet">
-				<xsd:annotation><xsd:documentation>Endet frühestens am</xsd:documentation></xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="fnlt">
+            <xsd:annotation>
+               <xsd:documentation>Endet spÃ¤testens am</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+         <xsd:enumeration value="fixed">
+            <xsd:annotation>
 
-			</xsd:enumeration>
-			<xsd:enumeration value="snlt">
-				<xsd:annotation><xsd:documentation>Beginnt spätestens am</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="fnlt">
-				<xsd:annotation><xsd:documentation>Endet spätestens am</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-			<xsd:enumeration value="fixed">
+               <xsd:documentation>Festgesetzt, darf nicht verschoben werden</xsd:documentation>
+            </xsd:annotation>
+         </xsd:enumeration>
+      </xsd:restriction>
+   </xsd:simpleType>
+   <xsd:element name="addProjectTaskRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
 
-				<xsd:annotation><xsd:documentation>Festgesetzt, darf nicht verschoben werden</xsd:documentation></xsd:annotation>
-			</xsd:enumeration>
-		</xsd:restriction>
-	</xsd:simpleType>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="task" type="project:T_TaskParameter"/>
+            <xsd:element name="taskResourceList" nillable="true" type="project:T_TaskResourceValueList"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="addProjectTaskResponse">
+      <xsd:complexType>
+         <xsd:sequence>
 
-	<!-- 5.2.2 addProjectTask -->
-	<xsd:element name="addProjectTaskRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
+            <xsd:element name="taskID" type="base:id"/>
+            <xsd:element name="taskResourceResultList" nillable="true" type="project:T_TaskResourceResultList"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="changeProjectTaskRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
 
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="task" type="project:T_TaskParameter"/>
-				<xsd:element name="taskResourceList" type="project:T_TaskResourceValueList" nillable="true"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+            <xsd:element name="taskID" type="base:id"/>
+            <xsd:element name="task" type="project:T_TaskParameter"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TaskParameter" type="project:T_TaskParameter"/>
+   <xsd:complexType name="T_TaskParameter">
+      <xsd:sequence>
+         <xsd:element name="name" type="xsd:string">
 
-	<xsd:element name="addProjectTaskResponse">
-		<xsd:complexType>
-			<xsd:sequence>
+            <xsd:annotation>
+               <xsd:documentation>Bezeichnung der AktivitÃ¤t - max 100 Zeichen</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="projectID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey des Projektes</xsd:documentation>
+            </xsd:annotation>
 
-				<xsd:element name="taskID" type="base:id"/>
-				<xsd:element name="taskResourceResultList" type="project:T_TaskResourceResultList" nillable="true"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
+         </xsd:element>
+         <xsd:element name="parentTaskID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Ã¼bergeordneten AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="plan" type="xsd:double">
+            <xsd:annotation>
 
-	<!-- 5.2.3 changeProjectTask -->
-		<xsd:element name="changeProjectTaskRequestParameter">
-			<xsd:complexType>
-				<xsd:sequence>
+               <xsd:documentation>Geplanter Aufwand in Minuten</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="planUnit" type="project:PlanUnit">
+            <xsd:annotation>
+               <xsd:documentation>Geplanter Aufwand ist in Arbeit oder Dauer</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
 
-					<xsd:element name="sessionID" type="xsd:string"/>
-					<xsd:element name="taskID" type="base:id"/>
-					<xsd:element name="task" type="project:T_TaskParameter"/>
-				</xsd:sequence>
-			</xsd:complexType>
-		</xsd:element>
-
-		<xsd:element name="TaskParameter" type="project:T_TaskParameter"/>
-
-		<xsd:complexType name="T_TaskParameter">
-			<xsd:sequence>
-
-				<xsd:element name="name" type="xsd:string">
-					<xsd:annotation><xsd:documentation>Bezeichnung der Aktivität - max 100 Zeichen</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="projectID" type="base:id">
-					<xsd:annotation><xsd:documentation>PrimaryKey des Projektes</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="parentTaskID" type="base:id" nillable="true">
-					<xsd:annotation><xsd:documentation>PrimaryKey der übergeordneten Aktivität</xsd:documentation></xsd:annotation>
-
-				</xsd:element>
-				<xsd:element name="plan" type="xsd:double">
-					<xsd:annotation><xsd:documentation>Geplanter Aufwand in Minuten</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="planUnit" type="project:PlanUnit">
-					<xsd:annotation><xsd:documentation>Geplanter Aufwand ist in Arbeit oder Dauer</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="startTime" type="xsd:dateTime" nillable="true">
-
-					<xsd:annotation><xsd:documentation>Startzeitpunkt der Aktivität
+         <xsd:element name="startTime" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+               <xsd:documentation>Startzeitpunkt der AktivitÃ¤t
 Pflichtfeld wenn limitation = mso, snet, snlt, fixed
-					</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="endTime" type="xsd:dateTime" nillable="true">
-					<xsd:annotation><xsd:documentation>Endzeitpunkt der Aktivität
+					</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="endTime" nillable="true" type="xsd:dateTime">
+            <xsd:annotation>
+               <xsd:documentation>Endzeitpunkt der AktivitÃ¤t
 Pflichtfeld wenn limitation = mfo, fnet, fnlt, fixed
-					</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="limitation" type="project:TaskLimitation">
-					<xsd:annotation><xsd:documentation>Einschränkungsart der Aktivität</xsd:documentation></xsd:annotation>
-
-				</xsd:element>
-				<xsd:element name="isMilestone" type="xsd:boolean">
-					<xsd:annotation><xsd:documentation>Dies ist ein Meilenstein</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="priority" type="xsd:int">
-					<xsd:annotation><xsd:documentation>Priorität der Aktivität - default 500 - zur Zeit ungenutzt</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="comment" type="xsd:string">
-
-					<xsd:annotation><xsd:documentation>Bemerkung zur Aktivität</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-
-		<!-- 5.2.4 deleteProjectTask -->
-	<xsd:element name="deleteProjectTaskRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="taskID" type="base:id"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- 5.2.5.1 addTaskPredecessor -->
-	<xsd:element name="addTaskPredecessorRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="taskID" type="base:id"/>
-				<xsd:element name="predecessorTaskID" type="base:id">
-					<xsd:annotation><xsd:documentation>TaskID des Vorgängers - Nur aus dem gleichen Projekt</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="buffer" type="xsd:double">
-					<xsd:annotation><xsd:documentation>Puffer zwischen den Aktivitäten in h/PT</xsd:documentation></xsd:annotation>
-				</xsd:element>
-
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- 5.2.5.2 deleteTaskPredecessor -->
-	<xsd:element name="deleteTaskPredecessorRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="taskID" type="base:id"/>
-
-				<xsd:element name="predecessorTaskID" type="base:id">
-					<xsd:annotation><xsd:documentation>TaskID des Vorgängers - Nur aus dem gleichen Projekt</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<!-- 5.2.6 getTaskResources -->
-	<xsd:element name="getTaskResourcesRequestParameter">
-
-		<xsd:annotation><xsd:documentation>Wenigstens einer der Parameter projectID, taskID oder personID muß gesetzt sein.</xsd:documentation></xsd:annotation>
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id" nillable="true">
-					<xsd:annotation><xsd:documentation>Nur die Aktivitätenbeteiligungen für dieses Projekt suchen</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="taskID" type="base:id" nillable="true">
-
-					<xsd:annotation><xsd:documentation>Nur die Aktivitätenbeteiligungen für diese Aktivität suchen</xsd:documentation></xsd:annotation>
-				</xsd:element>
-				<xsd:element name="personID" type="base:id" nillable="true">
-					<xsd:annotation><xsd:documentation>Nur die Aktivitätenbeteiligungen für diesen Mitarbeiter suchen</xsd:documentation></xsd:annotation>
-				</xsd:element>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-
-	<xsd:element name="TaskResource" type="project:T_TaskResource"/>
-
-	<xsd:complexType name="T_TaskResource">
-		<xsd:sequence>
-			<xsd:element name="taskResourceID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Aktivitätenbeteiligung</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="projectID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey des Projektes</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="taskID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Aktivität</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="resourceID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der betroffenen Ressource</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="from" type="xsd:dateTime">
-
-				<xsd:annotation><xsd:documentation>Beginn der Aktivitätenbeteiligung</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="to" type="xsd:dateTime">
-				<xsd:annotation><xsd:documentation>Ende der Aktivitätenbeteiligung</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_unit" type="project:WorkUnitType" nillable="true">
-				<xsd:annotation><xsd:documentation>Die Einheit für die Felder work, calculated_work, work_estimated, work_actual</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="participation_in_percent" type="xsd:double">
-				<xsd:annotation><xsd:documentation>%-Beteiligung der Ressource an dieser Aktivität</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_in_percent" type="xsd:double">
-				<xsd:annotation><xsd:documentation>%-Arbeitsanteil der Ressource an dieser Aktivität in Minuten</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="calculated_work_in_percent" type="base:optionalDouble">
-
-				<xsd:annotation><xsd:documentation>Berechneter %-Arbeitsanteil der Ressource an dieser Aktivität</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work" type="xsd:double">
-				<xsd:annotation><xsd:documentation>Arbeitsanteil der Ressource an dieser Aktivität in Stunden / Pt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="calculated_work" type="xsd:double">
-				<xsd:annotation><xsd:documentation>Berechneter Arbeitsanteil der Ressource an dieser Aktivität in Stunden / PT</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="work_estimated" type="xsd:double">
-				<xsd:annotation><xsd:documentation>Geschätzte Arbeit dieser Ressource an dieser Aktivität in Stunden / PT</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_actual" type="xsd:double">
-				<xsd:annotation><xsd:documentation>Aktuelle Arbeit in Stunden / Pt</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="roleID" type="base:id">
-
-				<xsd:annotation><xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="hasIndividualCosts" type="xsd:boolean">
-				<xsd:annotation><xsd:documentation>MA hat individuelle Kostensätze (siehe Ressource)</xsd:documentation></xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:element name="TaskResourceList" type="project:T_TaskResourceList"/>
-
-
-	<xsd:complexType name="T_TaskResourceList">
-		<xsd:sequence>
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:TaskResource"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<!-- 5.2.7 addTaskResource -->
-	<xsd:element name="addTaskResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="resource" type="project:T_TaskResourceValue"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="addMultiTaskResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-
-				<xsd:element name="resourceList" type="project:T_TaskResourceValueList"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="TaskResourceResultList" type="project:T_TaskResourceResultList"/>
-
-	<xsd:complexType name="T_TaskResourceResultList">
-		<xsd:sequence>
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:TaskResourceResult"/>
-		</xsd:sequence>
-
-	</xsd:complexType>
-
-	<xsd:element name="TaskResourceResult" type="project:T_TaskResourceResult"/>
-
-	<xsd:complexType name="T_TaskResourceResult">
-		<xsd:sequence>
-			<xsd:element name="taskID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Aktivität</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="resourceID" type="base:id">
-
-				<xsd:annotation><xsd:documentation>PrimaryKey der betroffenen Ressource</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="taskResourceID" type="base:id" nillable="true">
-				<xsd:annotation><xsd:documentation>PrimaryKey der angelegten TaskRessource</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="errorMessage" type="xsd:string" nillable="true">
-				<xsd:annotation><xsd:documentation>Fehlermeldung</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<!-- 5.2.8 changeTaskResource -->
-	<xsd:element name="changeTaskResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="taskResourceID" type="base:id"/>
-
-				<xsd:element name="resource" type="project:T_TaskResourceChangeValue"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="TaskResourceValue" type="project:T_TaskResourceValue"/>
-
-	<xsd:complexType name="T_TaskResourceValue">
-		<xsd:sequence>
-			<xsd:element name="taskID" type="base:id" nillable="true">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Aktivität</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="resourceID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der betroffenen Ressource</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="participation_in_percent" type="xsd:double">
-				<xsd:annotation><xsd:documentation>%-Beteiligung der Ressource an dieser Aktivität</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_in_percent" type="base:optionalDouble" nillable="true">
-
-				<xsd:annotation><xsd:documentation>%-Arbeitsanteil der Ressource an dieser Aktivität - nur bei Aktivitätentyp Arbeit möglich</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_in_pt" type="base:optionalDouble" nillable="true">
-				<xsd:annotation><xsd:documentation>Arbeitsanteil der Ressource an dieser Aktivität in Minuten</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="roleID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="hasIndividualCosts" type="xsd:boolean">
-				<xsd:annotation><xsd:documentation>MA hat individuelle Kostensätze (siehe Ressource)</xsd:documentation></xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:complexType name="T_TaskResourceValueList">
-		<xsd:sequence>
-
-			<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:TaskResourceValue"/>
-		</xsd:sequence>
-	</xsd:complexType>
-
-
-	<xsd:element name="TaskResourceChangeValue" type="project:T_TaskResourceChangeValue"/>
-
-	<xsd:complexType name="T_TaskResourceChangeValue">
-		<xsd:sequence>
-			<xsd:element name="participation_in_percent" type="base:optionalDouble" nillable="true">
-				<xsd:annotation><xsd:documentation>%-Beteiligung der Ressource an dieser Aktivität</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="work_in_percent" type="base:optionalDouble" nillable="true">
-				<xsd:annotation><xsd:documentation>%-Arbeitsanteil der Ressource an dieser Aktivität - nur bei Aktivitätentyp Arbeit möglich</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="work_in_pt" type="base:optionalDouble" nillable="true">
-				<xsd:annotation><xsd:documentation>Arbeitsanteil der Ressource an dieser Aktivität in Stunden</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="roleID" type="base:id" nillable="true">
-
-				<xsd:annotation><xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="hasIndividualCosts" type="base:optionalBoolean" nillable="true">
-				<xsd:annotation><xsd:documentation>MA hat individuelle Kostensätze (siehe Ressource)</xsd:documentation></xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<!-- 5.2.9 deleteTaskResource -->
-
-	<xsd:element name="deleteTaskResourceRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="taskResourceID" type="base:id"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="addProjectRequestParameter">
-
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="project" type="project:T_Project"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="changeProjectRequestParameter">
-		<xsd:complexType>
-
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="project" type="project:T_Project"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="GetParticipationProjectsRequestParameter">
-		<xsd:complexType>
-
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="GetProjectPermissionsRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="GetReleasableProjectParticipationsRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<xsd:element name="GetWtCalendarsRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="Risk" type="project:T_Risk"/>
-
-
-	<xsd:complexType name="T_Risk">
-		<xsd:sequence>
-			<xsd:element name="riskID" type="base:id" nillable="true">
-				<xsd:annotation><xsd:documentation>PrimaryKey des Risikos - nill bei Neuanlage</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="projectID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey des Projektes</xsd:documentation></xsd:annotation>
-			</xsd:element>
-
-			<xsd:element name="riskStateID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Risiko-Status</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="creationDate" type="xsd:date">
-				<xsd:annotation><xsd:documentation>Aufnahmedatum</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="risk" type="xsd:string">
-				<xsd:annotation><xsd:documentation>Risiko</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="riskProbabilityID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Risiko-Wahrscheinlichkeit</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="riskEffectID" type="base:id">
-				<xsd:annotation><xsd:documentation>PrimaryKey der Risiko-Auswirkung</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="costEffect" type="xsd:string" nillable="true">
-
-				<xsd:annotation><xsd:documentation>Auswirkung auf Kosten</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="dateEffect" type="xsd:string" nillable="true">
-				<xsd:annotation><xsd:documentation>Auswirkung auf Temin</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="qualityEffect" type="xsd:string" nillable="true">
-				<xsd:annotation><xsd:documentation>Auswirkung auf Qualität</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-			<xsd:element name="action" type="xsd:string" nillable="true">
-				<xsd:annotation><xsd:documentation>Maßnahme</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="responsibility" type="xsd:string" nillable="true">
-				<xsd:annotation><xsd:documentation>Verantwortlich</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="completionUntil" type="xsd:string" nillable="true">
-
-				<xsd:annotation><xsd:documentation>Umsetzung bis</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="comment" type="xsd:string" nillable="true">
-				<xsd:annotation><xsd:documentation>Kommentar</xsd:documentation></xsd:annotation>
-			</xsd:element>
-			<xsd:element name="monitoring" type="xsd:string" nillable="true">
-				<xsd:annotation><xsd:documentation>Kontrollierbarkeit</xsd:documentation></xsd:annotation>
-
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
-
-	<xsd:element name="RiskList">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element minOccurs="0" maxOccurs="unbounded" ref="project:Risk"/>
-			</xsd:sequence>
-
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="GetRisksRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="projectID" type="base:id"/>
-			</xsd:sequence>
-
-		</xsd:complexType>
-	</xsd:element>
-
-	<xsd:element name="AddRiskRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="risk" type="project:T_Risk"/>
-			</xsd:sequence>
-		</xsd:complexType>
-
-	</xsd:element>
-
-	<xsd:element name="ChangeRiskRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="risk" type="project:T_Risk"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-
-	<xsd:element name="DeleteRiskRequestParameter">
-		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="sessionID" type="xsd:string"/>
-				<xsd:element name="riskID" type="base:id"/>
-			</xsd:sequence>
-		</xsd:complexType>
-	</xsd:element>
-
-
+					</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="limitation" type="project:TaskLimitation">
+            <xsd:annotation>
+               <xsd:documentation>EinschrÃ¤nkungsart der AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="isMilestone" type="xsd:boolean">
+
+            <xsd:annotation>
+               <xsd:documentation>Dies ist ein Meilenstein</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="priority" type="xsd:int">
+            <xsd:annotation>
+               <xsd:documentation>PrioritÃ¤t der AktivitÃ¤t - default 500 - zur Zeit ungenutzt</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+         <xsd:element name="comment" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Bemerkung zur AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:element name="deleteProjectTaskRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="taskID" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="addTaskPredecessorRequestParameter">
+
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="taskID" type="base:id"/>
+            <xsd:element name="predecessorTaskID" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>TaskID des VorgÃ¤ngers - Nur aus dem gleichen Projekt</xsd:documentation>
+               </xsd:annotation>
+
+            </xsd:element>
+            <xsd:element name="buffer" type="xsd:double">
+               <xsd:annotation>
+                  <xsd:documentation>Puffer zwischen den AktivitÃ¤ten in h/PT</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+
+   </xsd:element>
+   <xsd:element name="deleteTaskPredecessorRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="taskID" type="base:id"/>
+            <xsd:element name="predecessorTaskID" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>TaskID des VorgÃ¤ngers - Nur aus dem gleichen Projekt</xsd:documentation>
+
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="getTaskResourcesRequestParameter">
+      <xsd:annotation>
+         <xsd:documentation>Wenigstens einer der Parameter projectID, taskID oder personID muÃ? gesetzt sein.</xsd:documentation>
+
+      </xsd:annotation>
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" nillable="true" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>Nur die AktivitÃ¤tenbeteiligungen fÃ¼r dieses Projekt suchen</xsd:documentation>
+               </xsd:annotation>
+
+            </xsd:element>
+            <xsd:element name="taskID" nillable="true" type="base:id">
+               <xsd:annotation>
+                  <xsd:documentation>Nur die AktivitÃ¤tenbeteiligungen fÃ¼r diese AktivitÃ¤t suchen</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="personID" nillable="true" type="base:id">
+               <xsd:annotation>
+
+                  <xsd:documentation>Nur die AktivitÃ¤tenbeteiligungen fÃ¼r diesen Mitarbeiter suchen</xsd:documentation>
+               </xsd:annotation>
+            </xsd:element>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TaskResource" type="project:T_TaskResource"/>
+   <xsd:complexType name="T_TaskResource">
+
+      <xsd:sequence>
+         <xsd:element name="taskResourceID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der AktivitÃ¤tenbeteiligung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="projectID" type="base:id">
+            <xsd:annotation>
+
+               <xsd:documentation>PrimaryKey des Projektes</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="taskID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="resourceID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der betroffenen Ressource</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="from" type="xsd:dateTime">
+            <xsd:annotation>
+               <xsd:documentation>Beginn der AktivitÃ¤tenbeteiligung</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="to" type="xsd:dateTime">
+            <xsd:annotation>
+               <xsd:documentation>Ende der AktivitÃ¤tenbeteiligung</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_unit" nillable="true" type="project:WorkUnitType">
+
+            <xsd:annotation>
+               <xsd:documentation>Die Einheit fÃ¼r die Felder work, calculated_work, work_estimated, work_actual</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="participation_in_percent" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>%-Beteiligung der Ressource an dieser AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+         <xsd:element name="work_in_percent" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>%-Arbeitsanteil der Ressource an dieser AktivitÃ¤t in Minuten</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="calculated_work_in_percent" type="base:optionalDouble">
+            <xsd:annotation>
+
+               <xsd:documentation>Berechneter %-Arbeitsanteil der Ressource an dieser AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Arbeitsanteil der Ressource an dieser AktivitÃ¤t in Stunden / Pt</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="calculated_work" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Berechneter Arbeitsanteil der Ressource an dieser AktivitÃ¤t in Stunden / PT</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_estimated" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>GeschÃ¤tzte Arbeit dieser Ressource an dieser AktivitÃ¤t in Stunden / PT</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_actual" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>Aktuelle Arbeit in Stunden / Pt</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="roleID" type="base:id">
+
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="hasIndividualCosts" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>MA hat individuelle KostensÃ¤tze (siehe Ressource)</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TaskResourceList" type="project:T_TaskResourceList"/>
+   <xsd:complexType name="T_TaskResourceList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:TaskResource"/>
+      </xsd:sequence>
+   </xsd:complexType>
+
+   <xsd:element name="addTaskResourceRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="resource" type="project:T_TaskResourceValue"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="addMultiTaskResourceRequestParameter">
+
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="resourceList" type="project:T_TaskResourceValueList"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TaskResourceResultList" type="project:T_TaskResourceResultList"/>
+   <xsd:complexType name="T_TaskResourceResultList">
+
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:TaskResourceResult"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TaskResourceResult" type="project:T_TaskResourceResult"/>
+   <xsd:complexType name="T_TaskResourceResult">
+      <xsd:sequence>
+         <xsd:element name="taskID" type="base:id">
+            <xsd:annotation>
+
+               <xsd:documentation>PrimaryKey der AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="resourceID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der betroffenen Ressource</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="taskResourceID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der angelegten TaskRessource</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="errorMessage" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Fehlermeldung</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="changeTaskResourceRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="taskResourceID" type="base:id"/>
+
+            <xsd:element name="resource" type="project:T_TaskResourceChangeValue"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="TaskResourceValue" type="project:T_TaskResourceValue"/>
+   <xsd:complexType name="T_TaskResourceValue">
+      <xsd:sequence>
+         <xsd:element name="taskID" nillable="true" type="base:id">
+            <xsd:annotation>
+
+               <xsd:documentation>PrimaryKey der AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="resourceID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der betroffenen Ressource</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="participation_in_percent" type="xsd:double">
+            <xsd:annotation>
+               <xsd:documentation>%-Beteiligung der Ressource an dieser AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_in_percent" nillable="true" type="base:optionalDouble">
+            <xsd:annotation>
+               <xsd:documentation>%-Arbeitsanteil der Ressource an dieser AktivitÃ¤t - nur bei AktivitÃ¤tentyp Arbeit mÃ¶glich</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_in_pt" nillable="true" type="base:optionalDouble">
+            <xsd:annotation>
+               <xsd:documentation>Arbeitsanteil der Ressource an dieser AktivitÃ¤t in Minuten</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="roleID" type="base:id">
+
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="hasIndividualCosts" type="xsd:boolean">
+            <xsd:annotation>
+               <xsd:documentation>MA hat individuelle KostensÃ¤tze (siehe Ressource)</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:complexType name="T_TaskResourceValueList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:TaskResourceValue"/>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="TaskResourceChangeValue" type="project:T_TaskResourceChangeValue"/>
+
+   <xsd:complexType name="T_TaskResourceChangeValue">
+      <xsd:sequence>
+         <xsd:element name="participation_in_percent" nillable="true" type="base:optionalDouble">
+            <xsd:annotation>
+               <xsd:documentation>%-Beteiligung der Ressource an dieser AktivitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_in_percent" nillable="true" type="base:optionalDouble">
+
+            <xsd:annotation>
+               <xsd:documentation>%-Arbeitsanteil der Ressource an dieser AktivitÃ¤t - nur bei AktivitÃ¤tentyp Arbeit mÃ¶glich</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="work_in_pt" nillable="true" type="base:optionalDouble">
+            <xsd:annotation>
+               <xsd:documentation>Arbeitsanteil der Ressource an dieser AktivitÃ¤t in Stunden</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+         <xsd:element name="roleID" nillable="true" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Projektrolle</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="hasIndividualCosts" nillable="true" type="base:optionalBoolean">
+            <xsd:annotation>
+
+               <xsd:documentation>MA hat individuelle KostensÃ¤tze (siehe Ressource)</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="deleteTaskResourceRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="taskResourceID" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="addProjectRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+
+            <xsd:element name="project" type="project:T_Project"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="changeProjectRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="project" type="project:T_Project"/>
+
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetParticipationProjectsRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+
+   </xsd:element>
+   <xsd:element name="GetProjectPermissionsRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetReleasableProjectParticipationsRequestParameter">
+
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="GetWtCalendarsRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+
+            <xsd:element name="sessionID" type="xsd:string"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="Risk" type="project:T_Risk"/>
+   <xsd:complexType name="T_Risk">
+      <xsd:sequence>
+         <xsd:element name="riskID" nillable="true" type="base:id">
+            <xsd:annotation>
+
+               <xsd:documentation>PrimaryKey des Risikos - nill bei Neuanlage</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="projectID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey des Projektes</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="riskStateID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Risiko-Status</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="creationDate" type="xsd:date">
+            <xsd:annotation>
+               <xsd:documentation>Aufnahmedatum</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="risk" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Risiko</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="riskProbabilityID" type="base:id">
+
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Risiko-Wahrscheinlichkeit</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="riskEffectID" type="base:id">
+            <xsd:annotation>
+               <xsd:documentation>PrimaryKey der Risiko-Auswirkung</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+         <xsd:element name="costEffect" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Auswirkung auf Kosten</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="dateEffect" nillable="true" type="xsd:string">
+            <xsd:annotation>
+
+               <xsd:documentation>Auswirkung auf Temin</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="qualityEffect" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Auswirkung auf QualitÃ¤t</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+
+         <xsd:element name="action" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>MaÃ?nahme</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="responsibility" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Verantwortlich</xsd:documentation>
+
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="completionUntil" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Umsetzung bis</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="comment" nillable="true" type="xsd:string">
+
+            <xsd:annotation>
+               <xsd:documentation>Kommentar</xsd:documentation>
+            </xsd:annotation>
+         </xsd:element>
+         <xsd:element name="monitoring" nillable="true" type="xsd:string">
+            <xsd:annotation>
+               <xsd:documentation>Kontrollierbarkeit</xsd:documentation>
+            </xsd:annotation>
+
+         </xsd:element>
+      </xsd:sequence>
+   </xsd:complexType>
+   <xsd:element name="RiskList">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element maxOccurs="unbounded" minOccurs="0" ref="project:Risk"/>
+         </xsd:sequence>
+      </xsd:complexType>
+
+   </xsd:element>
+   <xsd:element name="GetRisksRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="projectID" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+
+   <xsd:element name="AddRiskRequestParameter">
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="risk" type="project:T_Risk"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="ChangeRiskRequestParameter">
+
+      <xsd:complexType>
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="risk" type="project:T_Risk"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:element name="DeleteRiskRequestParameter">
+      <xsd:complexType>
+
+         <xsd:sequence>
+            <xsd:element name="sessionID" type="xsd:string"/>
+            <xsd:element name="riskID" type="base:id"/>
+         </xsd:sequence>
+      </xsd:complexType>
+   </xsd:element>
+   <xsd:complexType name="T_TaskPredecessorList">
+      <xsd:sequence>
+         <xsd:element maxOccurs="unbounded" minOccurs="0" name="predecessorID" type="base:id"/>
+
+      </xsd:sequence>
+   </xsd:complexType>
 </xsd:schema>
