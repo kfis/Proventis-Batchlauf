@@ -10,7 +10,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/x
 
     <properties>
     <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect"/>
-    <property name="hibernate.hbm2ddl.auto" value="update"/>
+    <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
     <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
    
 </properties>

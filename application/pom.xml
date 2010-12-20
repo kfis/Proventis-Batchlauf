@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-   <parent>
+    <parent>
         <artifactId>batch2</artifactId>
         <groupId>net.proventis</groupId>
         <version>0.0.1-SNAPSHOT</version>
@@ -13,22 +13,46 @@
     <packaging>ear</packaging>
 
     <name>application EAR</name>
-
-   <dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-ear-plugin</artifactId>
+    
+                <configuration>
+            
+                    <defaultLibBundleDir>lib</defaultLibBundleDir>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
        
-<!--
-      <dependency>
+
+        <dependency>
             <groupId>net.proventis</groupId>
             <artifactId>persistence</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>ejb</type>
         </dependency>
--->
+        <dependency>
+            <groupId>net.proventis</groupId>
+            <artifactId>proventis-services</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>net.proventis</groupId>
+            <artifactId>batchservice</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <type>ejb</type>
+        </dependency>
         <dependency>
             <groupId>net.proventis</groupId>
             <artifactId>webapp</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <type>war</type>
+
         </dependency>
     </dependencies>
 

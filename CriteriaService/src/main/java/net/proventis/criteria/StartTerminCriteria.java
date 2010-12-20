@@ -5,7 +5,7 @@
 
 package net.proventis.criteria;
 
-import net.proventis.batch.service.TaskInformation;
+import java.util.Date;
 
 /**
  *
@@ -19,13 +19,43 @@ public class StartTerminCriteria extends Criteria {
 
     @Override
     public boolean checkTask(TaskInformation task) {
-        return true;
+       return (isInAbsoluteDaysBufferRange(task)||isInPercentDaysBufferRange(task));
     }
 
     @Override
     public CriteriaType getCriteriaType() {
         return CriteriaType.startTermin;
     }
+
+
+    private boolean isInAbsoluteDaysBufferRange(TaskInformation task){
+       Date bufferStartTermin =  new Date(task.getStartTermin().getTime() + getDays() * DAY_IN_MS);
+        if(bufferStartTermin.after(new Date())){
+            return true;
+        }else{
+            return taskHasStarted(task);
+        }
+    }
+
+    private boolean isInPercentDaysBufferRange(TaskInformation task){
+        long taskDuration = task.getEndTermin().getTime() -  task.getStartTermin().getTime();
+
+        long bufferDays = (long)(taskDuration  / (1 / (double)getPercentage()) /100);
+    
+        Date bufferStartTermin  =  new Date(task.getStartTermin().getTime() + bufferDays);
+        if(bufferStartTermin.after(new Date())){
+            return true;
+        }else{
+            return taskHasStarted(task);
+        }
+    }
+
+    private boolean taskHasStarted(TaskInformation task){
+        return task.getProgress()>0;
+    }
+
+
+   
 
 
 }

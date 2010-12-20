@@ -7,6 +7,7 @@ package net.proventis.batch.service;
 import net.proventis.axis.blueant.base.Id;
 import net.proventis.axis.blueant.base.LoginRequestParameter;
 import net.proventis.axis.blueant.base.LogoutRequestParameter;
+import net.proventis.axis.blueant.cost.GetTasksRequestParameter;
 import net.proventis.axis.blueant.project.GetParticipationProjectsRequestParameter;
 import net.proventis.axis.blueant.project.GetProjectTasksRequestParameter;
 
@@ -41,5 +42,13 @@ public class RequestParameterFactory {
         GetParticipationProjectsRequestParameter gp = new GetParticipationProjectsRequestParameter();
         gp.setSessionID(sessionId);
         return gp;
+    }
+
+    public static GetTasksRequestParameter createGetTasksRequestParameter(String sessionId, Id taskId, Id projectId){
+        GetTasksRequestParameter grp = new GetTasksRequestParameter();
+        grp.setSelectedTaskID(taskId);
+        grp.setSessionID(sessionId);
+        grp.setProjectID(projectId);
+        return grp;
     }
 }

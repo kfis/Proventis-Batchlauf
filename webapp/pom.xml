@@ -25,15 +25,20 @@
     <dependencies>
         <dependency>
             <groupId>net.proventis</groupId>
-            <artifactId>proventis-services</artifactId>
+            <artifactId>batchservice</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <type>ejb</type>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>net.proventis</groupId>
-    <artifactId>persistence</artifactId>
+            <artifactId>CriteriaService</artifactId>
             <version>0.0.1-SNAPSHOT</version>
-            <type>ejb</type>
+        </dependency>
+        <dependency>
+            <groupId>net.proventis</groupId>
+            <artifactId>proventis-services</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
        
         <dependency>
@@ -45,6 +50,7 @@
     </dependencies>
 
     <build>
+        <!--
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -102,6 +108,7 @@
                 </executions>
             </plugin>
         </plugins>
+        -->
         <finalName>webapp</finalName>
     </build>
 
