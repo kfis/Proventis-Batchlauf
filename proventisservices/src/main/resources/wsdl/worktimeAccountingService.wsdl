@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BlueAnt" targetNamespace="http://blueant.axis.proventis.net/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://blueant.axis.proventis.net/" xmlns:exception="http://exception.blueant.axis.proventis.net/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:base="http://base.blueant.axis.proventis.net/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:cost="http://cost.blueant.axis.proventis.net/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/">
+<wsdl:documentation>Version 8.0.1 vom 26.04.2010 10:30 - WSI - Verified</wsdl:documentation>
+  <wsdl:types>
+    <xsd:schema>
+			<xsd:import namespace="http://exception.blueant.axis.proventis.net/" schemaLocation="exception.xsd"/>
+		</xsd:schema>
+    <xsd:schema>
+			<xsd:import namespace="http://base.blueant.axis.proventis.net/" schemaLocation="base.xsd"/>
+		</xsd:schema>
+
+    <xsd:schema>
+			<xsd:import namespace="http://cost.blueant.axis.proventis.net/" schemaLocation="cost.xsd"/>
+		</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="setEstimatedPlanResponse">
+  </wsdl:message>
+  <wsdl:message name="getWorktimeResponse">
+    <wsdl:part name="worktimelist" element="cost:WorktimeList">
+    </wsdl:part>
+
+  </wsdl:message>
+  <wsdl:message name="PermissionDeniedException">
+    <wsdl:part name="PermissionDeniedException" element="exception:PermissionDeniedException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidConcurrentLicenseException">
+    <wsdl:part name="InvalidConcurrentLicenseException" element="exception:InvalidConcurrentLicenseException">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="InvalidClientException">
+    <wsdl:part name="InvalidClientException" element="exception:InvalidClientException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getProjectsRequest">
+    <wsdl:part name="param" element="cost:getProjectsRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setEstimatedPlanRequest">
+
+    <wsdl:part name="param" element="cost:setEstimatedPlanRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonalWorktimeRequest">
+    <wsdl:part name="param" element="cost:getPersonalWorktimeRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidNamedLicenseException">
+    <wsdl:part name="InvalidNamedLicenseException" element="exception:InvalidNamedLicenseException">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editWorktimeRequest">
+    <wsdl:part name="param" element="cost:editWorktimeRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="editWorktimeResponse">
+    <wsdl:part name="worktimeID" element="base:mandatoryID">
+    </wsdl:part>
+
+  </wsdl:message>
+  <wsdl:message name="ServerMaintenanceException">
+    <wsdl:part name="ServerMaintenanceException" element="exception:ServerMaintenanceException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidSessionException">
+    <wsdl:part name="InvalidSessionException" element="exception:InvalidSessionException">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="getProjectsResponse">
+    <wsdl:part name="projectList" element="cost:WorkTimeProjectList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AssertionException">
+    <wsdl:part name="AssertionException" element="exception:AssertionException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWorktimeTicketsResponse">
+
+    <wsdl:part name="ticketList" element="cost:WorkTimeTicketList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeWorktimeStateResponse">
+    <wsdl:part name="worktimeStateResponseList" element="cost:WorkTimeStateResponseList">
+<wsdl:documentation>mögliche Fehlermeldungen: - Session abgelaufen - Ungültige Arbeitszeit - Ungültiger Status - Statusänderung nicht möglich, z.B. von 2 auf 0 oder 1 - ungültige AZ-Freigabe in Blue Ant - Recht in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidUsernamePasswordCombinationException">
+
+    <wsdl:part name="InvalidUsernamePasswordCombinatioException" element="exception:InvalidUsernamePasswordCombinationException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setSubjectiveProgressResponse">
+  </wsdl:message>
+  <wsdl:message name="InvalidDatesException">
+    <wsdl:part name="InvalidDatesException" element="exception:InvalidDatesException">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="InvalidUsernameException">
+    <wsdl:part name="InvalidUsernameException" element="exception:InvalidUsernameException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="changeWorktimeStateRequest">
+    <wsdl:part name="param" element="cost:changeWorktimeStateRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPersonalWorktimeResponse">
+
+    <wsdl:part name="worktimelist" element="cost:WorktimeList">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteWorktimeResponse">
+  </wsdl:message>
+  <wsdl:message name="getWorktimeTicketsRequest">
+    <wsdl:part name="param" element="cost:getWorktimeTicketsRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+
+  <wsdl:message name="setSubjectiveProgressRequest">
+    <wsdl:part name="param" element="cost:setSubjectiveProgressRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getWorktimeRequest">
+    <wsdl:part name="param" element="cost:getWorktimeRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTasksRequest">
+
+    <wsdl:part name="param" element="cost:getTasksRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteWorktimeRequest">
+    <wsdl:part name="param" element="cost:deleteWorktimeRequestParameter">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getTasksResponse">
+    <wsdl:part name="taskList" element="cost:WorkTimeTaskList">
+
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InvalidParameterException">
+    <wsdl:part name="InvalidParameterException" element="exception:InvalidParameterException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WorktimeAccounting">
+<wsdl:documentation>Mit diesen Services können Arbeitszeiten und/oder subj. Fortschritte einzelner Mitarbeiter an Blue Ant übergeben werden.</wsdl:documentation>
+    <wsdl:operation name="getProjects">
+
+<wsdl:documentation>Dieser Service liefert aus Blue Ant eine Liste aller arbeitszeitrelevanten Projekte für den aktuell angemeldeten Anwender.</wsdl:documentation>
+      <wsdl:input message="tns:getProjectsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getProjectsResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+
+<wsdl:documentation>Zugriff nicht gestattet/Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getTasks">
+<wsdl:documentation>Dieser Service liefert nach Übergabe einer ProjektID eine Liste aller projektbezogenen Aktivitäten für den aktuell angemeldeten Anwender.</wsdl:documentation>
+      <wsdl:input message="tns:getTasksRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getTasksResponse">
+    </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet/Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getWorktimeTickets">
+<wsdl:documentation>Dieser Service liefert alle Tickets des angemeldeten User zurück, auf die er Arbeitszeiten erfassen darf.</wsdl:documentation>
+
+      <wsdl:input message="tns:getWorktimeTicketsRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getWorktimeTicketsResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet/Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setSubjectiveProgress">
+<wsdl:documentation>Mit diesem Service kann der subjektive Fortschritt einer Aktivität für alle arbeitszeitrelevanten Projekte/Aktivitäten des aktuell angemeldeten Anwenders geändert werden.</wsdl:documentation>
+      <wsdl:input message="tns:setSubjectiveProgressRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:setSubjectiveProgressResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+
+<wsdl:documentation>Ungültiger Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet/Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getPersonalWorktime">
+<wsdl:documentation>Ausgabe der eigenen Arbeitszeiten</wsdl:documentation>
+      <wsdl:input message="tns:getPersonalWorktimeRequest">
+
+    </wsdl:input>
+      <wsdl:output message="tns:getPersonalWorktimeResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültige Parameter</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet/Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="getWorktime">
+<wsdl:documentation>Ausgabe von Arbeitszeiten aller Mitarbeiter</wsdl:documentation>
+      <wsdl:input message="tns:getWorktimeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getWorktimeResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültige Parameter</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet/Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editWorktime">
+<wsdl:documentation>Die Neuerfassung einer Arbeitszeit für den angemeldeten Benutzer erfolgt mit dem Status offen. Lediglich offene Arbeitszeiten können vom angemeldeten Benutzer geändert werden. Der Status der Arbeitszeit kann durch den Service Statusänderung geändert werden.
+								Wird die Fertigstellung über geschätzt ermittelt und die Summe der Arbeitszeiten übersteigt den Schätzwert, wird der geschätze Aufwand automatisch erhöht (geschätzter Planaufwand=IST+1)
+			</wsdl:documentation>
+      <wsdl:input message="tns:editWorktimeRequest">
+    </wsdl:input>
+
+      <wsdl:output message="tns:editWorktimeResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>ungültiger Parameter z.B. - Arbeitszeit nicht im Projektzeitraum - Mitarbeiter nicht der Aktivität zugewiesen - Änderung nicht möglich da falschen Status - ungültiges Projekt - ungültiges Datum - max. AZ überschritten - nicht buchbar da vorhandene Abwesenheit an diesem Tag - nicht buchbar da schon AZ auf dem Tag gebucht - nicht buchbar da Aktivität schon fertig gemeldet - Bemerkungsfeld zu lang - Aktivität gehört nicht zum Projekt - Tätigkeit ist in den Stammdaten passiv</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet/Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+
+    <wsdl:operation name="deleteWorktime">
+<wsdl:documentation>Mit diesem Service können offene, noch nicht freigegebene Arbeitszeiten des angemeldeten Benutzers gelöscht werden.</wsdl:documentation>
+      <wsdl:input message="tns:deleteWorktimeRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:deleteWorktimeResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Pparameter</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeWorktimeState">
+<wsdl:documentation>Mit diesem Service können Statusänderungen für Arbeitszeiten durchgeführt werden. In Blue Ant muss hierfür die allg. Freigabe von Arbeitszeiten eingestellt sein. Folgende Status werden hierbei von Blue Ant genutzt und können wie folgt gesetzt werden: 0 - offen, die AZ können vom Anwender in Blue Ant noch geändert werden 1 - bestätigt, die AZ wurde in einer externen Anwendung von einem Projektleiter, Abteilungsleiter etc. als korrekt bestätigt. In Blue Ant wird das Flag freigegeben gesetzt. Alle AZ mit dieser Kennung können nicht mehr vom Anwender bearbeitet werden. Hierfür muss die allg. Freigabe von AZ in Blue Ant eingestellt sein. 2 - Die AZ wurde in einer externen Anwendung als fakturiert gekennzeichnet. In Blue Ant wird eine neue Kennung Übergabe an Fremdsystem eingefügt. Die AZ stehen in Blue Ant für den Leistungsnachweis zur Verfügung, können vom Anwender jedoch nicht mehr verändert werden.</wsdl:documentation>
+      <wsdl:input message="tns:changeWorktimeStateRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:changeWorktimeStateResponse">
+
+<wsdl:documentation>mögliche Fehlermeldungen: - Session abgelaufen - Ungültige Arbeitszeit - Ungültiger Status - Statusänderung nicht möglich, z.B. von 2 auf 0 oder 1 - ungültige AZ-Freigabe in Blue Ant - Recht in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:output>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung: - Ungültige Arbeitszeit - Ungültiger Status - Statusänderung nicht möglich, z.B. von 2 auf 0 oder 1 - ungültige AZ-Freigabe in Blue Ant</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setEstimatedPlan">
+<wsdl:documentation>Mit diesem Service kann geschätzte Plan/-Mehraufwand in Minuten pro Aktivität an den Projektleiter übermittelt werden.
+				Wird die Fertigstellung über geschätzt ermittelt, muss der neue geschätzte Planaufwand immer größer oder gleich der IST-Arbeit des Mitarbeiters sein.
+			</wsdl:documentation>
+      <wsdl:input message="tns:setEstimatedPlanRequest">
+
+    </wsdl:input>
+      <wsdl:output message="tns:setEstimatedPlanResponse">
+    </wsdl:output>
+      <wsdl:fault name="InvalidParameterException" message="tns:InvalidParameterException">
+<wsdl:documentation>Ungültiger Parameter - ungültige Aktivität - ungültiger subj. Fortschritt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException" message="tns:InvalidSessionException">
+<wsdl:documentation>Session ungültig</wsdl:documentation>
+    </wsdl:fault>
+
+      <wsdl:fault name="AssertionException" message="tns:AssertionException">
+<wsdl:documentation>Ungültige Voraussetzung: - geschätzte Mehraufwände können für das Projekt nicht erfasst werden (siehe Projekteinstellungen in Blue Ant)</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="InvalidClientException" message="tns:InvalidClientException">
+<wsdl:documentation>Client nicht erlaubt</wsdl:documentation>
+    </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException" message="tns:PermissionDeniedException">
+<wsdl:documentation>Zugriff nicht gestattet / Rechte in Blue Ant nicht vorhanden</wsdl:documentation>
+    </wsdl:fault>
+
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WorktimeAccountingBinding" type="tns:WorktimeAccounting">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getProjects">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getProjects"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="getTasks">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getTasks"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getWorktimeTickets">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getWorktimeTickets"/>
+
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="setSubjectiveProgress">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/setSubjectiveProgress"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="getPersonalWorktime">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getPersonalWorktime"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getWorktime">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/getWorktime"/>
+
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="editWorktime">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/editWorktime"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="deleteWorktime">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/deleteWorktime"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="changeWorktimeState">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/changeWorktimeState"/>
+
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+
+    </wsdl:operation>
+    <wsdl:operation name="setEstimatedPlan">
+      <soap:operation soapAction="http://blueant.axis.proventis.net/setEstimatedPlan"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+
+      <wsdl:fault name="InvalidParameterException">
+        <soap:fault name="InvalidParameterException"/>
+      </wsdl:fault>
+      <wsdl:fault name="InvalidSessionException">
+        <soap:fault name="InvalidSessionException"/>
+      </wsdl:fault>
+      <wsdl:fault name="AssertionException">
+        <soap:fault name="AssertionException"/>
+      </wsdl:fault>
+
+      <wsdl:fault name="InvalidClientException">
+        <soap:fault name="InvalidClientException"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionDeniedException">
+        <soap:fault name="PermissionDeniedException"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WorktimeAccountingService">
+
+    <wsdl:port name="WorktimeAccountingServicePort" binding="tns:WorktimeAccountingBinding">
+<wsdl:documentation>Mit diesen Services können Arbeitszeiten und/oder subj. Fortschritte einzelner Mitarbeiter an Blue Ant übergeben werden.</wsdl:documentation>
+      <soap:address location="http://78.46.94.155:8081/hs/services/WorktimeAccountingService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

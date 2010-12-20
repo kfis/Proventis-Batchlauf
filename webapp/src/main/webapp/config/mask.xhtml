@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      >
+    <head>
+        <title>Konfiguration Batchlauf</title>
+
+        <meta charset="utf-8"></meta>
+
+        <script type="text/javascript" src="js/prototype.js"></script>
+        <script type="text/javascript" src="js/livevalidation.js"></script>
+
+        <style type="text/css">
+            * {
+                vertical-align: baseline;
+                font-weight: inherit;
+                font-family: inherit;
+                font-style: inherit;
+                font-size: 100%;
+                border: 0 none;
+                outline: 0;
+                padding: 0;
+                margin: 0;
+            }
+
+            body {
+                background-color: #E2E2E2;
+                font-family: Verdana, Geneva, sans-serif;
+                color: #000;
+                font-size: 100%;
+                line-height: 1.125em; /* 16x1.125=18px */
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 2em;
+                line-height: 1.8em;
+                color: #013D64;
+            }
+
+            h2 {
+                background-color: #A3B5DC;
+                padding: 5px 5px 5px 20px;
+                color: #FFF;
+                border-bottom: 2px solid #5F6F9F;
+                margin: 5px 0px;
+            }
+
+            h3 {
+                padding: 5px;
+                font-size: 0.8em;
+                font-weight: bold;
+            }
+
+            p {
+                padding: 5px 5px 5px 20px;
+                font-size: 0.9em;
+                font-weight: bold;
+            }
+
+            form p {
+                padding: 5px;
+                color: #AAA;
+                font-size: 0.8em;
+                font-weight: normal;
+            }
+            .formtext{
+                padding: 5px;
+                color: #AAA;
+                font-size: 0.8em;
+                font-weight: normal;
+            }
+
+
+            #content {
+                padding: 5px;
+                width: 540px;
+                border: 1px solid black;
+                background-color: #FFF;
+
+            }
+
+            span.running {
+                color: #00CC00;
+                font-weight: bold;
+            }
+
+            span.stopped {
+                color: #CC0000;
+                font-weight: bold;
+            }
+
+            table {
+                width: 100%;
+            }
+
+            td {
+                width: 33%;
+                padding: 5px;
+                font-size: 0.8em;
+            }
+
+            td p {
+                font-size: 1em;
+            }
+
+            fieldset {
+                padding: 5px;
+                border: 1px solid #DDD;
+            }
+
+            .button {
+                background: #e3e3e3;
+                border: 1px solid #ccc;
+                border-radius: 3px;
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+                box-shadow: inset 0 0 1px 1px #f6f6f6;
+                -moz-box-shadow: inset 0 0 1px 1px #f6f6f6;
+                -webkit-box-shadow: inset 0 0 1px 1px #f6f6f6;
+                color: #333;
+                font-family: "helvetica neue", helvetica, arial, sans-serif;
+                font-size: 12px;
+                font-weight: bold;
+                line-height: 1;
+                padding: 8px 0 9px;
+                text-align: center;
+                text-shadow: 0 1px 0px #fff;
+                width: 175px;
+            }
+
+            .button:hover {
+                background: #d9d9d9;
+                box-shadow: inset 0 0 1px 1px #eaeaea;
+                -moz-box-shadow: inset 0 0 1px 1px #eaeaea;
+                -webkit-box-shadow: inset 0 0 1px 1px #eaeaea;
+                color: #222;
+            }
+
+            .button:active {
+                background: #d0d0d0;
+                box-shadow: inset 0 0 1px 1px #e3e3e3;
+                -moz-box-shadow: inset 0 0 1px 1px #e3e3e3;
+                -webkit-box-shadow: inset 0 0 1px 1px #e3e3e3;
+                color: #000;
+            }
+
+            input[type=text] {
+                border: 1px solid #DDD;
+                background-color: #F9F9F9;
+                padding: 5px;
+            }
+
+            legend {
+                padding: 2px;
+                margin-left: 10px;
+                font-size: 0.8em;
+                color: #AAA;
+            }
+
+            select {
+                padding: 5px;
+                border: 1px solid #EFEFEF;
+            }
+
+            .small {
+                font-size: 0.7em;
+            }
+
+            .r{
+                text-align: right;
+            }
+
+            .l {
+                text-align: left;
+            }
+
+            .c {
+                text-align: center;
+            }
+
+            .LV_validation_message{
+                font-weight:bold;
+                margin:0 0 0 5px;
+            }
+
+            .LV_valid {
+                color:#00CC00;
+            }
+
+            .LV_invalid {
+                color:#CC0000;
+            }
+
+            .LV_valid_field,
+            input.LV_valid_field:hover,
+            input.LV_valid_field:active,
+            textarea.LV_valid_field:hover,
+            textarea.LV_valid_field:active {
+                border: 1px solid #00CC00;
+            }
+
+            .LV_invalid_field,
+            input.LV_invalid_field:hover,
+            input.LV_invalid_field:active,
+            textarea.LV_invalid_field:hover,
+            textarea.LV_invalid_field:active {
+                border: 1px solid #CC0000;
+            }
+        </style>
+
+    </head>
+
+    <body>
+
+        <h1><h:outputText value="#{messages['batch.name']}" /></h1>
+        
+
+        <div id="content">
+
+
+            <h:form id="batchconfig">
+
+                <h2><h:outputText value="#{messages['batch.status']}" /></h2>
+
+                <fieldset>
+                    <legend><h:outputText value="#{messages['batch.status.current']}" /></legend>
+
+                    <h:panelGrid columns="2">
+                       
+                           
+                        <h:outputText value="#{messages['batch.batchlauf']}" />
+                        
+                        <h:panelGroup>
+                            <h:outputText value="#{messages['batch.status.running']}" rendered="#{configBean.batchRunning}" styleClass="running"/>
+                            <h:outputText value="#{messages['batch.status.stopped']}" rendered="#{!configBean.batchRunning}" styleClass="stopped"/>
+                        </h:panelGroup>
+                      
+                    </h:panelGrid>
+                </fieldset>
+
+                <h2><h:outputText value="#{messages['batch.configration']}" /></h2>
+
+                <fieldset>
+                    <legend><h:outputText value="#{messages['batch.configuration.checkintervall']}" /></legend>
+
+
+                    <h:outputText value="#{messages['batch.configuration.checkintervall.description']}" styleClass="formtext" />
+
+                    <h:panelGrid columns="2">
+                        
+                        <h:panelGroup styleClass="r">
+                                <label for="check_time"><h:outputText value="#{messages['batch.configuration.checkintervall']}" /> :</label>
+                        </h:panelGroup>
+                         <h:panelGroup>
+                            <h:inputText id="check_time" value="#{configBean.checkInterval}" size="5" maxlength="5"/>
+                            <script type="text/javascript">
+                                var check_time = new LiveValidation('check_time');
+                               // check_time.add( Validate.Format, { pattern: ^([0-1]?[0-9]|[2][0-3]):([0-5][0-9])$ } );
+                            </script>
+                         </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText value=""/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText value="HH:MM" styleClass="small"/>
+                         </h:panelGroup>
+                        
+                    </h:panelGrid>
+
+                </fieldset>
+
+                <fieldset>
+                    <legend><h:outputText value="#{messages['batch.configration.sendintervall']}" /></legend>
+
+                    <h:outputText
+                        value="#{messages['batch.configuration.sendintervall.description']}"
+                        styleClass="formtext"
+                      />
+
+                    <h:panelGrid columns="2">
+                        <h:panelGroup styleClass="r">
+                            <label for="send_time"><h:outputText value="#{messages['batch.configration.sendintervall']}" /> :</label>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <h:inputText id="send_time" value="#{configBean.batchIntervalInfo.mailSendingInterval}" size="4" maxlength="4"/>
+                            <script type="text/javascript">
+                                var send_time = new LiveValidation('send_time');
+                                send_time.add( Validate.Numericality, { minimum: 1, maximum: 365, onlyInteger: true } );
+                             </script>
+                        </h:panelGroup>
+                        <h:panelGroup></h:panelGroup>
+                        <h:panelGroup>
+                            <h:outputText value="#{messages['batch.configration.sendintervall.intervall']}" styleClass="small"/>
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+                </fieldset>
+
+
+                <fieldset>
+                    <legend><h:outputText value="#{messages['batch.report']}" /></legend>
+
+                    <p><h:outputText value="#{messages['batch.configuration.report.description']}" /></p>
+
+
+                    <h3><h:outputText value="#{messages['batch.configuration.report.tolerance']}" /></h3>
+
+                    <h:panelGrid columns="3">
+                      
+                            <h:panelGroup styleClass="r">
+                                <label for="a_pro"><h:outputText value="#{messages['batch.configuration.report.tolerance.starttermin']}" /></label>
+                            </h:panelGroup>
+                            <h:panelGroup styleClass="l">
+                                <h:inputText value="#{configBean.batchIntervalInfo.startTerminCriteria.percentage}" id="a_pro" size="3" maxlength="3"/>%
+                                <script type="text/javascript">var a_pro = new LiveValidation('a_pro');a_pro.add( Validate.Numericality, { minimum: 1, maximum: 100, onlyInteger: true } );</script>
+                             </h:panelGroup>
+
+                            <h:panelGroup styleClass ="r">
+                                <h:inputText value="#{configBean.batchIntervalInfo.startTerminCriteria.days}" id="a_day" size="3" maxlength="3"/>
+                                <h:outputText value="#{messages['batch.configuration.report.tolerance.days']}" />
+                                <script type="text/javascript">var a_day = new LiveValidation('a_day');a_day.add( Validate.Numericality, { minimum: 1, maximum: 365, onlyInteger: true } );</script>
+                            </h:panelGroup>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+
+                            <h:panelGroup styleClass="r">
+                                <label for="e_pro"><h:outputText value="#{messages['batch.configuration.report.tolerance.endtermin']}" /></label>
+                            </h:panelGroup>
+                            <h:panelGroup styleClass="l">
+                                <h:inputText value="#{configBean.batchIntervalInfo.endTerminCriteria.percentage}" id="e_pro" size="3" maxlength="3"/>%
+                                <script type="text/javascript">var a_pro = new LiveValidation('a_pro');a_pro.add( Validate.Numericality, { minimum: 1, maximum: 100, onlyInteger: true } );</script>
+                             </h:panelGroup>
+
+                            <h:panelGroup styleClass ="r">
+                                <h:inputText value="#{configBean.batchIntervalInfo.endTerminCriteria.days}" id="e_day" size="3" maxlength="3"/>
+                                <h:outputText value="#{messages['batch.configuration.report.tolerance.days']}" />
+                                <script type="text/javascript">var a_day = new LiveValidation('a_day');a_day.add( Validate.Numericality, { minimum: 1, maximum: 365, onlyInteger: true } );</script>
+                            </h:panelGroup>
+
+                    </h:panelGrid>
+                    <h:panelGrid columns="3">
+
+                            <h:panelGroup styleClass="r">
+                                <label for="p_pro"><h:outputText value="#{messages['batch.configuration.report.tolerance.plan']}" /></label>
+                            </h:panelGroup>
+                            <h:panelGroup styleClass="l">
+                                <h:inputText value="#{configBean.batchIntervalInfo.progressCriteria.percentage}" id="p_pro" size="3" maxlength="3"/>%
+                                <script type="text/javascript">var a_pro = new LiveValidation('a_pro');a_pro.add( Validate.Numericality, { minimum: 1, maximum: 100, onlyInteger: true } );</script>
+                             </h:panelGroup>
+
+                            <h:panelGroup styleClass ="r">
+                                <h:inputText value="#{configBean.batchIntervalInfo.progressCriteria.days}" id="p_day" size="3" maxlength="3"/>
+                                <h:outputText value="#{messages['batch.configuration.report.tolerance.days']}" />
+                                <script type="text/javascript">var a_day = new LiveValidation('a_day');a_day.add( Validate.Numericality, { minimum: 1, maximum: 365, onlyInteger: true } );</script>
+                            </h:panelGroup>
+
+                    </h:panelGrid>
+
+                    <h3><h:outputText value="#{messages['batch.vice']}" /></h3>
+
+
+                    <p><h:outputText value="#{messages['batch.configuration.report.vice.description']}" /></p>
+
+                    <table>
+                        <tr>
+                            <td class="r">
+                                <label for="bericht_spl"><h:outputText value="#{messages['batch.configutation.report.vice']}" /></label>
+                            </td>
+                            <td>
+                            <h:selectBooleanCheckbox value="#{configBean.batchIntervalInfo.reportForVice}" id="bericht_spl"/>
+                        </td>
+                        </tr>
+                    </table>
+
+                    <!--BERICHTTYP -->
+
+                </fieldset>
+
+
+                <h2><h:outputText value="#{messages['batch.controll']}" /></h2>
+
+
+                <table>
+                    <tr>
+                        <td>
+                            <p><h:outputText value="#{messages['batch.controll.configuration.start.description']}" /></p>
+                    </td>
+
+                    <td>
+                        
+                            <h:commandButton action="#{configBean.startBatch}"
+                                             value="#{messages['batch.controll.configuration.start']}" styleClass="button"/>
+
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p><h:outputText value="#{messages['batch.controll.stopbatch.description']}" /><br /></p>
+
+
+                    </td>
+                    <td>
+                    
+                    <h:commandButton action ="#{configBean.stopBatch}" value="#{messages['batch.controll.stopbatch']}" styleClass="button"/>
+                    </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputText value="#{messages['batch.controll.sendreport.description']}" />
+
+                    </td>
+                    <td>
+                    <h:commandButton action ="#{configBean.sendReport}" value="#{messages['batch.controll.sendreport']}" styleClass="button"/>
+                    </td>
+                    </tr>
+                </table>
+
+
+
+
+            </h:form>
+        </div>
+
+
+    </body>
+</html>
