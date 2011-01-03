@@ -7,7 +7,6 @@ package net.proventis.criteria;
 
 import java.util.ArrayList;
 import java.util.List;
-import net.proventis.criteria.TaskInformation;
 
 /**
  *
@@ -17,6 +16,11 @@ public class ProjectInformation {
 
     private String project;
     private List<TaskInformation> tasks;
+
+    private String emailAddressProjectLeader;
+    private String emailAddressProjectVice;
+
+
 
     public ProjectInformation() {
         tasks = new ArrayList<TaskInformation>();
@@ -36,6 +40,22 @@ public class ProjectInformation {
 
     public void setTasks(List<TaskInformation> tasks) {
         this.tasks = tasks;
+    }
+
+        public String getEmailAddressProjectLeader() {
+        return emailAddressProjectLeader;
+    }
+
+    public void setEmailAddressProjectLeader(String emailAddressProjectLeader) {
+        this.emailAddressProjectLeader = emailAddressProjectLeader;
+    }
+
+    public String getEmailAddressProjectVice() {
+        return emailAddressProjectVice;
+    }
+
+    public void setEmailAddressProjectVice(String emailAddressProjectVice) {
+        this.emailAddressProjectVice = emailAddressProjectVice;
     }
 
     public void addTask(TaskInformation task){
