@@ -14,16 +14,17 @@ import javax.annotation.PostConstruct;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import net.proventis.axis.blueant.base.Id;
-import net.proventis.axis.blueant.cost.T_WorkTimeTask;
 import net.proventis.axis.blueant.masterdata.GetProgressListRequestParameter;
-import net.proventis.axis.blueant.masterdata.T_Progress;
 import net.proventis.axis.blueant.project.ParticipationProjectList;
 import net.proventis.axis.blueant.project.T_ParticipationProject;
+import net.proventis.axis.blueant.project.T_Project;
 import net.proventis.axis.blueant.project.T_ProjectTask;
 import net.proventis.axis.blueant.project.T_TaskResource;
 import net.proventis.criteria.TaskInformation;
 import net.proventis.service.BaseService;
 import net.proventis.service.BaseServiceStub;
+import net.proventis.service.HumanService;
+import net.proventis.service.HumanServiceStub;
 import net.proventis.service.MasterDataService;
 import net.proventis.service.MasterDataServiceStub;
 import net.proventis.service.ProjectsService;
@@ -44,6 +45,7 @@ public class ProjectInformationService {
     private ProjectsService projectService;
     private MasterDataService masterDataService;
     private WorktimeAccountingService worktimeAccountingService;
+    private HumanService humanService;
 
 
     @PostConstruct
@@ -53,6 +55,7 @@ public class ProjectInformationService {
             projectService = new ProjectsServiceStub();
             masterDataService = new MasterDataServiceStub();
             worktimeAccountingService = new WorktimeAccountingServiceStub();
+            humanService = new HumanServiceStub();
         } catch (AxisFault ex) {
             Logger.getLogger(ProjectInformationService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -64,14 +67,7 @@ public class ProjectInformationService {
         List<ProjectInformation> projects = new ArrayList<ProjectInformation>();
 
         String sessionId = login(username, password);
-        T_Progress[] prog = masterDataService.getProgressList(createProgressRequestParameter(sessionId)).getProgress();
-
-        for (T_Progress p : prog) {
-            System.out.println(p.getValue());
-        }
-
-
-
+        
 
         ParticipationProjectList projectList = projectService.getParticipationProjects(RequestParameterFactory.createProjectParameter(sessionId));
         T_ParticipationProject[] pjl = projectList.getParticipationProject();
@@ -79,17 +75,15 @@ public class ProjectInformationService {
 
         for (T_ParticipationProject project : pjl) {
             T_ProjectTask[] tasks = projectService.getProjectTasks(RequestParameterFactory.createTaskParameter(sessionId, project.getProjectID())).getProjectTaskList().getProjectTask();    
-            projects.add(createProjectsInformations(project, tasks,sessionId));
+            ProjectInformation pi = createProjectsInformations(project, tasks,sessionId);
+            if(pi!=null){
+                projects.add(pi);
+            }
             
         }
 
-
-
         logout(sessionId);
         return projects;
-          
-
-        // return createDummyList();
 
     }
 
@@ -104,21 +98,41 @@ public class ProjectInformationService {
 
     private ProjectInformation createProjectsInformations(T_ParticipationProject project, T_ProjectTask[] tasks,String sessionId)throws Exception {
         ProjectInformation pi = new ProjectInformation();
+        if(!setEmailInformationsForProject(pi, project, sessionId)){
+             Logger.getLogger(ProjectInformationService.class.getName()).log(Level.WARNING,
+                     "Couldnt set Email-Information for Project with ID "+project.getProjectID().getId() + " and thatswhy will not bet part of the Batch."
+                     +"Project wasnt available through getProjectList(...)");
+            return null;
+        }
         pi.setProject(project.getName());
         if (tasks != null) {
             addTaskInformationToProjectInformations(tasks, pi,sessionId,project.getProjectID());
         }
+        
         return pi;
+    }
+
+    private boolean setEmailInformationsForProject(ProjectInformation pi, T_ParticipationProject project, String sessionId)throws Exception{
+        
+        T_Project[] projectInfo =  projectService.getProjectList(RequestParameterFactory.createProjectListParameter(project.getName(), sessionId)).getProject();
+        if(projectInfo == null){
+            return false;
+        }
+       
+        String email = humanService.searchPersons(RequestParameterFactory.createSearchPersonParameter(projectInfo[0].getProjectLeaderID(), sessionId)).getPerson()[0].getEmail();
+        pi.setEmailAddressProjectLeader(email);
+        System.out.println("Setting EMail: "+email);
+        return true;
     }
 
     private void addTaskInformationToProjectInformations(T_ProjectTask[] tasks, ProjectInformation pi,String sessionId, Id projectId) throws Exception {
         for (T_ProjectTask task : tasks) {
-            T_WorkTimeTask workTimeTask = worktimeAccountingService.getTasks(RequestParameterFactory.createGetTasksRequestParameter(sessionId, task.getTaskID(),projectId)).getWorkTimeTaskList().getWorkTimeTask()[0];
+            
          
             TaskInformation ti = new TaskInformation();
             ti.setTask(task.getName());
             ti.setPlan(task.getPlan());
-            ti.setProgress(workTimeTask.getSubjectiveProgressAll());
+            ti.setProgress(100); //TODO
             ti.setId(task.getTaskID().getId());
 
             T_TaskResource[] ressources = task.getResources().getTaskResource();

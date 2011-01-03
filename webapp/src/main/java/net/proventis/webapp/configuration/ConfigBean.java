@@ -8,10 +8,12 @@ package net.proventis.webapp.configuration;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.inject.Named;
 import net.poventis.batch.model.BatchIntervalInfo;
 import net.poventis.batch.timer.BatchTimerBean;
+import net.proventis.webapp.user.SessionOwner;
+import net.proventis.webapp.user.User;
 
 /**
  *
@@ -23,6 +25,8 @@ public class ConfigBean {
 
     @EJB
     BatchTimerBean batch;
+    @Inject @SessionOwner
+    private User user;
 
     private BatchIntervalInfo bi;
 
@@ -61,8 +65,8 @@ public class ConfigBean {
 
 
     public void startBatch(){
-        bi.setPassword("s0518814");
-        bi.setUsername("Konrad Fischer");
+        bi.setPassword(user.getPassword());
+        bi.setUsername(user.getName());
         batch.createTimer(bi);
     }
 
@@ -70,8 +74,8 @@ public class ConfigBean {
         batch.stopBatch();
     }
     public void sendReport(){
-        bi.setPassword("s0518814");
-        bi.setUsername("Konrad Fischer");
+        bi.setPassword(user.getPassword());
+        bi.setUsername(user.getName());
         batch.checkImmediately(bi);
     }
 }

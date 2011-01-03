@@ -132,6 +132,27 @@
 
                         </configuration>
                     </execution>
+                    
+
+                    <execution>
+                        <id>humanService</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wsdl2code</goal>
+                        </goals>
+                        <configuration>
+
+                            <wsdlFile>${project.baseUri}/src/main/resources/wsdl/humanService.wsdl</wsdlFile>
+
+
+                            <packageName>net.proventis.service</packageName>
+
+                            <unpackClasses>true</unpackClasses>
+
+                            <generateTestcase>false</generateTestcase>
+                            <outputDirectory>src/main/java</outputDirectory>
+                        </configuration>
+                    </execution>
 
                     
                 </executions>

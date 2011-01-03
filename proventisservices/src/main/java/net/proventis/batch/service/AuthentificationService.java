@@ -5,7 +5,6 @@
 
 package net.proventis.batch.service;
 
-import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -13,11 +12,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import net.proventis.service.BaseService;
 import net.proventis.service.BaseServiceStub;
-import net.proventis.service.InvalidConcurrentLicenseException;
-import net.proventis.service.InvalidDatesException;
-import net.proventis.service.InvalidNamedLicenseException;
 import net.proventis.service.InvalidUsernamePasswordCombinationException;
-import net.proventis.service.ServerMaintenanceException;
 import org.apache.axis2.AxisFault;
 
 /**
