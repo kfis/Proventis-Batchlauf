@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>TODO supply a title</title>
+        <style type="text/css">
+            div.centerIt{
+    margin-left: 33%;
+    margin-right: 33%;
+    margin-top: 18%;
+    width: 34%;
+
+            }
+            div.loginPanel{
+  background-color: #A3B5DC;
+            }
+            div.credentials{
+    float: left;
+    margin-top: 16px;
+            }
+            div.blueant{
+
+            }
+
+           span.text{  font-size: 8pt;color: #000000;
+    font-weight: bold;}
+
+        </style>
+    </head>
+    <body>
+        <h:form>
+        <div class="centerIt">
+            <div class="loginPanel">
+                <div class="credentials">
+                     <table>
+                         <tr>
+                             <td><span class="text">Anmeldename</span></td>
+                             <td><h:inputText value="#{SessionOwner.name}"/> </td>
+                         </tr>
+                         <tr>
+                             <td><span class="text">Passwort</span></td>
+                             <td><h:inputText value="#{SessionOwner.password}"/></td>
+                         </tr>
+                         <tr>
+                             <td></td>
+                             <td><h:commandButton action="#{loginBean.login}" value="Anmelden"/></td>
+                         </tr>
+
+                    </table>
+
+                </div>
+                <div class ="blueant">
+                    <img src="http://www.blueantasp22.de/hs/images/login/new/eye.gif"/>
+                </div>
+
+            </div>
+
+        </div>
+        </h:form>
+    </body>
+</html>
