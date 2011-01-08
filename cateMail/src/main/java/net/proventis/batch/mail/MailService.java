@@ -138,7 +138,7 @@ public class MailService {
     }
 
     public static void main(String[] args) throws Exception {
-        Report report = new Report();
+       
         //postMail(readPropsFromFile(), report);
 
     }

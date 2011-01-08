@@ -17,10 +17,6 @@ public class ProgressCriteria extends Criteria{
         super(days,percentage);
     }
 
-
-
-
-
     private long getExpectedProportionalStatusInPercent(TaskInformation task){
         long taskDuration = task.getEndTermin().getTime() - task.getStartTermin().getTime();
         long remainingDuration = task.getEndTermin().getTime() - System.currentTimeMillis();
@@ -58,18 +54,6 @@ public class ProgressCriteria extends Criteria{
     @Override
     public CriteriaType getCriteriaType() {
         return CriteriaType.progress;
-    }
-
-     public static void main(String[]args){
-        TaskInformation task = new TaskInformation();
-        task.setStartTermin(new Date(110,10,28));
-        task.setEndTermin(new Date(110,10,29));
-        task.setProgress(50);
-
-        Criteria c = new ProgressCriteria(0, 8);
-        System.out.println(c.checkTask(task));
-
-
     }
 
 }

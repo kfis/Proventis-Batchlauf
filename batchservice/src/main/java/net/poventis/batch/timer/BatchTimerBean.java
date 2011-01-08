@@ -19,6 +19,7 @@ import javax.ejb.Timeout;
 import javax.ejb.Timer;
 import javax.ejb.TimerService;
 import net.poventis.batch.model.BatchIntervalInfo;
+import net.proventis.batch.mail.MailService;
 import net.proventis.batch.persistence.service.BatchPersisterService;
 import net.proventis.criteria.ProjectInformation;
 import net.proventis.batch.service.ProjectInformationService;
@@ -38,6 +39,8 @@ public class BatchTimerBean {
     ProjectInformationService projectInformationService;
     @EJB
     BatchPersisterService batchPersisterService;
+    @EJB
+    MailService mailService;
     
     public void createTimer(BatchIntervalInfo bi){
         stopBatch();
@@ -77,8 +80,10 @@ public class BatchTimerBean {
             for (ProjectInformation projectInformation : pi) {
                 filterOutSendedWarnings(projectInformation, bi);
                 filterOutNotCriticalTasks(projectInformation, bi);
-                send(projectInformation);
-                markTasksAsSended(projectInformation);
+                if(projectInformation.getTasks().size()>0){
+                    send(projectInformation);
+                    markTasksAsSended(projectInformation);
+                }
 
             }
 
@@ -128,6 +133,7 @@ public class BatchTimerBean {
             boolean critic = false;
             for (Criteria criteria : criterias) {
                 critic = critic || !(criteria.checkTask(tasks.get(i)));
+                tasks.get(i).setIsCritical(critic);
                 System.out.println("TASKKFILTER "+criteria.getCriteriaType()+" :"+tasks.get(i) + "is "+criteria.checkTask(tasks.get(i)));
                }
             if(!critic){
@@ -137,7 +143,8 @@ public class BatchTimerBean {
     }
 
     private void send(ProjectInformation pi) {
-      System.out.println("SENDING:"+pi.toString());
+        pi.setEmailAddressProjectLeader("Konrad.Fischer@GameDuell.de");
+        mailService.sendReport(pi);
     }
 
     private void markTasksAsSended(ProjectInformation pi) {

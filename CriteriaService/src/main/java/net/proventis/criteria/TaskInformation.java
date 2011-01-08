@@ -17,6 +17,7 @@ public class TaskInformation {
     private long id;
     private double progress;
     private double plan;
+    private boolean isCritical;
 
 
     private Date startTermin;
@@ -73,6 +74,16 @@ public class TaskInformation {
     public void setId(long id) {
         this.id = id;
     }
+
+    public boolean IsCritical() {
+        return isCritical;
+    }
+
+    public void setIsCritical(boolean isCritical) {
+        this.isCritical = isCritical;
+    }
+
+
 
     
 

@@ -58,17 +58,4 @@ public class EndTerminCriteria extends Criteria{
     private boolean taskHasFinished(TaskInformation task){
         return task.getProgress()>=100;
     }
-
-    public static void main(String[]args){
-        TaskInformation task = new TaskInformation();
-        task.setStartTermin(new Date(110,10,24));
-        task.setEndTermin(new Date(110,10,26));
-        task.setProgress(99);
-
-        Criteria c = new EndTerminCriteria(2, 100);
-        System.out.println(c.checkTask(task));
-
-
-    }
-
 }

@@ -9,6 +9,7 @@
     <groupId>net.proventis</groupId>
     <artifactId>batchservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <name>batchservice</name>
     <packaging>ejb</packaging>
 
     <build>
@@ -42,6 +43,13 @@
         <dependency>
             <groupId>net.proventis</groupId>
             <artifactId>persistence</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.proventis</groupId>
+            <artifactId>mailservice</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>

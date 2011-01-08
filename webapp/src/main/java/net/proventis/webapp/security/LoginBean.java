@@ -9,8 +9,6 @@ import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.inject.Named;
 import net.proventis.batch.service.AuthentificationService;
-import net.proventis.service.BaseService;
-import net.proventis.service.BaseServiceStub;
 import net.proventis.webapp.user.SessionOwner;
 import net.proventis.webapp.user.User;
 

@@ -4,6 +4,7 @@
  */
 package net.proventis.batch.service;
 
+import net.proventis.axis.blueant.human.T_Person;
 import net.proventis.criteria.ProjectInformation;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,7 +82,6 @@ public class ProjectInformationService {
             }
             
         }
-
         logout(sessionId);
         return projects;
 
@@ -118,38 +118,24 @@ public class ProjectInformationService {
         if(projectInfo == null){
             return false;
         }
+        T_Person person = humanService.searchPersons(RequestParameterFactory.createSearchPersonParameter(projectInfo[0].getProjectLeaderID(), sessionId)).getPerson()[0];
+        
+         pi.setEmailAddressProjectLeader(person.getEmail());
+         pi.setProjectLeaderName(person.getFirstname()+" "+person.getLastname());
        
-        String email = humanService.searchPersons(RequestParameterFactory.createSearchPersonParameter(projectInfo[0].getProjectLeaderID(), sessionId)).getPerson()[0].getEmail();
-        pi.setEmailAddressProjectLeader(email);
-        System.out.println("Setting EMail: "+email);
         return true;
     }
 
     private void addTaskInformationToProjectInformations(T_ProjectTask[] tasks, ProjectInformation pi,String sessionId, Id projectId) throws Exception {
         for (T_ProjectTask task : tasks) {
-            
-         
+                     
             TaskInformation ti = new TaskInformation();
             ti.setTask(task.getName());
-            ti.setPlan(task.getPlan());
-            ti.setProgress(100); //TODO
+            ti.setProgress(50); //TODO
             ti.setId(task.getTaskID().getId());
-
-            T_TaskResource[] ressources = task.getResources().getTaskResource();
-
-
-
 
             ti.setEndTermin(task.getEndTime().getTime());
             ti.setStartTermin(task.getStartTime().getTime());
-            System.out.println(ti);
-
-            //task.
-            if(ressources!=null){
-            for (T_TaskResource r : ressources) {
-               
-
-            }}
 
             pi.addTask(ti);
             if (task.getChildren().getProjectTask() != null) {
@@ -158,73 +144,4 @@ public class ProjectInformationService {
         }
 
     }
-    
-
-    public static void main(String[]args){
-        ProjectInformationService ps = new ProjectInformationService();
-        ps.init();
-        try {
-            List<ProjectInformation> infos = ps.getProjectInformation("Konrad Fischer", "s0518814");
-            for (ProjectInformation projectInformation : infos) {
-                System.out.println(projectInformation);
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(ProjectInformationService.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }
-
-    private GetProgressListRequestParameter createProgressRequestParameter(String sessionId) {
-        GetProgressListRequestParameter p = new GetProgressListRequestParameter();
-        p.setSessionID(sessionId);
-        return p;
-    }
-
-    private static List<ProjectInformation> createDummyList(){
-        List<ProjectInformation> p = new ArrayList<ProjectInformation>();
-        ProjectInformation i = new ProjectInformation();
-        TaskInformation ti = new TaskInformation();
-        ti.setTask("GUTER TASK");
-        ti.setStartTermin(new Date(110,10,26));
-        ti.setEndTermin(new Date(110,10,30));
-        ti.setProgress(70);
-        ti.setId(1);
-        i.addTask(ti);
-
-
-        ti = new TaskInformation();
-        ti.setTask("Anfangstermin TASK");
-        ti.setStartTermin(new Date(110,10,26));
-        ti.setEndTermin(new Date(110,10,30));
-        ti.setProgress(0);
-        ti.setId(2);
-        i.addTask(ti);
-
-        ti = new TaskInformation();
-        ti.setTask("Endtermin TASK");
-        ti.setStartTermin(new Date(110,10,26));
-        ti.setEndTermin(new Date(110,10,27));
-        ti.setProgress(10);
-        ti.setId(3);
-        i.addTask(ti);
-
-        ti = new TaskInformation();
-        ti.setTask("Progress TASK");
-        ti.setStartTermin(new Date(110,10,26));
-        ti.setEndTermin(new Date(110,10,28));
-        ti.setProgress(1);
-        ti.setId(4);
-        i.addTask(ti);
-
-        p.add(i);
-        return p;
-
-
-
-
-
-    }
-
-
 }

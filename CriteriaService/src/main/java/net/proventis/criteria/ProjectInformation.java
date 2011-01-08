@@ -18,9 +18,8 @@ public class ProjectInformation {
     private List<TaskInformation> tasks;
 
     private String emailAddressProjectLeader;
-    private String emailAddressProjectVice;
-
-
+    private String projectLeaderName;
+  
 
     public ProjectInformation() {
         tasks = new ArrayList<TaskInformation>();
@@ -50,17 +49,19 @@ public class ProjectInformation {
         this.emailAddressProjectLeader = emailAddressProjectLeader;
     }
 
-    public String getEmailAddressProjectVice() {
-        return emailAddressProjectVice;
-    }
-
-    public void setEmailAddressProjectVice(String emailAddressProjectVice) {
-        this.emailAddressProjectVice = emailAddressProjectVice;
-    }
-
     public void addTask(TaskInformation task){
         tasks.add(task);
     }
+
+    public String getProjectLeaderName() {
+        return projectLeaderName;
+    }
+
+    public void setProjectLeaderName(String projectLeaderName) {
+        this.projectLeaderName = projectLeaderName;
+    }
+
+
 
     @Override
     public String toString(){

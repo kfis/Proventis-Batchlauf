@@ -5,7 +5,8 @@ and open the template in the editor.
 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>TODO supply a title</title>
@@ -34,34 +35,41 @@ and open the template in the editor.
         </style>
     </head>
     <body>
-        <h:form>
+       
         <div class="centerIt">
             <div class="loginPanel">
                 <div class="credentials">
+                     <h:form>
                      <table>
                          <tr>
-                             <td><span class="text">Anmeldename</span></td>
+                             <td><span class="text">#{messages['login.name']}</span></td>
                              <td><h:inputText value="#{SessionOwner.name}"/> </td>
                          </tr>
                          <tr>
-                             <td><span class="text">Passwort</span></td>
+                             <td><span class="text">#{messages['login.password']}</span></td>
                              <td><h:inputText value="#{SessionOwner.password}"/></td>
                          </tr>
                          <tr>
                              <td></td>
-                             <td><h:commandButton action="#{loginBean.login}" value="Anmelden"/></td>
+                             <td><h:commandButton action="#{loginBean.login}" value="#{messages['login.button']}"/></td>
                          </tr>
 
                     </table>
-
+                      </h:form>
                 </div>
                 <div class ="blueant">
                     <img src="http://www.blueantasp22.de/hs/images/login/new/eye.gif"/>
                 </div>
+                <h:form >
+                    <h:selectOneMenu value="#{localeConfig.selectedLocale}">
+                        <f:selectItems value="#{supportedLanguages}" />
+                    </h:selectOneMenu>
+                    <h:commandButton action="#{localeConfig.changeLocale}" value="select"/>
+                </h:form>
 
             </div>
 
         </div>
-        </h:form>
+        
     </body>
 </html>

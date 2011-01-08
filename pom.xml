@@ -13,6 +13,7 @@
         <module>persistence</module>
         <module>application</module>
         <module>batchservice</module>
+	<module>cateMail</module>
     </modules>
 
     <build>

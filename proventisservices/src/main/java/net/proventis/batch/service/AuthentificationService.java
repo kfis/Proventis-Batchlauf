@@ -38,7 +38,6 @@ public class AuthentificationService {
         try {
             baseService.login(RequestParameterFactory.createLoginParameter(name, password));
         } catch (InvalidUsernamePasswordCombinationException ex) {
-             Logger.getLogger(AuthentificationService.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         } catch (Exception ex) {
             Logger.getLogger(AuthentificationService.class.getName()).log(Level.SEVERE, null, ex);

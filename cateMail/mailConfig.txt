@@ -1,6 +1,0 @@
-host: mail.rz.htw-berlin.de
-port: 465
-auth: true
-
-username: s0516540
-password: dkDsytVW
