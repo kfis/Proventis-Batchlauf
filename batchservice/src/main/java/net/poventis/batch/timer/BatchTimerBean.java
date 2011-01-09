@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -78,8 +79,11 @@ public class BatchTimerBean {
         try {
             List<ProjectInformation> pi = projectInformationService.getProjectInformation(bi.getUsername(), bi.getPassword());
             for (ProjectInformation projectInformation : pi) {
-                filterOutSendedWarnings(projectInformation, bi);
-                filterOutNotCriticalTasks(projectInformation, bi);
+                markCritialTasks(projectInformation, bi);
+                if(!bi.isReportFull()){
+                    filterOutSendedWarnings(projectInformation, bi);
+                    filterOutNotCriticalTasks(projectInformation, bi);
+                }
                 if(projectInformation.getTasks().size()>0){
                     send(projectInformation);
                     markTasksAsSended(projectInformation);
@@ -94,13 +98,19 @@ public class BatchTimerBean {
 
     }
 
+    @Asynchronous
     public void checkImmediately(BatchIntervalInfo info){
 
         try {
             List<ProjectInformation> pi = projectInformationService.getProjectInformation(info.getUsername(), info.getPassword());
             for (ProjectInformation projectInformation : pi) {
-                filterOutNotCriticalTasks(projectInformation, info);
-                send(projectInformation);
+                markCritialTasks(projectInformation, info);
+                if(!info.isReportFull()){
+                    filterOutNotCriticalTasks(projectInformation, info);
+                }
+                 if(projectInformation.getTasks().size()>0){
+                    send(projectInformation);
+                }
  
             }
 
@@ -128,22 +138,14 @@ public class BatchTimerBean {
 
     private void filterOutNotCriticalTasks(ProjectInformation projectInformation, BatchIntervalInfo bi) {
         List<TaskInformation> tasks = projectInformation.getTasks();
-       for(int i = tasks.size()-1; i>=0 ; i--){
-            List<Criteria> criterias = bi.getCriterias();
-            boolean critic = false;
-            for (Criteria criteria : criterias) {
-                critic = critic || !(criteria.checkTask(tasks.get(i)));
-                tasks.get(i).setIsCritical(critic);
-                System.out.println("TASKKFILTER "+criteria.getCriteriaType()+" :"+tasks.get(i) + "is "+criteria.checkTask(tasks.get(i)));
-               }
-            if(!critic){
-                tasks.remove(i);
+       for(int i = tasks.size()-1; i>=0 ; i--){       
+           if(!tasks.get(i).IsCritical()){
+               tasks.remove(i);
            }
        }
     }
 
     private void send(ProjectInformation pi) {
-        pi.setEmailAddressProjectLeader("Konrad.Fischer@GameDuell.de");
         mailService.sendReport(pi);
     }
 
@@ -153,6 +155,21 @@ public class BatchTimerBean {
             batchPersisterService.markAsSended(taskInformation.getId(), new Date());
         }
 
+    }
+
+    private void markCritialTasks(ProjectInformation projectInformation, BatchIntervalInfo bi) {
+         List<TaskInformation> tasks = projectInformation.getTasks();
+
+        for(int i = tasks.size()-1; i>=0 ; i--){
+            List<Criteria> criterias = bi.getCriterias();
+            boolean critic = false;
+            for (Criteria criteria : criterias) {
+                critic = critic || !(criteria.checkTask(tasks.get(i)));
+                tasks.get(i).setIsCritical(critic);
+                System.out.println("TASKKFILTER "+criteria.getCriteriaType()+" :"+tasks.get(i) + "is "+criteria.checkTask(tasks.get(i)));
+               }
+            System.out.println("Task "+tasks.get(i)+" is critic "+tasks.get(i).IsCritical());
+           }
     }
 
 

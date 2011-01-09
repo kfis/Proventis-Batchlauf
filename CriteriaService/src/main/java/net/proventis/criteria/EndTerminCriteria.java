@@ -36,7 +36,6 @@ public class EndTerminCriteria extends Criteria{
         if(bufferEndTermin.after(new Date())){
             return true;
         }else{
-           System.out.println(taskHasFinished(task));
             return taskHasFinished(task);
         }
     }

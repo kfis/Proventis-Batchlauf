@@ -5,6 +5,7 @@
 
 package net.proventis.webapp.configuration;
 
+import java.text.DecimalFormat;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -56,9 +57,10 @@ public class ConfigBean {
         bi.setCheckInterval(Integer.valueOf(hhmm[0]), Integer.valueOf(hhmm[1]));
     }
     public String getCheckInterval(){
+        DecimalFormat df = new DecimalFormat("00");
         int hoursAndMinutes = bi.getCheckInterval();
-        String hours = ""+hoursAndMinutes / 60;
-        String minutes = ""+ (hoursAndMinutes- (hoursAndMinutes / 60) *60);
+        String hours = df.format(hoursAndMinutes / 60);
+        String minutes =df.format(hoursAndMinutes- (hoursAndMinutes / 60) *60);
         return hours+":"+minutes;
     }
 

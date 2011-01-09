@@ -359,12 +359,18 @@
                             </h:panelGroup>
 
                     </h:panelGrid>
-
+                </fieldset>
                  
 
-                    <!--BERICHTTYP -->
+                    <fieldset>
+                    <legend><h:outputText value="#{messages['batch.configuration.report.type']}" /></legend>
+                    <h:outputText value="#{messages['batch.configuration.report.type.full']}"/>
+                    <h:selectBooleanCheckbox value="#{configBean.batchIntervalInfo.reportFull}"/>
+                
+                    </fieldset>
 
-                </fieldset>
+
+                
 
 
                 <h2><h:outputText value="#{messages['batch.controll']}" /></h2>

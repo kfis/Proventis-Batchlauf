@@ -131,7 +131,7 @@ public class ProjectInformationService {
                      
             TaskInformation ti = new TaskInformation();
             ti.setTask(task.getName());
-            ti.setProgress(50); //TODO
+            ti.setProgress(100); //TODO
             ti.setId(task.getTaskID().getId());
 
             ti.setEndTermin(task.getEndTime().getTime());

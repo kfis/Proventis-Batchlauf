@@ -46,7 +46,6 @@ public class ProgressCriteria extends Criteria{
 
     @Override
     public boolean checkTask(TaskInformation task) {
-        System.out.println(getExpectedProportionalStatusInPercentWithBufferDays(task));
        return (task.getProgress()>= getExpectedProportionalStatusInPercentWithBufferDays(task)
                || task.getProgress()+getPercentage() >= getExpectedProportionalStatusInPercent(task));
     }
