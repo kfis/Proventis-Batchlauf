@@ -1,0 +1,21 @@
+# Mailserver for outgoing SMTP messages
+mail.smtp.host=mail.rz.htw-berlin.de
+# SMTP port of the mailserver
+mail.smtp.port=465
+# If true, attempt to authenticate the user using the AUTH command
+mail.smtp.auth=true
+# username for mailserver authentication
+mail.smtp.username=s0516540
+# password for mailserver authentication
+mail.smtp.password=dkDsytVW
+# Transport protocol - do not change this unless you know what you do!
+mail.transport.protocol=smtp
+# The submitter to use in the AUTH tag in the MAIL FROM command.Used by a mail relay.
+# Mail clients typically do not use this. 
+mail.smtp.submitter=s0516540
+# If true, uses SSL for malserver authentication
+mail.smtp.ssl.enable=true
+# If false, mailservice uses development mailserver
+mailservice.production=false
+# development mail address
+mailservice.dev.email=projektleitung.cate@googlemail.com
